@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>राजेश & नेहा - शाही विवाह सोहळा</title>
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- IMPORTED TIRO (For Body) and YATRA ONE (For Royal Scroll) -->
+    <link href="https://fonts.googleapis.com/css2?family=Gotu&family=Rozha+One&family=Sahitya:wght@400;700&family=Tiro+Devanagari+Marathi:ital@0;1&family=Yatra+One&display=swap" rel="stylesheet">
+    
+    <!-- ICONS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ================= ROYAL THEME VARIABLES ================= */
+        :root {
+            --bg-paper: #fff9f0;
+            --text-main: #4a0e0e;
+            --gold-dark: #b8860b;
+            --gold-light: #d4af37;
+            --royal-red: #800000;
+            
+            /* --- FONT PALETTE --- */
+            --font-head: 'Rozha One', serif;     /* Headings */
+            --font-sub: 'Gotu', sans-serif;      /* Subtitles */
+            --font-body: 'Tiro Devanagari Marathi', serif; /* Body Text (Best for reading) */
+            --font-royal: 'Yatra One', cursive;  /* Royal Scroll Text (Calligraphy) */
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0; padding: 0;
+            background-color: var(--bg-paper);
+            font-family: var(--font-body); /* Default readable font */
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+            padding-bottom: 50px;
+        }
+
+        /* ================= FIXED BORDER FRAME ================= */
+        .royal-frame {
+            position: fixed; top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 2px solid var(--gold-dark);
+            pointer-events: none; z-index: 900;
+        }
+        .royal-frame::after {
+            content: ''; position: absolute;
+            top: 4px; left: 4px; right: 4px; bottom: 4px;
+            border: 1px solid var(--gold-light);
+        }
+
+        .corner-ornament {
+            position: fixed; width: 80px; height: 80px; z-index: 901;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%23b8860b'%3E%3Cpath d='M0,0 v40 q0,10 10,10 h30 q-20,0 -20,-20 v-10 h10 q20,0 20,20 v-30 h-30 z'/%3E%3Cpath d='M0,0 h40 q10,0 10,10 v30 q0,-20 -20,-20 h-10 v10 q0,20 -20,20 h-10 z'/%3E%3C/svg%3E");
+            background-size: contain; background-repeat: no-repeat; opacity: 0.8;
+        }
+        .c-tl { top: 10px; left: 10px; }
+        .c-tr { top: 10px; right: 10px; transform: scaleX(-1); }
+        .c-bl { bottom: 10px; left: 10px; transform: scaleY(-1); }
+        .c-br { bottom: 10px; right: 10px; transform: scale(-1); }
+
+        .top-center-decor {
+            position: fixed; top: 15px; left: 50%; transform: translateX(-50%);
+            width: 120px; opacity: 0.9; z-index: 901;
+        }
+
+        /* ================= SCROLL (KHALITA) INTRO STYLES ================= */
+        .scroll-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 3000;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+        .scroll-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+        .khalita-container {
+            position: relative; width: 340px;
+            display: flex; flex-direction: column; align-items: center;
+            animation: float-scroll 4s ease-in-out infinite;
+        }
+        @keyframes float-scroll { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        /* Rods */
+        .rod {
+            width: 400px; height: 55px;
+            background: linear-gradient(to bottom, #b8860b 0%, #ffd700 20%, #fffacd 40%, #d4af37 60%, #8b4513 100%);
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.6), inset 0 0 10px rgba(0,0,0,0.3);
+            z-index: 10; position: relative;
+            border: 1px solid #8b4513;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        /* Knobs */
+        .knob {
+            width: 35px; height: 70px;
+            background: radial-gradient(circle at 30% 30%, #ff6b6b, #800000);
+            border: 4px solid #ffd700; border-radius: 15px;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.5); position: relative;
+        }
+        .knob::after {
+            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 10px; height: 10px; background: #ffd700; border-radius: 50%; box-shadow: 0 0 5px #fff;
+        }
+        .knob-left { margin-left: -10px; } .knob-right { margin-right: -10px; }
+
+        /* Tassels */
+        .tassel-string {
+            position: absolute; top: 50%; width: 4px; height: 100px;
+            background: repeating-linear-gradient(45deg, #ffd700, #ffd700 2px, #b8860b 2px, #b8860b 4px);
+            z-index: 5; transform-origin: top center;
+            animation: swing-tassel 3s ease-in-out infinite;
+        }
+        .tassel-left { left: 20px; } .tassel-right { right: 20px; animation-delay: 1.5s; }
+
+        .tassel-head {
+            position: absolute; bottom: -15px; left: -8px; width: 20px; height: 20px;
+            background: #800000; border-radius: 50%; border: 2px solid #ffd700;
+        }
+        .tassel-body {
+            position: absolute; bottom: -55px; left: -10px; width: 24px; height: 40px;
+            background: linear-gradient(to bottom, #800000, #d32f2f);
+            border-radius: 5px 5px 15px 15px; box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+        }
+        .tassel-body::after {
+            content: ''; position: absolute; bottom: -15px; left: 2px; width: 20px; height: 15px;
+            border-left: 2px solid #d32f2f; border-right: 2px solid #d32f2f;
+            background: repeating-linear-gradient(to right, #d32f2f, #d32f2f 2px, transparent 2px, transparent 4px);
+        }
+        @keyframes swing-tassel { 0%, 100% { transform: rotate(5deg); } 50% { transform: rotate(-5deg); } }
+
+        /* Paper */
+        .khalita-paper {
+            width: 320px; height: 0;
+            background-color: #f3e5ab; 
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37' fill-opacity='0.1'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z'/%3E%3C/g%3E%3C/svg%3E");
+            box-shadow: inset 0 0 30px rgba(101, 67, 33, 0.5);
+            overflow: hidden; transition: height 2s cubic-bezier(0.25, 1, 0.5, 1);
+            display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;
+        }
+        .scroll-content {
+            opacity: 0; transform: scale(0.9);
+            transition: opacity 1s ease 1s, transform 1s ease 1s;
+            text-align: center; padding: 30px 20px; width: 100%; color: #3e2723;
+        }
+        
+        /* --- FONT FIX FOR SCROLL CONTENT --- */
+        .old-marathi-text { 
+            font-family: var(--font-body); /* CHANGED TO TIRO for correct rendering */
+            font-weight: 700; 
+            text-shadow: 0px 0px 1px rgba(62, 39, 35, 0.2); 
+        }
+
+        /* Seal */
+        .royal-seal {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 100px; height: 100px;
+            background: radial-gradient(circle at 30% 30%, #e53935, #8e0000);
+            border-radius: 50%; border: 5px solid #ffd700;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: #ffd700; font-family: var(--font-head); font-weight: 400; cursor: pointer;
+            z-index: 20; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: pulse-seal 2s infinite; transition: opacity 0.5s;
+        }
+        .seal-text { font-size: 0.9rem; font-family: var(--font-sub); text-transform: uppercase; letter-spacing: 1px; color: #fff; font-weight: bold; }
+        
+        /* Open State */
+        .khalita-container.open .khalita-paper { height: 65vh; }
+        .khalita-container.open .scroll-content { opacity: 1; transform: scale(1); }
+        .khalita-container.open .royal-seal { opacity: 0; pointer-events: none; }
+        @keyframes pulse-seal { 0% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.05); } 100% { transform: translate(-50%, -50%) scale(1); } }
+
+        /* ================= UTILITIES ================= */
+        .container {
+            max-width: 800px; margin: 0 auto; padding: 6rem 1.5rem 4rem;
+            text-align: center; position: relative; z-index: 10;
+        }
+
+        /* Ensure correct font rendering for headings */
+        h1, h2 { 
+            font-family: var(--font-head); 
+            margin: 0; color: var(--royal-red); 
+            font-weight: 400; 
+        }
+        h3 { font-family: var(--font-sub); color: var(--gold-dark); margin: 5px 0; font-weight: 600; }
+        
+        .section-title {
+            font-size: 2.5rem; margin-bottom: 1rem;
+            background: linear-gradient(to right, transparent, var(--gold-light), transparent);
+            background-size: 100% 2px; background-position: bottom; background-repeat: no-repeat;
+            display: inline-block; padding-bottom: 5px;
+        }
+
+        .btn {
+            background: var(--royal-red); color: #fff;
+            padding: 12px 30px; border: 2px solid var(--gold-light);
+            border-radius: 5px; font-family: var(--font-body); font-size: 1.1rem; font-weight: bold;
+            text-decoration: none; display: inline-block; margin-top: 15px;
+            cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            position: relative; z-index: 100;
+        }
+        .btn:hover { background: var(--gold-dark); transform: translateY(-2px); }
+
+        /* WhatsApp Button Style */
+        .whatsapp-share-btn {
+            background: #25D366; color: white;
+            border: 2px solid white;
+            padding: 12px 30px; border-radius: 50px;
+            font-family: var(--font-body); font-weight: bold; font-size: 1.1rem;
+            display: inline-flex; align-items: center; gap: 10px;
+            cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s; margin-top: 15px;
+            text-decoration: none;
+            position: relative; z-index: 100;
+        }
+        .whatsapp-share-btn:hover { transform: translateY(-2px); background: #128C7E; }
+
+
+        /* ================= SECTIONS ================= */
+        
+        /* --- HEADER --- */
+        #header {
+            min-height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            position: relative;
+        }
+        
+        .ganesh-logo { width: 120px; margin-bottom: 15px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1)); }
+
+        .couple-names {
+            font-size: clamp(3rem, 9vw, 5rem); line-height: 1.1;
+            color: var(--royal-red);
+            text-shadow: 1px 1px 0px rgba(212,175,55,0.4);
+            margin: 20px 0;
+            font-family: var(--font-head); font-weight: 400;
+        }
+        
+        .weds-badge {
+            font-family: var(--font-body); font-size: 1.2rem;
+            background: var(--bg-paper); border: 1px solid var(--gold-dark);
+            padding: 5px 20px; border-radius: 20px; display: inline-block;
+            color: var(--gold-dark); font-weight: bold;
+        }
+
+        /* --- COUPLE --- */
+        .couple-wrapper {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 30px;
+        }
+        .person-card {
+            background: #fff; padding: 15px;
+            border: 1px solid var(--gold-light);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            max-width: 300px; width: 100%;
+            position: relative;
+        }
+        .person-img {
+            width: 100%; height: 320px; object-fit: cover;
+            border: 5px solid var(--bg-paper);
+            outline: 1px solid var(--gold-dark);
+        }
+        
+        .decor-peacock {
+            position: absolute; width: 60px; top: -25px; right: -20px;
+            filter: sepia(1) saturate(2) hue-rotate(-10deg) brightness(0.8);
+        }
+
+        /* --- EVENTS --- */
+        .event-card {
+            background: #fff; border: 1px solid var(--gold-dark);
+            padding: 20px; margin: 20px 0; text-align: center;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .event-card::before {
+            content: '⚜'; position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
+            background: var(--bg-paper); padding: 0 10px; font-size: 1.8rem; color: var(--gold-dark);
+        }
+        .event-time { font-weight: bold; color: var(--royal-red); font-size: 1.1rem; margin: 10px 0; }
+
+        /* --- FAMILY (AAPLE SNEHANKIT) --- */
+        .family-list { list-style: none; padding: 0; font-size: 1.1rem; }
+        .family-list li { margin-bottom: 8px; color: var(--text-main); }
+        .family-title { 
+            font-size: 1.4rem; color: var(--gold-dark); font-weight: bold; 
+            margin-bottom: 15px; border-bottom: 2px dotted var(--gold-light); 
+            display: inline-block; font-family: var(--font-body); 
+        }
+        .family-group { margin-bottom: 30px; }
+
+        /* --- CHOTE NIMANTRAK (KIDS) --- */
+        #kids { 
+            background-color: #fff0e6; padding: 3rem 1rem; 
+            border-top: 4px double var(--royal-red); border-bottom: 4px double var(--royal-red); 
+        }
+        .kids-names { 
+            font-size: 1.5rem; font-family: var(--font-head); color: var(--royal-red); 
+            margin: 10px 0; font-weight: 400; 
+        }
+        .kids-quote { 
+            font-family: var(--font-body); font-size: 1.2rem; color: var(--gold-dark); font-style: italic; 
+        }
+
+        /* --- ANIMATIONS --- */
+        #flower-rain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
+        .flower {
+            position: absolute; top: -30px; width: 18px; height: 18px;
+            background: radial-gradient(circle, #ffaa00, #ff4500);
+            border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            animation: fall linear infinite;
+        }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+        /* Music */
+        #music-btn {
+            position: fixed; bottom: 25px; right: 25px; width: 55px; height: 55px;
+            background: var(--royal-red); color: #fff; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid var(--gold-light); cursor: pointer; z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4); font-size: 1.2rem;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding-top: 5rem; }
+            .ganesh-logo { width: 90px; }
+            .couple-names { font-size: 3rem; }
+            .corner-ornament { width: 60px; height: 60px; }
+            .royal-frame { top: 5px; left: 5px; right: 5px; bottom: 5px; }
+            .rod { width: 95vw; }
+            .khalita-paper { width: 85vw; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- === SCROLL (KHALITA) INTRO === -->
+    <div id="scroll-overlay" class="scroll-overlay">
+        <div class="khalita-container" id="khalita">
+            <!-- TOP ROD -->
+            <div class="rod top-rod">
+                <div class="knob knob-left"></div> <div class="knob knob-right"></div>
+                <div class="tassel-string tassel-left"><div class="tassel-head"></div><div class="tassel-body"></div></div>
+                <div class="tassel-string tassel-right"><div class="tassel-head"></div><div class="tassel-body"></div></div>
+            </div>
+            <!-- PAPER -->
+            <div class="khalita-paper">
+                <div class="scroll-content">
+                    <div class="old-marathi-text" style="font-size: 2.8rem; color: #5d4037;">|| श्री ||</div>
+                    <div class="old-marathi-text" style="margin: 15px 0; font-size: 1.2rem; color: var(--text-main);">
+                        राजेश आणि नेहा<br><span style="font-size: 1.1rem; color: #6d4c41;">यांच्या विवाहाचे आग्रहाचे निमंत्रण</span>
+                    </div>
+                    <button class="btn" onclick="enterSite()" style="border-color: #8d6e63; background: #5d4037; color: #f3e5ab;">
+                        प्रवेश करा
+                    </button>
+                </div>
+            </div>
+            <!-- BOTTOM ROD -->
+            <div class="rod bottom-rod"><div class="knob knob-left"></div><div class="knob knob-right"></div></div>
+            <!-- SEAL -->
+            <div class="royal-seal" onclick="unrollScroll()">
+                <i class="fas fa-scroll fa-2x"></i><span class="seal-text">उघडा</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- FIXED FRAME DECORATIONS -->
+    <div class="royal-frame"></div>
+    <div class="corner-ornament c-tl"></div>
+    <div class="corner-ornament c-tr"></div>
+    <div class="corner-ornament c-bl"></div>
+    <div class="corner-ornament c-br"></div>
+    
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Ganesha_silhouette.svg" class="top-center-decor" style="width: 60px; filter: sepia(1) saturate(5) brightness(0.7);">
+
+    <!-- Flower Animation -->
+    <div id="flower-rain"></div>
+
+    <!-- Music -->
+    <div id="music-btn" onclick="toggleMusic()"><i class="fas fa-music"></i></div>
+    <audio id="bg-music" loop>
+        <source src="/temp/music/tabla.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- HEADER SECTION -->
+    <section id="header" class="container">
+        <img src="http://gokarn.page.gd/temp/images/ganesha.jpg" class="ganesh-logo" style="filter: sepia(1) saturate(3) hue-rotate(-10deg);">
+        
+        <div style="font-family: var(--font-sub); font-weight: 700; color: var(--gold-dark); letter-spacing: 2px;">
+            || श्री गणेशाय नमः ||
+        </div>
+
+        <div class="names-container">
+            <h1 class="couple-names">राजेश</h1>
+            <div class="weds-badge">शुभ विवाह</div>
+            <h1 class="couple-names">नेहा</h1>
+        </div>
+
+        <p style="font-size: 1.2rem; margin-top: 20px;">
+            आम्ही आमच्या आयुष्यातील नवीन प्रवासाची सुरुवात करत आहोत.<br>
+            आपल्या शुभेच्छा आणि आशीर्वादांची अपेक्षा आहे.
+        </p>
+
+        <div style="margin-top: 30px; border: 2px solid var(--gold-dark); padding: 15px 30px; display: inline-block;">
+            <div style="font-size: 1.5rem; font-weight: bold; color: var(--royal-red);">रविवार, २१ मे २०२६</div>
+            <div style="color: var(--text-main);">दुपारी १२:३५ वा. | पुणे</div>
+        </div>
+
+        <div style="margin-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 10px;">
+            <a href="#couple" class="btn">खाली पहा <i class="fas fa-chevron-down"></i></a>
+            
+            <!-- WHATSAPP SHARE BUTTON -->
+            <button onclick="shareToWhatsApp()" class="whatsapp-share-btn">
+                <i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> निमंत्रण पाठवा
+            </button>
+        </div>
+    </section>
+
+    <!-- COUPLE SECTION -->
+    <section id="couple" class="container">
+        <h2 class="section-title">वर आणि वधू</h2>
+        
+        <div class="couple-wrapper">
+            <div class="person-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Peacock_silhouette.svg" class="decor-peacock">
+                <img src="https://images.unsplash.com/photo-1621621667797-e06afc217fb0?auto=format&fit=crop&q=80&w=400" class="person-img" alt="Groom">
+                <h3>चिरंजीव राजेश</h3>
+                <p style="color: #666;">पाटील घराण्याचे जेष्ठ सुपुत्र</p>
+            </div>
+
+            <div class="person-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Peacock_silhouette.svg" class="decor-peacock" style="left: -20px; right: auto; transform: scaleX(-1);">
+                <img src="https://images.unsplash.com/photo-1583946678857-dd72188b8923?auto=format&fit=crop&q=80&w=400" class="person-img" alt="Bride">
+                <h3>चि. सौ. कां. नेहा</h3>
+                <p style="color: #666;">देशमुख घराण्याची सुकन्या</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENTS SECTION -->
+    <section id="events" class="container">
+        <h2 class="section-title">कार्यक्रम</h2>
+        
+        <div class="event-card">
+            <h3>हळद समारंभ</h3>
+            <p class="event-time">२० मे २०२६ | सकाळी १०:०० वा.</p>
+            <p>घरच्या अंगणात, कोल्हापूर</p>
+        </div>
+
+        <div class="event-card">
+            <h3>संगीत रजनी</h3>
+            <p class="event-time">२० मे २०२६ | सायं. ७:०० वा.</p>
+            <p>हॉटेल सयाजी, कोल्हापूर</p>
+        </div>
+
+        <div class="event-card" style="border-color: var(--royal-red); box-shadow: 0 10px 25px rgba(128,0,0,0.1);">
+            <h3 style="color: var(--royal-red);">शुभ विवाह</h3>
+            <p class="event-time">२१ मे २०२६ | दुपारी १२:३५ वा.</p>
+            <p>महालक्ष्मी लॉन्स, पुणे-बेंगलोर हायवे</p>
+            <a href="#" style="display: block; margin-top: 10px; color: var(--gold-dark); font-weight: bold;">नकाशा पहा <i class="fas fa-map-marker-alt"></i></a>
+        </div>
+    </section>
+
+    <!-- AAPLE SNEHANKIT (FAMILY) -->
+    <section id="family" class="container">
+        <h2 class="section-title">आपले स्नेहांकित</h2>
+        
+        <div class="family-group">
+            <div class="family-title">पाटील परिवार</div>
+            <ul class="family-list">
+                <li>श्री. सुरेश पाटील & सौ. सुनिता पाटील (आई-वडील)</li>
+                <li>श्री. रमेश पाटील (काका)</li>
+                <li>कै. बाबुराव पाटील (आजोबा)</li>
+            </ul>
+        </div>
+
+        <div class="family-group">
+            <div class="family-title">देशमुख परिवार</div>
+            <ul class="family-list">
+                <li>श्री. विजय देशमुख & सौ. वंदना देशमुख (आई-वडील)</li>
+                <li>श्री. अनंतराव देशमुख (मोठे काका)</li>
+                <li>समस्त देशमुख व पाटील परिवार</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- CHOTE NIMANTRAK (KIDS) -->
+    <section id="kids" class="container">
+        <div style="font-size: 2.5rem; color: var(--royal-red); margin-bottom: 10px;"><i class="fas fa-child"></i></div>
+        <h2 class="section-title" style="font-size: 2.2rem;">बाल निमंत्रक</h2>
+        
+        <div class="kids-names">
+            आर्यन, अनन्या, अद्वैत आणि स्वरा
+        </div>
+        
+        <p class="kids-quote">"लग्नाला नक्की यायचं हं! नाहीतर आम्ही कट्टी घेऊ!"</p>
+        <div style="font-size: 1.5rem; color: var(--gold-dark); margin-top: 10px;">🎈 🍫 🍬</div>
+    </section>
+
+    <!-- FOOTER -->
+    <section class="container" style="padding-top: 0;">
+        <div style="font-size: 2rem; color: var(--gold-dark); margin-bottom: 15px;">❖</div>
+        
+        <div style="margin: 20px auto; padding: 30px; border: 2px double var(--gold-dark); position: relative; max-width: 600px; border-radius: 10px;">
+            <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--bg-paper); padding: 0 15px; font-family: var(--font-head); color: var(--royal-red); font-size: 1.5rem;">
+                आपले नम्र
+            </div>
+            
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 10px;">
+                <div style="text-align: center;">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px; color: var(--text-main);">पाटील परिवार</h3>
+                    <p style="font-size: 1rem; margin: 0;">श्री. सुरेश व सौ. सुनिता पाटील</p>
+                </div>
+                <div style="text-align: center;">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px; color: var(--text-main);">देशमुख परिवार</h3>
+                    <p style="font-size: 1rem; margin: 0;">श्री. विजय व सौ. वंदना देशमुख</p>
+                </div>
+            </div>
+            
+            <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">(तसेच समस्त पाटील आणि देशमुख परिवार)</p>
+        </div>
+
+        <!-- Decorative Horses (Fixed Color) -->
+        <div style="margin-top: 30px; opacity: 0.8;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Horse_silhouette.svg" style="width: 80px; filter: sepia(1) saturate(5) brightness(0.5); transform: scaleX(-1);" alt="">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Horse_silhouette.svg" style="width: 80px; filter: sepia(1) saturate(5) brightness(0.5);" alt="">
+        </div>
+        
+        <br><br>
+    </section>
+
+    <script>
+        // Unroll the Scroll Intro
+        function unrollScroll() {
+            document.getElementById('khalita').classList.add('open');
+            toggleMusic();
+        }
+
+        // Hide Intro and Enter Main Site
+        function enterSite() {
+            document.getElementById('scroll-overlay').classList.add('hidden');
+            startFlowers();
+        }
+
+        // Toggle Background Music
+        function toggleMusic() {
+            const audio = document.getElementById('bg-music');
+            const btn = document.getElementById('music-btn');
+            if (audio.paused) {
+                audio.play().catch(e => console.log("Audio prevented"));
+                btn.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                audio.pause();
+                btn.innerHTML = '<i class="fas fa-music"></i>';
+            }
+        }
+
+        // Start Flower Rain Animation
+        function startFlowers() {
+            setInterval(() => {
+                const flower = document.createElement('div');
+                flower.classList.add('flower');
+                flower.style.left = Math.random() * 100 + "vw";
+                flower.style.animationDuration = Math.random() * 3 + 5 + "s";
+                flower.style.opacity = Math.random();
+                document.getElementById('flower-rain').appendChild(flower);
+                setTimeout(() => flower.remove(), 8000);
+            }, 600);
+        }
+
+        // WhatsApp Share Functionality
+        function shareToWhatsApp() {
+            const groom = "राजेश";
+            const bride = "नेहा";
+            const date = "२१ मे २०२६";
+            const time = "दुपारी १२:३५";
+            const venue = "महालक्ष्मी लॉन्स, पुणे";
+            const link = window.location.href;
+
+            const msg = `*सप्रेम नमस्कार,*%0A%0A` +
+                        `✨ *${groom}* weds *${bride}* ✨%0A%0A` +
+                        `आमच्या लग्नाला आपली उपस्थिती प्रार्थनीय आहे.%0A%0A` +
+                        `📅 *तारीख:* ${date}%0A` +
+                        `⏰ *वेळ:* ${time}%0A` +
+                        `📍 *ठिकाण:* ${venue}%0A%0A` +
+                        `कृपया नक्की या!%0A` +
+                        `👇 डिजिटल पत्रिका पहा:%0A${link}`;
+
+            window.open(`https://wa.me/?text=${msg}`, '_blank');
+        }
+    </script>
+
+</body>
+</html>

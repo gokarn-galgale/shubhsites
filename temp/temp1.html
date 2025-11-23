@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="mr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>लग्नाचे आमंत्रण — राधा ❤️ शिव</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Tiro+Devanagari+Marathi:wght@400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root{
+      /* Traditional Hindu Palette */
+      --red: #A92020;
+      --gold: #FFD700;
+      --dark-gold: #B8860B;
+      --cream: #FFFDD0;
+      --text-dark: #333;
+      
+      --font-heading: 'Tiro Devanagari Marathi', serif;
+      --font-body: 'Noto Sans Devanagari', sans-serif;
+      --max-width:900px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:var(--font-body);background-color:var(--cream);color:var(--text-dark);}
+    html{scroll-behavior:smooth}
+    body.modal-open{overflow: hidden;}
+
+    /* === NEW: Full-Screen Cover Modal === */
+    .cover-modal{
+      position:fixed;
+      inset:0;
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('cover-bg.jpg'); /* REPLACE 'cover-bg.jpg' */
+      background-size: cover;
+      background-position: center;
+      z-index: 10000;
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    .cover-modal.hidden{opacity: 0;visibility: hidden;}
+    
+    /* NEW: Ganesh Icon */
+    .cover-ganesh-icon {
+      width: 70px;
+      height: auto;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3));
+    }
+    .cover-ganesh {font-size: 1.2rem;color: var(--gold);margin-bottom: 20px;font-weight: 500;letter-spacing: 1px;}
+    .cover-title {font-family: var(--font-heading);font-size: 1.5rem;font-weight: 400;}
+    .cover-names {font-family: var(--font-heading);font-size: clamp(3rem, 10vw, 5rem);color: var(--gold);margin: 10px 0;}
+    .cover-guest {font-size: 1.1rem;margin-top: 20px;}
+    .cover-guest-name {font-size: 1.3rem;font-weight: 700;color: var(--gold);}
+    .btn{display:inline-block;padding:12px 24px;border-radius:8px;background:var(--gold);color:#000;text-decoration:none;font-weight:700;border:0;cursor:pointer;transition:transform 0.2s ease, background-color 0.2s ease;font-family: var(--font-body);font-size: 1rem;}
+    .btn:hover{transform:scale(1.05); background-color: white;}
+    .cover-button {margin-top: 30px;}
+    
+    /* === Main Content === */
+    .main-wrap{opacity:0;visibility:hidden;transition:opacity 1s ease 0.5s, visibility 1s ease 0.5s; background: url('https://www.transparenttextures.com/patterns/traditional-design.png'), var(--cream);}
+    .main-wrap.visible{opacity:1;visibility:visible}
+    
+    main{max-width:var(--max-width);margin:0 auto;padding:18px}
+    section{padding-top: 60px; position: relative;} /* Added position relative for art */
+    
+    /* === Reusable Components === */
+    .section-title{font-family:var(--font-heading);font-size:2.8rem;color:var(--red);font-weight:400;text-align:center;margin-bottom:10px;display: flex;align-items: center;justify-content: center;gap: 15px;}
+    .section-title::before, .section-title::after {content: "~~~~~";font-family: serif;font-size: 1rem;color: var(--dark-gold);opacity: 0.6;}
+    .section-subtitle{text-align:center;color:var(--text-dark);opacity:0.8;max-width:600px;margin:0 auto 30px auto; padding: 0 10px;}
+    .content-card{
+      background: #ffffff;
+      /* NEW: Art texture */
+      background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
+      padding:24px;
+      border-radius:12px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.08);
+      border:1px solid rgba(184, 134, 11, 0.3);
+    }
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+    .btn-copy{padding: 5px 10px;font-size: 0.8rem;font-weight: 500;background: var(--dark-gold);color: white;border: 0;border-radius: 5px;cursor: pointer;margin-left: 10px;}
+    
+    /* NEW: Illustrated Graphic Divider */
+    .graphic-divider {
+      height: 50px;
+      background: url('floral-divider.png') center center no-repeat; /* REPLACE 'floral-divider.png' */
+      background-size: contain;
+      opacity: 0.7;
+      margin: 30px 0;
+    }
+    
+    /* NEW: Floral Corner Art */
+    .section-with-art::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 150px;
+      height: 150px;
+      background: url('floral-corner-top-left.png') no-repeat; /* REPLACE */
+      background-size: contain;
+      opacity: 0.8;
+      z-index: -1;
+    }
+    .section-with-art::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 150px;
+      height: 150px;
+      background: url('floral-corner-bottom-right.png') no-repeat; /* REPLACE */
+      background-size: contain;
+      opacity: 0.8;
+      z-index: -1;
+    }
+
+    /* === Section Specific Styles === */
+    .hero{text-align:center;padding:20px;}
+    .hero img {width: 100%;max-width: 500px;height: auto;border-radius: 12px;border: 4px solid var(--gold);box-shadow: 0 4px 15px rgba(0,0,0,0.1);}
+    .hero-names{font-family:var(--font-heading);font-size:clamp(3rem, 10vw, 5rem);color:var(--red);font-weight:400;margin:10px 0;}
+    .hero-date{font-size:1.2rem;margin-top:10px;font-weight:500;}
+
+    #countdown{display:flex;justify-content:center;gap:15px;margin-top:30px;text-align:center;}
+    .countdown-block{background:white;padding:15px;border-radius:8px;border:1px solid var(--dark-gold);min-width:80px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);}
+    .countdown-block span{display:block;font-size:2.5rem;font-weight:700;color:var(--red);line-height:1;}
+    .countdown-block div{font-size:0.9rem;color:var(--text-dark);opacity:0.8;margin-top:5px;}
+
+    .couple-card{text-align:center;}
+    .couple-photo{width:180px;height:180px;border-radius:50%;object-fit:cover;border:4px solid var(--gold);margin-bottom:15px;box-shadow:0 4px 15px rgba(0,0,0,0.2);}
+    .couple-name{font-family:var(--font-heading);font-size:2.5rem;color:var(--red);font-weight:400;margin:0;}
+    .couple-parents{font-size:1rem;opacity:0.9;margin-top:5px;}
+    
+    .event-card{padding:20px;text-align:center;background:white;background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');border:2px solid var(--gold);border-radius:12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);}
+    .event-title{font-family:var(--font-heading);font-size:2.2rem;color:var(--red);margin-top:0;}
+    .event-icon{font-size:2.5rem;color:var(--dark-gold);margin-bottom:15px;}
+    .event-details p{margin:5px 0;font-size:1.1rem;line-height:1.7;}
+    
+    .timeline{position:relative;max-width:800px;margin:0 auto;padding:20px 0;}
+    .timeline::after{content:'';position:absolute;width:3px;background:var(--gold);opacity:0.3;top:0;bottom:0;left:50%;margin-left:-1.5px;}
+    .timeline-item{padding:10px 40px;position:relative;width:50%;}
+    .timeline-item.right{left:50%;}
+    .timeline-item::after{content:'';position:absolute;width:20px;height:20px;right:-10px;background:var(--cream);border:4px solid var(--gold);top:25px;border-radius:50%;z-index:1;}
+    .timeline-item.right::after{left:-10px;}
+    .timeline-content{padding:20px;background:white;background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');border-radius:8px;border:1px solid var(--border-color);}
+    .timeline-content h3{font-family:var(--font-heading);color:var(--red);font-size:1.5rem;margin-top:0;}
+    
+    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;}
+    .gallery-grid img{width:100%;height:250px;object-fit:cover;border-radius:8px;cursor:pointer;transition:transform 0.3s ease;}
+    .gallery-grid img:hover{transform:scale(1.05);}
+    .video-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;background:#000;border-radius:8px;margin-top:20px;}
+    .video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;}
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:10000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity 0.3s ease, visibility 0.3s ease;}
+    .lightbox.visible{opacity:1;visibility:visible;}
+    .lightbox-content img{display:block;max-width:90vw;max-height:90vh;border-radius:8px;}
+    .lightbox-close{position:absolute;top:20px;right:30px;background:transparent;color:white;border:none;font-size:3rem;cursor:pointer;}
+
+    .gift-content{display:none;margin-top:20px;padding:20px;border:1px solid var(--border-color);border-radius:8px;}
+    .gift-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;align-items:center;}
+    .gift-details p{margin:8px 0;font-size:1rem;}
+    .gift-details span{font-weight:700;color:var(--red);}
+    .qr-code img{max-width:150px;border-radius:8px;}
+
+    form.rsvp-form{display:grid;gap:15px}
+    input,textarea{padding:12px;border-radius:8px;border:1px solid var(--border-color);background:var(--cream);color:var(--text-dark);font-size:1rem;font-family:var(--font-body)}
+    input::placeholder,textarea::placeholder{color:rgba(0,0,0,0.5);}
+
+    #guestbook-list{margin-top: 25px;padding-top: 20px;border-top: 1px solid var(--border-color);}
+    .guestbook-entry{background: var(--cream);padding: 12px 15px;border-radius: 8px;margin-bottom: 10px;border: 1px solid var(--border-color);}
+    .guestbook-entry-name{font-weight: 700;color: var(--red);font-size: 1.1rem;margin-bottom: 5px;}
+    .guestbook-entry-message{font-size: 0.95rem;opacity: 0.9;margin: 0;word-wrap: break-word;}
+
+    .bottom-nav{position:fixed;bottom:0;left:0;width:100%;background:rgba(255,255,255,0.8);backdrop-filter:blur(10px);z-index:1000;padding:5px 0;border-top: 1px solid var(--border-color);}
+    .bottom-nav-grid{max-width:var(--max-width);margin:0 auto;display:flex;justify-content:space-around;align-items:center;}
+    .nav-btn{color:var(--text-dark);text-decoration:none;text-align:center;padding:10px;border-radius:8px;transition:background 0.2s ease; flex-grow: 1;}
+    .nav-btn:hover{background:var(--border-color);}
+    .nav-btn i{display:block;font-size:1.5rem;margin-bottom:3px; color: var(--red);}
+    .nav-btn span{font-size:0.75rem;}
+    #audio-toggle{background:transparent;border:0;color:var(--text-dark);cursor:pointer;}
+
+    @media (max-width:768px){
+      section{padding-top: 40px;}
+      main{padding: 10px;}
+      .content-card{padding: 15px;}
+      .section-title{font-size: 2rem;}
+      .section-title::before, .section-title::after { content: "~~~"; }
+      
+      .hero-names{font-size: 2.8rem;}
+      .hero-subtitle, .hero-date{font-size: 1rem;}
+      
+      #countdown{gap: 10px;}
+      .countdown-block{padding: 10px; min-width: 65px;}
+      .countdown-block span{font-size: 2rem;}
+      .countdown-block div{font-size: 0.7rem;}
+
+      .couple-card{padding-bottom: 20px;}
+      .couple-photo{width:150px;height:150px;}
+      .couple-name{font-size: 2rem;}
+      
+      .event-card{padding: 20px;}
+      .event-title{font-size: 1.8rem;}
+
+      .timeline::after{left:30px;}
+      .timeline-item{width:100%;padding-left:70px;padding-right:25px;}
+      .timeline-item.right{left:0;}
+      .timeline-item::after, .timeline-item.right::after{left:21px;}
+      .timeline-content{padding: 15px;}
+      
+      .gallery-grid{gap: 10px;}
+      .gallery-grid img{height: 200px;}
+      
+      .gift-grid{gap: 15px; grid-template-columns: 1fr;}
+      .gift-details{text-align: center;}
+      .qr-code{text-align: center;}
+      
+      .bottom-nav-grid{padding: 0 5px;}
+      .nav-btn i{font-size: 1.3rem;}
+      .nav-btn span{font-size: 0.7rem;}
+      
+      .section-with-art::before, .section-with-art::after {width: 80px;height: 80px;}
+    }
+  </style>
+</head>
+<body class="modal-open">
+
+  <div class="cover-modal" id="cover-modal">
+    <img src="https://static.vecteezy.com/system/resources/thumbnails/027/810/568/small_2x/ganesh-chaturthi-ganesh-art-ganesh-illustration-vector.jpg" alt="Shree Ganesh" class="cover-ganesh-icon">
+    <div class="cover-ganesh">श्री गणेशाय नमः</div>
+    <div class="cover-title">आमच्या लग्नाचे आमंत्रण</div>
+    <div class="cover-names">राधा & शिव</div>
+    
+    <div class="cover-guest">
+      <span>सादर सस्नेह आमंत्रण</span>
+      <div id="cover-guest-name" class="cover-guest-name" style="display: none;"></div>
+    </div>
+    
+    <div class="cover-button">
+      <button class="btn" id="open-invitation">
+        <i class="fa-regular fa-envelope-open"></i> आमंत्रण उघडा
+      </button>
+    </div>
+  </div>
+
+  <div class="main-wrap" id="main">
+
+    <section id="home" class="hero section-with-art"> <img src="https://images.pexels.com/photos/19733687/pexels-photo-19733687/free-photo-of-portrait-of-indian-wedding-couple.jpeg" alt="Couple Photo">
+        <h1 class="hero-names">राधा & शिव</h1>
+        <p class="hero-date">शनिवार, २५ जानेवारी, २०२६</p>
+        <div id="countdown">
+            <div class="countdown-block"><span id="cd-days">0</span><div>दिवस</div></div>
+            <div class="countdown-block"><span id="cd-hours">0</span><div>तास</div></div>
+            <div class="countdown-block"><span id="cd-minutes">0</span><div>मिनिटे</div></div>
+            <div class="countdown-block"><span id="cd-seconds">0</span><div>सेकंद</div></div>
+        </div>
+    </section>
+
+    <main>
+      <section id="couple">
+        <h2 class="section-title">वधू आणि वर</h2>
+        <div class="content-card">
+          <div class="grid">
+            <div class="couple-card">
+              <img src="bride.jpg" alt="Bride Photo" class="couple-photo">
+              <h2 class="couple-name">राधा पाटील</h2>
+              <p class="couple-parents">
+                श्री. महेश पाटील आणि सौ. सीमा पाटील यांची सुकन्या
+              </p>
+            </div>
+            <div class="couple-card">
+              <img src="groom.jpg" alt="Groom Photo" class="couple-photo">
+              <h2 class="couple-name">शिव देसाई</h2>
+              <p class="couple-parents">
+                श्री. सुरेश देसाई आणि सौ. निर्मळा देसाई यांचे सुपुत्र
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="graphic-divider"></div>
+
+      <section id="details">
+        <h2 class="section-title">लग्न सोहळा</h2>
+        <p class="section-subtitle">आमच्या या आनंदाच्या क्षणी आपण उपस्थित राहून आम्हास शुभाशीर्वाद द्यावेत, हीच सदिच्छा!</p>
+        
+        <div class="grid" style="margin-bottom: 24px;">
+            <div class="event-card">
+                <div class="event-icon"><i class="fa-solid fa-sun"></i></div>
+                <h3 class="event-title">हळद</h3>
+                <div class="event-details">
+                    <p><strong>शुक्रवार, २४ जानेवारी, २०२६</strong></p>
+                    <p>सकाळी ९:०० वाजता</p>
+                    <p>पत्ता: [येथे हळदीचा पत्ता टाका]</p>
+                </div>
+            </div>
+            <div class="event-card">
+                <div class="event-icon"><i class="fa-solid fa-music"></i></div>
+                <h3 class="event-title">संगीत</h3>
+                <div class="event-details">
+                    <p><strong>शुक्रवार, २४ जानेवारी, २०२६</strong></p>
+                    <p>सायंकाळी ७:०० वाजता</p>
+                    <p>पत्ता: [येथे संगीताचा पत्ता टाका]</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="event-card">
+                <div class="event-icon"><i class="fa-solid fa-ring"></i></div>
+                <h3 class="event-title">शुभविवाह</h3>
+                <div class="event-details">
+                    <p><strong>शनिवार, २५ जानेवारी, २०२६</strong></p>
+                    <p>सकाळी १०:०० वाजता</p>
+                    <p>शिवशक्ती भव्य मंगल कार्यालय, मुख्य रोड, पुणे — ४११००१</p>
+                    <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=राधा+❤️+शिव+लग्न+सोहळा&dates=20260125T100000/20260125T130000&details=आपले+मनःपूर्वक+स्वागत+आहे!&location=शिवशक्ती+भव्य+मंगल+कार्यालय,+१२३,+मुख्य+रोड,+पुणे+—+४११००१" target="_blank" class="btn" style="margin-top:15px;"><i class="fa-regular fa-calendar-check"></i> कॅलेंडरमध्ये जोडा</a>
+                </div>
+            </div>
+            <div class="event-card">
+                <div class="event-icon"><i class="fa-solid fa-utensils"></i></div>
+                <h3 class="event-title">भोजन समारंभ</h3>
+                <div class="event-details">
+                    <p><strong>शनिवार, २५ जानेवारी, २०२६</strong></p>
+                    <p>दुपारी १२:०० वाजल्यापासून</p>
+                    <p>शिवशक्ती भव्य मंगल कार्यालय, मुख्य रोड, पुणे — ४११००१</p>
+                    <a href="http://googleusercontent.com/maps/google.com/1" target="_blank" class="btn" style="margin-top:15px;"><i class="fa-solid fa-map-location-dot"></i> नकाशा बघा</a>
+                </div>
+            </div>
+        </div>
+      </section>
+
+      <div class="graphic-divider"></div>
+
+      <section id="story">
+        <h2 class="section-title">आमची कथा</h2>
+        <p class="section-subtitle">आमच्या प्रवासातील काही खास क्षण...</p>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>२०२२ - पहिली भेट</h3>
+                    <p>एका मित्राच्या वाढदिवसाला आमची ओळख झाली आणि तिथूनच आमच्या मैत्रीची सुरुवात झाली.</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3>२०२३ - मैत्रीचे प्रेमात रूपांतर</h3>
+                    <p>अनेक भेटीगाठी, गप्पा आणि एकमेकांना समजून घेताना मैत्रीचे रूपांतर प्रेमात कधी झाले कळलेच नाही.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>२०२५ - लग्नाचा निर्णय</h3>
+                    <p>दोन्ही कुटुंबांच्या संमतीने आणि आशीर्वादाने आम्ही आमच्या नात्याला लग्नाच्या पवित्र बंधनात बांधण्याचा निर्णय घेतला.</p>
+                </div>
+            </div>
+        </div>
+      </section>
+
+      <div class="graphic-divider"></div>
+
+      <section id="gallery">
+        <h2 class="section-title">गॅलरी</h2>
+        <p class="section-subtitle">आमच्या आठवणीतील काही क्षणचित्रे.</p>
+        <div class="content-card">
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="gallery-grid" style="margin-top:20px;">
+            <img src="https://via.placeholder.com/400x400/A92020/FFFFFF?text=Photo+1" alt="Gallery image 1" onclick="openLightbox(this.src)">
+            <img src="https://via.placeholder.com/400x400/A92020/FFFFFF?text=Photo+2" alt="Gallery image 2" onclick="openLightbox(this.src)">
+            <img src="https://via.placeholder.com/400x400/A92020/FFFFFF?text=Photo+3" alt="Gallery image 3" onclick="openLightbox(this.src)">
+            <img src="https://via.placeholder.com/400x400/A92020/FFFFFF?text=Photo+4" alt="Gallery image 4" onclick="openLightbox(this.src)">
+          </div>
+        </div>
+      </section>
+
+      <div class="graphic-divider"></div>
+
+      <section id="gift">
+        <h2 class="section-title">सप्रेम भेट</h2>
+        <p class="section-subtitle">आपली उपस्थिती हीच आमच्यासाठी सर्वात मोठी भेट आहे. तरीही, आपण भेट देऊ इच्छित असल्यास, खालील पर्यायांचा विचार करू शकता.</p>
+        <div style="text-align:center;">
+          <button class="btn" onclick="toggleGiftSection()">
+            <i class="fa-solid fa-gift"></i> सप्रेम भेट देण्यासाठी क्लिक करा
+          </button>
+        </div>
+        <div class="content-card gift-content" id="giftSection">
+          <div class="gift-grid">
+            <div class="gift-details">
+              <h4>बँक खाते तपशील</h4>
+              <p>नाव: <span>राधा एम. पाटील</span></p>
+              <p>बँकेचे नाव: <span>स्टेट बँक ऑफ इंडिया</span></p>
+              <p>खाते क्र.: <span id="acc-number">12345678901</span>
+                 <button class="btn-copy" onclick="copyToClipboard('acc-number', this)">Copy</button>
+              </p>
+              <p>IFSC कोड: <span id="ifsc-code">SBIN0001234</span>
+                 <button class="btn-copy" onclick="copyToClipboard('ifsc-code', this)">Copy</button>
+              </p>
+            </div>
+            <div class="qr-code">
+              <h4>UPI QR कोड</h4>
+              <img src="qr-code.png" alt="UPI QR Code">
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section id="guestbook" class="section-with-art"> <h2 class="section-title">शुभेच्छा</h2>
+        <p class="section-subtitle">कृपया आमच्यासाठी एक छानसा शुभेच्छा संदेश लिहा.</p>
+        <div class="content-card" style="max-width:600px; margin:0 auto;">
+          <form class="rsvp-form" id="guestbookForm" onsubmit="handleGuestbook(event)">
+            <input type="text" id="guestName" placeholder="आपले संपूर्ण नाव" required>
+            <textarea id="guestMessage" placeholder="शुभेच्छा संदेश" rows="4" required></textarea>
+            <button type="submit" class="btn">संदेश पाठवा</button>
+          </form>
+          <div id="guestbook-list"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer style="padding:40px 20px; text-align:center; opacity:0.7; margin-top:50px; margin-bottom: 80px;">
+      © २०२५ — राधा आणि शिव
+    </footer>
+  </div>
+  
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">×</button>
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <img src="" id="lightbox-img" alt="Gallery preview">
+    </div>
+  </div>
+  
+  <nav class="bottom-nav">
+      <div class="bottom-nav-grid">
+          <a href="#home" class="nav-btn"><i class="fa-solid fa-house"></i><span>मुखपृष्ठ</span></a>
+          <a href="#details" class="nav-btn"><i class="fa-solid fa-calendar-days"></i><span>सोहळा</span></a>
+          <button id="audio-toggle" class="nav-btn">
+              <i class="fa-solid fa-music"></i><span>संगीत</span>
+          </button>
+          <a href="#gallery" class="nav-btn"><i class="fa-solid fa-images"></i><span>गॅलरी</span></a>
+          <a href="#guestbook" class="nav-btn"><i class="fa-solid fa-pen-to-square"></i><span>शुभेच्छा</span></a>
+      </div>
+  </nav>
+
+  <audio id="bgMusic" loop src="/temp/music/sehnai.mp3"></audio>
+
+  <script>
+    // ===== Page Load Logic =====
+    document.addEventListener('DOMContentLoaded',()=>{
+      const coverModal = document.getElementById('cover-modal');
+      const openButton = document.getElementById('open-invitation');
+      const main = document.getElementById('main');
+      const music = document.getElementById('bgMusic');
+
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const guestName = urlParams.get('to');
+        if (guestName) {
+            const guestNameEl = document.getElementById('cover-guest-name');
+            guestNameEl.textContent = decodeURIComponent(guestName.replace(/\+/g, ' '));
+            guestNameEl.style.display = 'block';
+        }
+      } catch (e) { console.warn('Could not read URL params for guest name.'); }
+      
+      openButton.addEventListener('click', () => {
+        coverModal.classList.add('hidden');
+        document.body.classList.remove('modal-open');
+        main.classList.add('visible');
+        startCountdown();
+        music.play().catch(()=>{ console.warn("Audio autoplay was blocked."); });
+      });
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(prefersReduced){
+        coverModal.classList.add('hidden');
+        document.body.classList.remove('modal-open');
+        main.classList.add('visible');
+        startCountdown();
+      }
+    });
+
+    // ===== Countdown Timer Logic =====
+    function startCountdown() {
+      const weddingDate = new Date('2026-01-25T10:00:00').getTime();
+      const interval = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+        if (distance < 0) {
+          clearInterval(interval);
+          document.getElementById('countdown').innerHTML = "<h3 style='color:var(--red); margin:0;'>शुभ विवाह संपन्न!</h3>";
+          return;
+        }
+        document.getElementById('cd-days').textContent = Math.floor(distance / (1000 * 60 * 60 * 24));
+        document.getElementById('cd-hours').textContent = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById('cd-minutes').textContent = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById('cd-seconds').textContent = Math.floor((distance % (1000 * 60)) / 1000);
+      }, 1000);
+    }
+    
+    // ===== Lightbox Logic =====
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    function openLightbox(src) {
+      lightboxImg.src = src;
+      lightbox.classList.add('visible');
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('visible');
+    }
+    
+    // ===== Wedding Gift Toggle =====
+    function toggleGiftSection(){
+        const giftSection = document.getElementById('giftSection');
+        if(giftSection.style.display === 'block'){
+            giftSection.style.display = 'none';
+        } else {
+            giftSection.style.display = 'block';
+        }
+    }
+    
+    // ===== Copy to Clipboard Logic =====
+    function copyToClipboard(elementId, button) {
+      const textToCopy = document.getElementById(elementId).textContent;
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        button.textContent = 'Copied!';
+        setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+      }).catch(err => { console.error('Failed to copy: ', err); });
+    }
+    
+    // ===== Guestbook Logic =====
+    const guestbookEntries = [];
+    function handleGuestbook(e){
+      e.preventDefault();
+      const name = document.getElementById('guestName').value.trim();
+      const message = document.getElementById('guestMessage').value.trim();
+      
+      const entry = { name, message };
+      guestbookEntries.unshift(entry);
+      
+      renderGuestbook();
+      e.target.reset();
+    }
+    
+    function renderGuestbook(){
+      const listEl = document.getElementById('guestbook-list');
+      listEl.innerHTML = '';
+      
+      guestbookEntries.forEach(entry => {
+        const entryEl = document.createElement('div');
+        entryEl.className = 'guestbook-entry';
+        
+        const nameEl = document.createElement('div');
+        nameEl.className = 'guestbook-entry-name';
+        nameEl.textContent = entry.name;
+        
+        const msgEl = document.createElement('p');
+        msgEl.className = 'guestbook-entry-message';
+        msgEl.textContent = entry.message; 
+        
+        entryEl.appendChild(nameEl);
+        entryEl.appendChild(msgEl);
+        listEl.appendChild(entryEl);
+      });
+    }
+
+    // ===== Background music toggle =====
+    const music = document.getElementById('bgMusic');
+    const audioToggle = document.getElementById('audio-toggle');
+    audioToggle.addEventListener('click', () => {
+        const icon = audioToggle.querySelector('i');
+        if(music.paused) {
+            music.play();
+            icon.classList.remove('fa-music');
+            icon.classList.add('fa-pause');
+        } else {
+            music.pause();
+            icon.classList.remove('fa-pause');
+            icon.classList.add('fa-music');
+        }
+    });
+
+  </script>
+</body>
+</html>

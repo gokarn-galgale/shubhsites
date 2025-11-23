@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>राजवर्धन weds राजनंदिनी | राजवाडा निमंत्रण</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Fonts that support Marathi well -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --wood-dark: #3e2723;
+            --wood-light: #5d4037;
+            --gold-royal: #FFD700;
+            --gold-antique: #c5a059;
+            --maroon-royal: #5a0000;
+            --parchment: #fdfbf7;
+            
+            --font-title: 'Noto Serif Devanagari', serif; 
+            --font-heading: 'Noto Serif Devanagari', serif; 
+            --font-body: 'Noto Sans Devanagari', sans-serif; 
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+        body { background-color: #1a0505; overflow-x: hidden; font-family: var(--font-body); color: #3e2723; }
+
+        /* --- RAJWADA DOORS (Overlay) --- */
+        #rajwada-doors {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 10000; display: flex;
+            transition: transform 1.5s ease-in-out, opacity 1s ease 1s;
+        }
+
+        .door-panel {
+            width: 50%; height: 100%;
+            background: repeating-linear-gradient(90deg, var(--wood-dark), var(--wood-dark) 20px, var(--wood-light) 25px, var(--wood-dark) 30px);
+            position: relative;
+            border-right: 5px solid var(--gold-antique);
+            box-shadow: inset 0 0 50px #000;
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #door-left { border-right: 4px solid var(--gold-royal); transform-origin: left; }
+        #door-right { border-left: 4px solid var(--gold-royal); transform-origin: right; }
+
+        .door-pattern {
+            position: absolute; top: 10%; bottom: 10%; left: 20%; right: 20%;
+            border: 2px dashed var(--gold-antique);
+            background-image: radial-gradient(var(--gold-antique) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+        }
+
+        #door-latch {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            z-index: 10001; cursor: pointer;
+            display: flex; flex-direction: column; align-items: center;
+            transition: opacity 0.5s;
+        }
+        
+        .latch-circle {
+            width: 100px; height: 100px;
+            background: radial-gradient(circle, #ffd700, #b8860b);
+            border-radius: 50%;
+            border: 4px solid #5a0000;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+            animation: pulse-glow 2s infinite;
+        }
+        
+        .latch-text {
+            font-family: var(--font-heading); font-size: 1.5rem; color: #5a0000; font-weight: bold;
+        }
+
+        .doors-open #door-left { transform: translateX(-100%); }
+        .doors-open #door-right { transform: translateX(100%); }
+        .doors-open #door-latch { opacity: 0; pointer-events: none; }
+        .doors-open { pointer-events: none; }
+
+        /* --- MAIN CONTENT (The Scroll) --- */
+        #main-site { 
+            min-height: 100vh;
+            width: 100%;
+            background-color: var(--parchment);
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0; transition: opacity 1s ease 1s;
+            padding-bottom: 50px;
+            position: relative;
+        }
+        
+        .visible-site { opacity: 1 !important; }
+
+        .toran-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 60px; z-index: 50;
+            background: url('https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-garland-diwali-flaticons-lineal-color-flat-icons-2.png') repeat-x top center;
+            background-size: 50px;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+        }
+
+        .royal-scroll {
+            max-width: 800px; margin: 80px auto 40px;
+            background: #fffbf0;
+            border: 8px double var(--gold-antique);
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            position: relative; padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .corner-decor { position: absolute; width: 80px; opacity: 0.8; pointer-events: none; }
+        .corner-tl { top: 5px; left: 5px; }
+        .corner-tr { top: 5px; right: 5px; transform: scaleX(-1); }
+        .corner-bl { bottom: 5px; left: 5px; transform: scaleY(-1); }
+        .corner-br { bottom: 5px; right: 5px; transform: rotate(180deg); }
+
+        h1 { font-family: var(--font-heading); color: var(--maroon-royal); text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        h2 { font-family: var(--font-title); color: var(--maroon-royal); }
+        .shloka { font-size: 1.2rem; color: #6d4c41; font-style: italic; margin: 15px 0; font-weight: 600; }
+
+        .btn-royal {
+            background: linear-gradient(to bottom, #800000, #5a0000);
+            color: var(--gold-royal); border: 2px solid var(--gold-royal);
+            padding: 12px 30px; font-family: var(--font-heading); font-size: 1.2rem;
+            border-radius: 50px; cursor: pointer; margin: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4); transition: all 0.3s;
+            display: inline-flex; align-items: center; gap: 10px;
+        }
+        .btn-royal:hover { transform: scale(1.05); background: #900000; }
+        .flower-btn { background: linear-gradient(to bottom, #ffb300, #ff6f00); color: #3e2723; border-color: #800000; }
+
+        #music-fab {
+            position: fixed; bottom: 30px; right: 30px; z-index: 200;
+            width: 60px; height: 60px; border-radius: 50%;
+            background: var(--gold-royal); border: 3px solid var(--maroon-royal);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); cursor: pointer;
+            animation: spin-slow 12s linear infinite;
+            animation-play-state: paused;
+        }
+        @keyframes spin-slow { 100% { transform: rotate(360deg); } }
+        @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 15px var(--gold-royal); } 50% { box-shadow: 0 0 30px #ff6f00; } }
+
+        @keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
+        .particle { position: fixed; top: -10px; z-index: 9999; pointer-events: none; }
+        .petal { width: 15px; height: 15px; background: #ffca28; border-radius: 50% 0 50% 0; animation: fall 4s linear infinite; }
+        .petal:nth-child(even) { background: #ff6f00; width: 18px; height: 18px; }
+
+        #particle-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        .family-box { background: rgba(255, 215, 0, 0.15); border: 1px dashed var(--maroon-royal); padding: 15px; border-radius: 8px; }
+        .event-card { background: #fff; border: 1px solid var(--gold-antique); padding: 20px; border-radius: 10px; box-shadow: 0 5px 10px rgba(0,0,0,0.1); position: relative; overflow: hidden; }
+        .event-card::before { content: ""; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: var(--maroon-royal); }
+
+        @media(max-width: 768px) {
+            .royal-scroll { margin: 70px 15px 40px; padding: 30px 15px; }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 2.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- AUDIO -->
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    <div id="music-fab" onclick="toggleMusic()" title="Music Toggle">
+        <span style="font-size: 28px;">🎺</span>
+    </div>
+
+    <!-- PARTICLES -->
+    <div id="particle-container"></div>
+
+    <!-- RAJWADA DOORS -->
+    <div id="rajwada-doors">
+        <div id="door-left" class="door-panel">
+            <div class="door-pattern"></div>
+        </div>
+
+        <div id="door-right" class="door-panel">
+            <div class="door-pattern"></div>
+        </div>
+
+        <div id="door-latch" onclick="openRajwada()">
+            <div class="latch-circle">
+                <span class="latch-text">श्री</span>
+            </div>
+            <div class="mt-4 text-yellow-200 font-bold text-sm animate-bounce bg-black/50 px-3 py-1 rounded-full">
+                प्रवेश करण्यासाठी क्लिक करा (Click to Enter)
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN INVITATION -->
+    <div id="main-site">
+        <div class="toran-container"></div>
+
+        <div class="royal-scroll">
+            <!-- Corners -->
+            <img src="https://img.icons8.com/color/48/mandala.png" class="corner-decor corner-tl">
+            <img src="https://img.icons8.com/color/48/mandala.png" class="corner-decor corner-tr">
+            <img src="https://img.icons8.com/color/48/mandala.png" class="corner-decor corner-bl">
+            <img src="https://img.icons8.com/color/48/mandala.png" class="corner-decor corner-br">
+
+            <!-- Ganesh & Shloka -->
+            <div class="mb-6">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/027/810/568/small_2x/ganesh-chaturthi-ganesh-art-ganesh-illustration-vector.jpg" class="w-20 mx-auto mb-2" alt="Ganesh">
+                <h1 class="text-3xl font-bold text-red-800">|| श्री गणेशाय नम: ||</h1>
+                <p class="shloka">
+                    "वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ ।<br>
+                    निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ॥"
+                </p>
+            </div>
+
+            <!-- Names -->
+            <div class="py-6 border-t-2 border-b-2 border-yellow-600/30 my-6 relative">
+                <h2 class="text-4xl md:text-5xl text-red-900 mb-2">राजवर्धन</h2>
+                <div class="text-xl font-bold text-green-800 my-2">-- शुभविवाह --</div>
+                <h2 class="text-4xl md:text-5xl text-red-900 mt-2">राजनंदिनी</h2>
+            </div>
+
+            <!-- Date & Time -->
+            <div class="bg-yellow-100/50 inline-block px-6 py-3 rounded-lg border border-yellow-600 mb-8">
+                <p class="text-xl font-bold text-red-900">रविवार, दि. ११ फेब्रुवारी २०१८</p>
+                <p class="text-md font-bold text-gray-700">दुपारी १२:३५ वाजता (गोरज मुहूर्त)</p>
+            </div>
+
+            <!-- Flower Button -->
+            <div class="mb-10">
+                <button onclick="triggerFlowers()" class="btn-royal flower-btn">
+                    <span>🌺</span> पुष्पवृष्टी करा (Shower Flowers)
+                </button>
+            </div>
+
+            <!-- Invitation Text -->
+            <div class="max-w-2xl mx-auto text-lg font-medium text-gray-800 leading-loose mb-10">
+                सस्नेह नमस्कार,<br>
+                आमच्या लाडक्या <span class="text-red-800 font-bold">चि. राजवर्धन</span> आणि <span class="text-red-800 font-bold">चि.सौ.कां. राजनंदिनी</span> 
+                यांच्या शुभविवाह सोहळ्यास आपण सहकुटुंब सहपरिवार उपस्थित राहून वधु-वरांस शुभाशिर्वाद द्यावेत, ही आमची आग्रहाची विनंती.
+            </div>
+
+            <!-- Family -->
+            <div class="mb-10 text-left">
+                <h3 class="text-center text-2xl font-bold text-red-800 mb-4">|| कुळवृत्तांत ||</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="family-box">
+                        <p class="font-bold text-red-900 text-lg mb-1">वर पक्ष (निकम परिवार)</p>
+                        <p class="text-sm"><strong>आजोबा:</strong> कै. रामचंद्र शामराव निकम</p>
+                        <p class="text-sm"><strong>वडील:</strong> श्री. आनंदराव रामचंद्र निकम</p>
+                        <p class="text-xs text-gray-600 mt-1">रा. सांगली, ता. मिरज</p>
+                    </div>
+                    <div class="family-box">
+                        <p class="font-bold text-red-900 text-lg mb-1">वधू पक्ष (पाटील परिवार)</p>
+                        <p class="text-sm"><strong>आजोबा:</strong> श्री. आनंदराव तुकाराम पाटील</p>
+                        <p class="text-sm"><strong>वडील:</strong> श्री. सदाशिव आनंदराव पाटील</p>
+                        <p class="text-xs text-gray-600 mt-1">रा. सांगली, ता. मिरज</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Events -->
+            <div class="mb-10 text-left">
+                <h3 class="text-center text-2xl font-bold text-red-800 mb-4">|| शुभ कार्यक्रम ||</h3>
+                
+                <div class="event-card mb-4">
+                    <div class="flex items-start gap-4">
+                        <div class="text-3xl bg-yellow-100 p-2 rounded-full">🌻</div>
+                        <div>
+                            <h4 class="text-xl font-bold text-yellow-700">हळदी समारंभ</h4>
+                            <p class="font-bold text-gray-800">शनिवार, १० फेब्रुवारी २०१८</p>
+                            <p class="text-gray-600">सकाळी १०:०० वाजता | स्थळ: स्वगृही</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="flex items-start gap-4">
+                        <div class="text-3xl bg-red-100 p-2 rounded-full">🥁</div>
+                        <div>
+                            <h4 class="text-xl font-bold text-red-800">शुभविवाह सोहळा</h4>
+                            <p class="font-bold text-gray-800">रविवार, ११ फेब्रुवारी २०१८</p>
+                            <p class="text-gray-600">दुपारी १२:३५ वाजता</p>
+                            <p class="text-sm font-bold text-red-900 mt-1">स्थळ: श्री गणेश मल्टी पर्पज हॉल, कराड</p>
+                            
+                            <div class="mt-3 inline-flex items-center gap-2 bg-gray-100 px-3 py-1 rounded-full cursor-pointer hover:bg-gray-200 border border-gray-300" onclick="window.open('https://maps.google.com', '_blank')">
+                                <span>🗺️</span>
+                                <span class="text-sm font-bold text-blue-700">Google Map पहा</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Simple Offline AI Bot -->
+            <div class="bg-gray-900 text-yellow-100 p-4 rounded-lg border-2 border-yellow-600 text-left">
+                <h3 class="font-bold text-lg mb-2 text-yellow-400 flex items-center gap-2">
+                    <span>🤖</span> लग्नासाठी मदतनीस
+                </h3>
+                <div id="chat-display" class="h-24 overflow-y-auto bg-black/30 p-2 rounded mb-2 text-sm border border-gray-700">
+                    <div class="opacity-60">नमस्कार! काही प्रश्न विचारायचा आहे का?</div>
+                </div>
+                <div class="flex gap-2">
+                    <input type="text" id="userQuestion" placeholder="उदा. जेवण कधी आहे?" class="flex-1 p-2 rounded text-black bg-yellow-50 border-none text-sm">
+                    <button onclick="askBot()" class="bg-yellow-600 text-black font-bold px-3 rounded text-sm hover:bg-yellow-500">विचार</button>
+                </div>
+            </div>
+
+            <div class="mt-8 text-sm text-gray-500 font-bold">
+                || निमंत्रक: समस्त निकम आणि पाटील परिवार ||
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // DOOR ANIMATION
+        function openRajwada() {
+            var doorContainer = document.getElementById('rajwada-doors');
+            var mainSite = document.getElementById('main-site');
+            
+            if (!doorContainer || !mainSite) return;
+
+            doorContainer.classList.add('doors-open');
+            toggleMusic();
+            setTimeout(triggerFlowers, 500);
+
+            setTimeout(function() {
+                mainSite.classList.add('visible-site');
+                doorContainer.style.opacity = '0';
+                setTimeout(function(){ doorContainer.style.display = 'none'; }, 1500); 
+            }, 1000);
+        }
+
+        // AUTO-FALLBACK: open after 2s if user doesn’t click
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                var doorContainer = document.getElementById('rajwada-doors');
+                if (doorContainer && doorContainer.style.display !== 'none') {
+                    openRajwada();
+                }
+            }, 2000);
+        });
+
+        // AUDIO
+        var audio = document.getElementById('bg-music');
+        var btn = document.getElementById('music-fab');
+        
+        function toggleMusic() {
+            if (!audio) return;
+            if (audio.paused) {
+                audio.volume = 0.4;
+                audio.play().then(function() {
+                    if (btn) btn.style.animationPlayState = 'running';
+                }).catch(function(e) {
+                    console.log("Autoplay blocked");
+                });
+            } else {
+                audio.pause();
+                if (btn) btn.style.animationPlayState = 'paused';
+            }
+        }
+
+        // FLOWERS
+        function triggerFlowers() {
+            var container = document.getElementById('particle-container');
+            if (!container) return;
+            for(var i=0; i<30; i++) {
+                (function(i){
+                    setTimeout(function() {
+                        var el = document.createElement('div');
+                        el.className = 'particle petal';
+                        el.style.left = Math.random() * 100 + 'vw';
+                        el.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                        if(Math.random() > 0.5) el.style.background = '#e65100';
+                        container.appendChild(el);
+                        setTimeout(function(){ el.remove(); }, 6000);
+                    }, i * 150);
+                })(i);
+            }
+        }
+
+        // SIMPLE OFFLINE BOT (no API errors)
+        function offlineReply(q) {
+            var low = q.toLowerCase();
+            if (low.indexOf('वेळ') !== -1 || low.indexOf('कधी') !== -1) {
+                return 'विवाह सोहळा दि. ११ फेब्रुवारी २०१८ रोजी दुपारी १२:३५ वाजता आहे.';
+            }
+            if (low.indexOf('जेवण') !== -1 || low.indexOf('भोजन') !== -1) {
+                return 'जेवणाचा कार्यक्रम विवाह सोहळ्यानंतर त्वरित आहे. कृपया वेळेत या.';
+            }
+            if (low.indexOf('ठिकाण') !== -1 || low.indexOf('कुठे') !== -1 || low.indexOf('पत्ता') !== -1) {
+                return 'स्थळ: श्री गणेश मल्टी पर्पज हॉल, कराड. नकाशा पाहण्यासाठी Google Map बटणावर क्लिक करा.';
+            }
+            return 'आमच्या माहितीनुसार अधिक माहिती साठी कार्यक्रम विभाग आणि नकाशा बटण पहा. अजून काही विचारायचे आहे का?';
+        }
+
+        function askBot() {
+            var input = document.getElementById('userQuestion');
+            var display = document.getElementById('chat-display');
+            if (!input || !display) return;
+
+            var q = input.value.trim();
+            if(!q) return;
+
+            display.innerHTML += '<div class="text-right text-yellow-300 mb-1">तुम्ही: ' + q + '</div>';
+            input.value = '';
+            display.scrollTop = display.scrollHeight;
+
+            var ans = offlineReply(q);
+            display.innerHTML += '<div class="text-left text-white mb-1 p-1 bg-white/10 rounded">AI: ' + ans + '</div>';
+            display.scrollTop = display.scrollHeight;
+        }
+    </script>
+</body>
+</html>

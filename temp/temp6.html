@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>शुभ विवाह - प्रिया आणि राहुल</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;800&family=Great+Vibes&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- FONTS --- */
+        .marathi-font { font-family: 'Noto Sans Devanagari', sans-serif; }
+        .english-script { font-family: 'Great Vibes', cursive; }
+        .royal-font { font-family: 'Cinzel', serif; }
+        
+        /* --- BACKGROUNDS & TEXTURES --- */
+        
+        /* Royal Purple Gradient Base */
+        .royal-bg-base {
+            background-color: #4a044e; /* Deepest Purple */
+            background-image: 
+                radial-gradient(circle at 50% 0%, #86198f 0%, transparent 60%),
+                radial-gradient(circle at 0% 100%, #701a75 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, #701a75 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Seamless Luxury Pattern Overlay */
+        .luxury-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fbbf24' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Golden Mandala Watermark - Centered & Fixed */
+        .mandala-watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fbbf24' fill-opacity='0.08'%3E%3Cpath d='M100 0a100 100 0 1 0 100 100A100 100 0 0 0 100 0zm0 180a80 80 0 1 1 80-80 80 80 0 0 1-80 80z'/%3E%3Cpath d='M100 20a80 80 0 1 0 80 80 80 80 0 0 0-80-80zm0 140a60 60 0 1 1 60-60 60 60 0 0 1-60 60z'/%3E%3Cpath d='M100 40a60 60 0 1 0 60 60 60 60 0 0 0-60-60zm0 100a40 40 0 1 1 40-40 40 40 0 0 1-40 40z'/%3E%3C/g%3E%3C/svg%3E");
+            background-position: center;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Decorative Side Borders */
+        .border-frame {
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v20H0z' fill='none' stroke='%23d97706' stroke-width='2' stroke-opacity='0.3'/%3E%3Cpath d='M2 2h16v16H2z' fill='none' stroke='%23fbbf24' stroke-width='1'/%3E%3C/svg%3E") 20 round;
+        }
+
+        /* --- TEXT STYLES --- */
+        
+        /* Gold Gradient Text - Looks like Foil */
+        .text-gold-foil {
+            background: linear-gradient(to bottom, #fef3c7 0%, #f59e0b 40%, #b45309 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.5));
+            /* Ensure padding for ascenders/descenders */
+            padding-top: 0.1em;
+            padding-bottom: 0.1em;
+        }
+        
+        /* Lighter Gold for body text */
+        .text-gold-light {
+            color: #fde68a;
+        }
+        
+        /* Cream White for high readability */
+        .text-cream {
+            color: #fffbeb;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* --- COMPONENT STYLES --- */
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(40, 7, 30, 0.6); /* Darker tint for better contrast */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(251, 191, 36, 0.4); /* Gold border */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- ENVELOPE 3D STYLES --- */
+        .perspective-2000 { perspective: 2000px; }
+        .envelope-container {
+          position: relative; width: 360px; height: 250px;
+          transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+          transform-style: preserve-3d; filter: drop-shadow(0 30px 30px rgba(0,0,0,0.7));
+        }
+        .purple-silk {
+          background-color: #701a75;
+          background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 4px), repeating-linear-gradient(-45deg, rgba(0,0,0,0.2) 0px, rgba(0,0,0,0.2) 1px, transparent 1px, transparent 4px);
+          box-shadow: inset 0 0 40px rgba(0,0,0,0.5);
+        }
+        .gold-dashed { position: absolute; inset: 6px; border: 2px dashed #fbbf24; outline: 1px solid #fbbf24; outline-offset: 3px; opacity: 0.7; pointer-events: none; }
+        .envelope-interior { position: absolute; inset: 0; z-index: 5; background-color: #fce7f3; background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1' fill='%23db2777' fill-opacity='0.2'/%3E%3C/svg%3E"); border-radius: 6px; }
+        .envelope-body { position: absolute; bottom: 0; width: 100%; height: 100%; z-index: 20; clip-path: polygon(0 0, 50% 45%, 100% 0, 100% 100%, 0 100%); border-radius: 0 0 6px 6px; }
+        .envelope-flap { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 30; transform-origin: top; transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), z-index 0.8s; transform-style: preserve-3d; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3)); }
+        .flap-face { position: absolute; top: 0; left: 0; width: 100%; height: 100%; backface-visibility: hidden; clip-path: polygon(0 0, 100% 0, 50% 52%); border-radius: 6px 6px 0 0; }
+        .flap-front { z-index: 2; transform: rotateX(0deg); background-color: #701a75; background-image: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, transparent 40%), repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 4px); }
+        .flap-back { z-index: 1; transform: rotateX(180deg); background-color: #fce7f3; background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1' fill='%23db2777' fill-opacity='0.2'/%3E%3C/svg%3E"); box-shadow: inset 0 0 20px rgba(0,0,0,0.1); }
+        .opening .envelope-flap { transform: rotateX(180deg); z-index: 1; }
+        .invitation-card-inner { position: absolute; bottom: 10px; left: 15px; width: 330px; height: 220px; background: linear-gradient(135deg, #581c47 0%, #831843 100%); z-index: 10; transition: transform 1.2s 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px solid #fcd34d; box-shadow: 0 -5px 15px rgba(0,0,0,0.2); }
+        .opening .invitation-card-inner { transform: translateY(-220px) scale(1.05); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .opening .envelope-container { transform: translateY(250px); opacity: 0; transition: transform 1s 1.6s, opacity 0.5s 2s; }
+        .wax-seal-swastik { position: absolute; top: 115px; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; z-index: 40; cursor: pointer; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #fcd34d, #d97706, #78350f); box-shadow: 0 4px 10px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; font-size: 36px; color: #451a03; font-weight: bold; border: 2px solid #fef3c7; animation: pulse-gold 2s infinite; }
+        .opening .wax-seal-swastik { opacity: 0; pointer-events: none; }
+        @keyframes pulse-gold { 0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); } 70% { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 0 0 15px rgba(251, 191, 36, 0); } 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); } }
+        .animate-fade-in-up { animation: fadeInUp 1s ease-out forwards; opacity: 0; transform: translateY(20px); }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // --- ICONS ---
+        const Heart = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>);
+        const Calendar = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>);
+        const MapPin = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>);
+        const Clock = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>);
+        const Music = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>);
+        const Users = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>);
+        const Sparkles = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M9 3v4"/><path d="M3 5h4"/><path d="M3 9h4"/></svg>);
+        const Share2 = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>);
+        const Copy = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>);
+        const Play = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polygon points="5 3 19 12 5 21 5 3"/></svg>);
+        const Pause = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect width="4" height="16" x="6" y="4"/><rect width="4" height="16" x="14" y="4"/></svg>);
+
+        const WeddingInvitation = () => {
+            const [step, setStep] = useState('closed'); 
+            const [generatedBlessing, setGeneratedBlessing] = useState('');
+            const [musicAllowed, setMusicAllowed] = useState(false);
+            const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+            const audioRef = useRef(null);
+
+            useEffect(() => {
+                audioRef.current = new Audio('/temp/music/sehnai.mp3'); 
+                audioRef.current.loop = true;
+                return () => {
+                    if (audioRef.current) audioRef.current.pause();
+                };
+            }, []);
+
+            // Countdown Logic
+            useEffect(() => {
+                const timer = setInterval(() => {
+                    const difference = +new Date("2025-12-02T12:21:00") - +new Date();
+                    if (difference > 0) {
+                        setTimeLeft({
+                            days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+                            hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+                            minutes: Math.floor((difference / 1000 / 60) % 60),
+                            seconds: Math.floor((difference / 1000) % 60),
+                        });
+                    }
+                }, 1000);
+                return () => clearInterval(timer);
+            }, []);
+
+            useEffect(() => {
+                if (musicAllowed && audioRef.current) {
+                    audioRef.current.play().catch(e => console.log("Audio autoplay prevented"));
+                } else if (audioRef.current) {
+                    audioRef.current.pause();
+                }
+            }, [musicAllowed]);
+
+            const handleOpenEnvelope = () => {
+                setStep('opening');
+                setTimeout(() => {
+                    setStep('open');
+                    setMusicAllowed(true); 
+                }, 2200);
+            };
+
+            const handleWhatsAppShare = () => {
+                const currentUrl = window.location.href;
+                const text = `नमस्कार! \n\nचि. राहुल आणि चि. सौ. का. प्रिया यांच्या लग्नाचे आग्रहाचे निमंत्रण!\n\n📅 *तारीख:* मंगळवार, ०२ डिसेंबर २०२५\n⏰ *मुहूर्त:* दुपारी १२:२१ वाजता\n📍 *स्थळ:* पॅलेस वेलफेअर मंडप, विद्यानगर, पुणे\n\nतुम्ही सहकुटुंब उपस्थित राहावे ही विनंती.\n\nअधिक माहितीसाठी खालील लिंक वर क्लिक करा:\n${currentUrl}`;
+                window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+            };
+
+            const generateBlessing = () => {
+                const blessings = [
+                    "लग्नाच्या गाठी स्वर्गात बांधल्या जातात, हे खरेच आहे. तुम्हा दोघांना पाहून याची खात्री पटते. सुखी भव!",
+                    "तुमच्या आयुष्यात प्रेमाचा वर्षाव सतत होत राहो. लग्नाच्या खूप खूप शुभेच्छा!",
+                    "सप्तपदीचे सात पाऊले, सात जन्माची सोबत.. तुम्हा दोघांना सुखी संसारासाठी खूप साऱ्या शुभेच्छा!",
+                    "फुलांसारखे बहरत राहो आयुष्य तुमचे, सुख आणि प्रेमाने भरलेले असो अंगण तुमचे. शुभ विवाह!"
+                ];
+                setGeneratedBlessing(blessings[Math.floor(Math.random() * blessings.length)]);
+            };
+
+            return (
+                <div className="min-h-screen royal-bg-base luxury-pattern font-sans text-white overflow-x-hidden relative border-frame">
+                    
+                    {/* Mandala Watermark (Fixed) */}
+                    <div className="mandala-watermark"></div>
+
+                    {/* --- INTRO: ROYAL PURPLE ENVELOPE --- */}
+                    {step !== 'open' && (
+                        <div className={`fixed inset-0 z-[60] flex flex-col items-center justify-center royal-bg-base transition-opacity duration-1000 ${step === 'opening' ? 'opacity-0 pointer-events-none delay-[2200ms]' : 'opacity-100'}`}>
+                        
+                        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent pointer-events-none"></div>
+
+                        {/* Header */}
+                        <div className={`mb-16 text-center z-10 transition-opacity duration-500 ${step === 'opening' ? 'opacity-0' : 'opacity-100'}`}>
+                            <div className="text-gold-light marathi-font text-sm mb-2 animate-pulse tracking-widest">|| श्री गणेशाय नमः ||</div>
+                            <h1 className="text-5xl font-bold text-gold-foil drop-shadow-lg marathi-font leading-relaxed py-2">
+                            शुभ विवाह
+                            </h1>
+                            <p className="text-gold-light mt-4 text-sm">पत्रिका उघडण्यासाठी स्वास्तिक वर क्लिक करा</p>
+                        </div>
+
+                        <div className={`perspective-2000 ${step === 'opening' ? 'opening' : ''} z-20 transform scale-90 md:scale-110`}>
+                            <div className="envelope-container">
+                            
+                            {/* Interior */}
+                            <div className="envelope-interior shadow-inner"></div>
+                            
+                            {/* Card Inside (Purple) */}
+                            <div className="invitation-card-inner">
+                                <div className="text-center p-4 marathi-font text-white">
+                                    <div className="text-xs font-bold text-gold-light mb-2">|| श्री गजानन प्रसन्न ||</div>
+                                    <h2 className="text-3xl font-bold text-gold-foil leading-relaxed py-1">प्रिया</h2>
+                                    <span className="text-xl text-white">&</span>
+                                    <h2 className="text-3xl font-bold text-gold-foil leading-relaxed py-1">राहुल</h2>
+                                    <div className="w-full h-px bg-yellow-500/50 my-3"></div>
+                                    <p className="text-xs font-semibold text-gray-200">०२ डिसेंबर २०२५</p>
+                                </div>
+                            </div>
+
+                            {/* Body (Purple Silk) */}
+                            <div className="envelope-body purple-silk">
+                                <div className="gold-dashed"></div>
+                            </div>
+
+                            {/* Flap */}
+                            <div className="envelope-flap">
+                                <div className="flap-face flap-front">
+                                    <div className="gold-dashed" style={{ clipPath: 'polygon(0 0, 100% 0, 50% 52%)' }}></div>
+                                </div>
+                                <div className="flap-face flap-back"></div>
+                            </div>
+                            
+                            {/* Swastik Seal */}
+                            <button onClick={handleOpenEnvelope} className="wax-seal-swastik" aria-label="Open">
+                                卐
+                            </button>
+
+                            </div>
+                        </div>
+                        </div>
+                    )}
+
+                    {/* --- MAIN CONTENT --- */}
+                    <div className={`relative z-10 transition-all duration-1000 ease-in-out ${step === 'open' ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-95 h-0 overflow-hidden'}`}>
+                        
+                        {/* Sticky Music Control */}
+                        <button onClick={() => setMusicAllowed(!musicAllowed)} className="fixed top-4 right-4 z-50 bg-black/40 p-3 rounded-full shadow-lg border border-yellow-500/50 hover:bg-black/60 transition-transform hover:scale-105 backdrop-blur-sm">
+                        {musicAllowed ? <Pause className="w-5 h-5 text-yellow-400 animate-pulse" /> : <Play className="w-5 h-5 text-gray-300" />}
+                        </button>
+
+                        {/* WhatsApp Floating */}
+                        <div className="fixed bottom-6 right-6 z-50">
+                        <button onClick={handleWhatsAppShare} className="bg-green-600 text-white px-6 py-3 rounded-full shadow-2xl hover:bg-green-700 transition-all flex items-center gap-2 font-bold border border-green-400 animate-bounce">
+                            <Share2 className="w-5 h-5" />
+                            <span className="hidden md:inline">निमंत्रण पाठवा</span>
+                        </button>
+                        </div>
+
+                        {/* Hero Section */}
+                        <header className="relative min-h-screen flex flex-col items-center justify-center p-4 text-center marathi-font">
+                        
+                        <div className="z-10 w-full max-w-md mx-auto animate-fade-in-up">
+                            <div className="mb-4 space-y-1 text-gold-light font-semibold text-sm md:text-base tracking-widest">
+                            <p>॥ श्री गणेश प्रसन्न ॥</p>
+                            <p>॥ श्री कुलदेवता प्रसन्न ॥</p>
+                            </div>
+
+                            {/* Ganesha Image */}
+                            <div className="w-28 h-28 mx-auto mb-4 flex items-center justify-center drop-shadow-lg">
+                                <img 
+                                    src="/temp/images/ganesha1.jpg" 
+                                    alt="Ganesha" 
+                                    className="w-full h-full object-contain filter drop-shadow-[0_0_10px_rgba(251,191,36,0.6)]"
+                                />
+                            </div>
+
+                            <h1 className="text-2xl font-bold text-gold-foil mb-4 tracking-widest border-b border-yellow-500/30 inline-block pb-2 leading-relaxed">शुभ विवाह निमंत्रण</h1>
+                            
+                            {/* Names Section with Swastik */}
+                            <div className="my-4 relative py-8 border-y border-yellow-500/40 glass-card rounded-2xl mx-2">
+                                <div className="text-5xl md:text-6xl font-bold text-gold-foil mb-2 drop-shadow-lg leading-relaxed py-2">प्रिया</div>
+                                
+                                {/* Central Swastik Motif */}
+                                <div className="flex justify-center my-2">
+                                    <span className="text-5xl drop-shadow-lg text-yellow-500 filter brightness-110">卐</span>
+                                </div>
+                                
+                                <div className="text-5xl md:text-6xl font-bold text-gold-foil mt-2 drop-shadow-lg leading-relaxed py-2">राहुल</div>
+                            </div>
+
+                            <div className="mt-4 p-3 border border-yellow-500/50 inline-block glass-card rounded-lg shadow-lg">
+                            <p className="text-lg font-bold text-cream">मंगळवार, ०२ डिसेंबर २०२५</p>
+                            <p className="text-xs text-gold-light mt-1 uppercase tracking-wider">दुपारी १२ वा. ३० मि.</p>
+                            </div>
+
+                            <div className="mt-8 animate-bounce text-gold-light">
+                            <p className="text-[10px] uppercase tracking-widest">Scroll Down</p>
+                            <div className="w-0.5 h-6 bg-yellow-500 mx-auto mt-1"></div>
+                            </div>
+                        </div>
+                        </header>
+
+                        {/* Invite Text Section */}
+                        <section className="py-10 px-4 max-w-2xl mx-auto text-center marathi-font relative">
+                        
+                        <h2 className="text-2xl font-bold text-gold-foil mb-6 royal-font leading-relaxed">सप्रेम नमस्कार</h2>
+                        
+                        <div className="glass-card p-6 rounded-2xl shadow-2xl mb-8 mx-2 relative overflow-hidden">
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-yellow-500 to-transparent"></div>
+                            <p className="text-cream leading-relaxed text-base font-medium">
+                                "फुटत्या या क्षणांना, येतो गंध प्रेमाचा<br/>
+                                हसऱ्या दोन मनांनी, घेता आकार फुलांचा"<br/><br/>
+                                <span className="text-xs text-gold-light">वि. वि. श्री कृपेकरुन आमचे येथे...</span>
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-4 mt-4 text-left">
+                            {/* Bride Details */}
+                            <div className="p-5 glass-card rounded-xl shadow-lg relative group hover:bg-white/5 transition-colors">
+                                <div className="absolute -top-2 -left-2 text-3xl">💃</div>
+                                <h3 className="text-xl font-bold text-gold-foil mb-1 mt-1 leading-relaxed py-1">चि. सौ. का. प्रिया</h3>
+                                <p className="text-[10px] text-gold-light mb-2 uppercase tracking-widest">(रा. इचलकरंजी)</p>
+                                <p className="text-cream text-xs leading-relaxed">
+                                    कै. गणपतराव विलास पाटील यांची नात,<br/>
+                                    <strong>श्री. विलास गणपतराव पाटील</strong><br/>
+                                    यांची कनिष्ठ सुकन्या
+                                </p>
+                            </div>
+
+                            {/* Groom Details */}
+                            <div className="p-5 glass-card rounded-xl shadow-lg relative group hover:bg-white/5 transition-colors">
+                                <div className="absolute -top-2 -right-2 text-3xl">🕺</div>
+                                <h3 className="text-xl font-bold text-gold-foil mb-1 mt-1 text-right leading-relaxed py-1">चि. राहुल</h3>
+                                <p className="text-[10px] text-gold-light mb-2 uppercase tracking-widest text-right">(रा. इचलकरंजी)</p>
+                                <p className="text-cream text-xs leading-relaxed text-right">
+                                    कै. रमेश आनंदराव देशमुख यांचा नातू,<br/>
+                                    <strong>श्री. आनंदराव रमेश देशमुख</strong><br/>
+                                    यांचे ज्येष्ठ चिरंजीव
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* ADDED WEDDING TEXT */}
+                        <div className="mt-8 text-center">
+                            <div className="inline-block px-6 py-2 border-t border-b border-yellow-500/30">
+                                <p className="text-xl text-gold-foil font-bold tracking-wider drop-shadow-sm leading-relaxed py-1">
+                                    यांचा शुभ विवाह आयोजित केला आहे
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* COUNTDOWN TIMER */}
+                        <div className="mt-8 flex justify-center gap-3 text-center">
+                            <div className="glass-card p-3 rounded-lg min-w-[70px]">
+                                <span className="block text-2xl font-bold text-gold-foil">{timeLeft.days}</span>
+                                <span className="text-[10px] text-cream uppercase tracking-wide">Days</span>
+                            </div>
+                            <div className="glass-card p-3 rounded-lg min-w-[70px]">
+                                <span className="block text-2xl font-bold text-gold-foil">{timeLeft.hours}</span>
+                                <span className="text-[10px] text-cream uppercase tracking-wide">Hours</span>
+                            </div>
+                            <div className="glass-card p-3 rounded-lg min-w-[70px]">
+                                <span className="block text-2xl font-bold text-gold-foil">{timeLeft.minutes}</span>
+                                <span className="text-[10px] text-cream uppercase tracking-wide">Mins</span>
+                            </div>
+                            <div className="glass-card p-3 rounded-lg min-w-[70px]">
+                                <span className="block text-2xl font-bold text-gold-foil">{timeLeft.seconds}</span>
+                                <span className="text-[10px] text-cream uppercase tracking-wide">Secs</span>
+                            </div>
+                        </div>
+
+                        </section>
+
+                        {/* Events Timeline */}
+                        <section className="py-12 px-4 max-w-4xl mx-auto marathi-font">
+                        <h2 className="text-2xl font-bold text-center text-gold-foil mb-10 royal-font leading-relaxed">शुभ कार्यक्रम</h2>
+                        <div className="space-y-8">
+                            {/* Haldi */}
+                            <div className="flex flex-col md:flex-row items-center glass-card rounded-2xl shadow-lg overflow-hidden border-l-4 border-yellow-500 hover:scale-[1.01] transition-transform">
+                            <div className="bg-yellow-500/20 p-6 flex flex-col items-center justify-center w-full md:w-1/3 min-w-[180px] border-b md:border-b-0 md:border-r border-yellow-500/20">
+                                <Music className="w-10 h-10 text-yellow-400 mb-2" />
+                                <h3 className="text-xl font-bold text-gold-foil leading-relaxed">हळदी</h3>
+                            </div>
+                            <div className="p-6 w-full text-center md:text-left">
+                                <div className="flex items-center justify-center md:justify-start mb-2 text-cream text-base">
+                                <Calendar className="w-5 h-5 mr-2 text-yellow-500" />
+                                <span className="font-bold">सोमवार, ०१ डिसेंबर २०२५</span>
+                                </div>
+                                <div className="flex items-center justify-center md:justify-start text-gold-light text-sm">
+                                <Clock className="w-5 h-5 mr-2 text-yellow-500" />
+                                <span>सायं. ७:०० वाजता (विवाह स्थळी)</span>
+                                </div>
+                            </div>
+                            </div>
+
+                            {/* Wedding */}
+                            <div className="flex flex-col md:flex-row items-center glass-card rounded-2xl shadow-lg overflow-hidden border-l-4 border-pink-600 hover:scale-[1.01] transition-transform">
+                            <div className="bg-pink-900/30 p-6 flex flex-col items-center justify-center w-full md:w-1/3 min-w-[180px] border-b md:border-b-0 md:border-r border-pink-500/20">
+                                <Users className="w-10 h-10 text-pink-400 mb-2" />
+                                <h3 className="text-xl font-bold text-pink-300 leading-relaxed">विवाह</h3>
+                                <p className="text-[10px] text-pink-200 mt-1 tracking-wider">(अक्षतारोपण)</p>
+                            </div>
+                            <div className="p-6 w-full text-center md:text-left">
+                                <div className="flex items-center justify-center md:justify-start mb-2 text-cream text-base">
+                                <Calendar className="w-5 h-5 mr-2 text-pink-500" />
+                                <span className="font-bold">मंगळवार, ०२ डिसेंबर २०२५</span>
+                                </div>
+                                <div className="flex items-center justify-center md:justify-start text-gold-light text-sm">
+                                <Clock className="w-5 h-5 mr-2 text-pink-500" />
+                                <span>दुपारी १२:३० वाजता</span>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </section>
+
+                        {/* Family Section */}
+                        <section className="py-12 px-4 max-w-4xl mx-auto marathi-font text-center">
+                        <div className="inline-block px-6 py-2 border-y border-yellow-500/40 mb-8">
+                            <h2 className="text-xl font-bold text-gold-foil leading-relaxed">आपले स्नेहांकित</h2>
+                        </div>
+                        
+                        <div className="grid md:grid-cols-2 gap-8 text-cream mb-8 text-base">
+                            <div className="space-y-2 text-right border-r border-yellow-500/20 pr-4">
+                            <p className="font-bold text-gold-light text-lg mb-2">पाटील परिवार</p>
+                            <p>श्री. विलास उर्फ अण्णा गणपतराव पाटील</p>
+                            <p>श्री. अशोक बापू पाटील</p>
+                            <p>सौ. अनिता विलास पाटील</p>
+                            <p>सौ. सुनीता अशोक पाटील</p>
+                            </div>
+                            <div className="space-y-2 text-left pl-2">
+                            <p className="font-bold text-gold-light text-lg mb-2">देशमुख परिवार</p>
+                            <p>श्री. संजय रामचंद्र जाधव</p>
+                            <p>श्री. नितीन पांडुरंग शिंदे</p>
+                            <p>सौ. पूनम संजय जाधव</p>
+                            <p>सौ. रेखा नितीन शिंदे</p>
+                            </div>
+                        </div>
+
+                        <p className="text-gold-foil font-bold text-lg mb-8 drop-shadow-sm leading-relaxed">समस्त पाटील व देशमुख परिवार</p>
+
+                        {/* Kids Section */}
+                        <div className="glass-card p-4 rounded-2xl border border-pink-500/30 inline-block max-w-md mx-auto transform hover:rotate-1 transition duration-300 cursor-pointer">
+                            <h3 className="text-lg font-bold text-pink-400 mb-1 leading-relaxed">🎈 छोटे निमंत्रक 🎈</h3>
+                            <p className="font-bold text-white text-base mb-1">आर्या, वेदांत, सोहम</p>
+                            <p className="text-pink-200 font-medium italic text-xs">
+                            "आमच्या मावशीच्या लग्नाला यायचं बर का.....!"
+                            </p>
+                        </div>
+                        </section>
+
+                        {/* Venue Section */}
+                        <section className="py-10 marathi-font">
+                        <div className="max-w-3xl mx-auto px-4 text-center">
+                            <div className="glass-card p-8 rounded-3xl shadow-2xl relative">
+                            <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-black/80 p-2 rounded-full border border-yellow-500">
+                                <MapPin className="w-6 h-6 text-yellow-500 animate-bounce" />
+                            </div>
+                            <h2 className="text-2xl font-bold text-gold-foil mb-3 mt-3 leading-relaxed">विवाह स्थळ</h2>
+                            <p className="text-xl text-cream font-bold mb-1">पॅलेस वेलफेअर मंडप</p>
+                            <p className="text-gold-light mb-6 text-sm">४ था अव्हेन्यू, गणेश मंदिर जवळ, विद्यानगर, पुणे - ४११०३२</p>
+                            
+                            <button 
+                                onClick={() => window.open('https://www.google.com/maps/search/?api=1&query=Palace+Welfare+Mandap+Vidyanagar+Pune', '_blank')}
+                                className="bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-bold py-2 px-6 rounded-full transition duration-300 shadow-lg flex items-center mx-auto transform hover:scale-105 text-sm"
+                            >
+                                <MapPin className="w-4 h-4 mr-2" />
+                                गुगल मॅप्स वर पहा
+                            </button>
+                            </div>
+                        </div>
+                        </section>
+
+                        {/* AI Blessing Generator */}
+                        <section className="py-12 marathi-font text-center px-4">
+                        <div className="max-w-2xl mx-auto">
+                            <h2 className="text-xl font-bold text-gold-foil mb-4 flex items-center justify-center gap-2 leading-relaxed">
+                                <Sparkles className="text-yellow-300"/> AI शुभेच्छा जनरेटर
+                            </h2>
+                            <p className="text-gray-300 mb-4 text-sm">लग्नासाठी सुंदर शुभेच्छा सुचत नाहीयेत? आमचे AI टूल वापरा!</p>
+                            <div className="glass-card p-6 rounded-2xl shadow-lg">
+                                {generatedBlessing ? (
+                                <div className="animate-fade-in-up">
+                                    <p className="text-lg text-cream font-medium italic mb-4 leading-relaxed">"{generatedBlessing}"</p>
+                                    <div className="flex justify-center gap-4">
+                                    <button onClick={()=>{navigator.clipboard.writeText(generatedBlessing); alert('कॉपी केले!')}} className="flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full hover:bg-white/20 transition text-white border border-white/20 text-sm"><Copy size={16}/> कॉपी</button>
+                                    <button onClick={()=>window.open(`https://wa.me/?text=${encodeURIComponent(generatedBlessing)}`)} className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-full hover:bg-green-500 transition shadow-lg text-sm"><Share2 size={16}/> पाठवा</button>
+                                    </div>
+                                    <button onClick={()=>setGeneratedBlessing('')} className="mt-4 text-xs text-yellow-400 hover:underline">दुसरी शुभेच्छा पहा</button>
+                                </div>
+                                ) : (
+                                <button onClick={generateBlessing} className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-black px-6 py-3 rounded-full font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2 mx-auto border-2 border-yellow-300 text-sm">
+                                    <Sparkles size={18}/>
+                                    शुभेच्छा जनरेट करा
+                                </button>
+                                )}
+                            </div>
+                        </div>
+                        </section>
+
+                        {/* Footer */}
+                        <footer className="bg-black/60 text-yellow-500/60 py-8 text-center marathi-font border-t border-yellow-900/50 backdrop-blur-md">
+                        <p className="mb-2 text-xl royal-font tracking-widest text-gold-foil leading-relaxed">।। शुभ विवाह ।।</p>
+                        <p className="text-xs opacity-70">© 2025 Patil & Deshmukh Family</p>
+                        </footer>
+
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<WeddingInvitation />);
+    </script>
+</body>
+</html>

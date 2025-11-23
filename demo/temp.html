@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shubh_Sites | Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --accent: #D4AF37; /* Gold */
+            --light: #f9f9f9;
+            --white: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Lato', sans-serif; background-color: var(--light); color: var(--primary); }
+
+        /* === HEADER === */
+        header {
+            background-color: var(--white);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .logo span { color: var(--accent); }
+
+        /* === HERO === */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+        }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 15px; }
+        .hero p { font-size: 1.2rem; font-weight: 300; opacity: 0.9; }
+
+        /* === GRID SYSTEM === */
+        .container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .section-title::after {
+            content: ''; display: block; width: 60px; height: 3px; 
+            background: var(--accent); margin: 10px auto 0;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* === TEMPLATE CARD === */
+        .template-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .card-image {
+            height: 200px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .template-card:hover .card-image img { transform: scale(1.1); }
+
+        .card-details { padding: 25px; text-align: center; }
+        .card-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .card-tags { margin-bottom: 20px; height: 30px; overflow: hidden; }
+        .tag { 
+            display: inline-block; font-size: 0.75rem; background: #f0f0f0; 
+            padding: 4px 10px; border-radius: 20px; color: #666; margin: 2px;
+        }
+
+        .preview-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            transition: background 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+        .preview-btn:hover { background-color: var(--accent); }
+
+        /* === PREVIEW MODAL (IFRAME CONTAINER) === */
+        #preview-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            z-index: 2000;
+            display: none; /* Hidden by default */
+            flex-direction: column;
+        }
+
+        .preview-header {
+            height: 60px;
+            background: #111;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .close-preview {
+            background: transparent; border: 1px solid #555;
+            color: #ddd; padding: 8px 15px; border-radius: 5px;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .close-preview:hover { background: #333; color: #fff; border-color: #fff; }
+
+        .device-toggles i {
+            margin: 0 10px; cursor: pointer; color: #777; transition: 0.2s;
+        }
+        .device-toggles i.active { color: var(--accent); }
+
+        .iframe-container {
+            flex-grow: 1;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            background: #222;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        /* Device Widths for Simulation */
+        iframe.mobile { width: 375px; border-radius: 20px; height: 95%; }
+        iframe.tablet { width: 768px; height: 95%; }
+        iframe.desktop { width: 100%; height: 100%; }
+
+        @media(max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .iframe-container { padding: 0; }
+            iframe.mobile { width: 100%; border-radius: 0; height: 100%; }
+            .device-toggles { display: none; } /* Hide toggles on mobile devices */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo">Shubh<span>_Sites</span></a>
+        <div class="socials">
+            <i class="fab fa-instagram" style="font-size: 1.2rem; cursor:pointer;"></i>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Wedding Portfolio</h1>
+        <p>Live Previews of Our 20 Signature Designs</p>
+    </section>
+
+    <!-- Templates Gallery -->
+    <div class="container">
+        <h2 class="section-title">Website Collection</h2>
+        
+        <div class="template-grid" id="gallery-grid">
+            <!-- Content injected via JS -->
+        </div>
+    </div>
+
+    <!-- PREVIEW OVERLAY -->
+    <div id="preview-overlay">
+        <div class="preview-header">
+            <div style="font-weight: bold; font-size: 1.2rem;">Live Preview</div>
+            
+            <div class="device-toggles">
+                <i class="fas fa-mobile-alt active" onclick="setDevice('mobile', this)" title="Mobile View"></i>
+                <i class="fas fa-tablet-alt" onclick="setDevice('tablet', this)" title="Tablet View"></i>
+                <i class="fas fa-desktop" onclick="setDevice('desktop', this)" title="Desktop View"></i>
+            </div>
+
+            <button class="close-preview" onclick="closePreview()">
+                <i class="fas fa-times"></i> Close Preview
+            </button>
+        </div>
+        <div class="iframe-container">
+            <iframe id="preview-frame" class="mobile"></iframe>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        
+        // =====================================================
+        // CONFIGURATION: EDIT YOUR LINKS HERE
+        // =====================================================
+        // Only 'url' type items. 
+        // Replace '#' with your actual website URL (e.g., 'https://mysite.com')
+        // Replace image URLs with screenshots of your sites
+        
+        const myWebsites = [
+            { id: 'w1', title: 'Marathi Temple Theme', img: 'https://images.unsplash.com/photo-1604609025629-d0d2e722eb77?q=80&w=600', tags: ['Traditional', 'Divine', 'Red'], url: 'https://gokarn.page.gd/ex1.html' },
+            { id: 'w2', title: 'Royal Vintage', img: 'https://images.unsplash.com/photo-1544124499-58912cbddaad?q=80&w=600', tags: ['Luxury', 'Gold', 'Classic'], url: 'https://gokarn.page.gd/gk1.html' },
+            { id: 'w3', title: 'Modern Floral', img: 'https://images.unsplash.com/photo-1523438885200-e635ba2c371e?q=80&w=600', tags: ['Pastel', 'Clean', 'Elegant'], url: '#' },
+            { id: 'w4', title: 'South Indian', img: 'https://images.unsplash.com/photo-1606216794074-735e91aa2c0c?q=80&w=600', tags: ['Silk', 'Gold', 'Culture'], url: '#' },
+            { id: 'w5', title: 'Nikah Elegance', img: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=600', tags: ['Green', 'Urdu', 'Royal'], url: '#' },
+            { id: 'w6', title: 'Punjabi Anand Karaj', img: 'https://images.unsplash.com/photo-1587271407850-4d4cc86baa39?q=80&w=600', tags: ['Vibrant', 'Fun', 'Sikh'], url: '#' },
+            { id: 'w7', title: 'Christian White Wedding', img: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=600', tags: ['Minimal', 'White', 'Church'], url: '#' },
+            { id: 'w8', title: 'Bengali Biye', img: 'https://images.unsplash.com/photo-1621621667797-e06afc217fb0?q=80&w=600', tags: ['Red', 'Artistic', 'Tradition'], url: '#' },
+            { id: 'w9', title: 'Beach Sunset', img: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=600', tags: ['Goa', 'Blue', 'Fun'], url: '#' },
+            { id: 'w10', title: 'Rajasthani Palace', img: 'https://images.unsplash.com/photo-1532659624997-e6960b50371e?q=80&w=600', tags: ['Pink', 'Grand', 'Royal'], url: '#' },
+            { id: 'w11', title: 'Gujarati Lagan', img: 'https://images.unsplash.com/photo-1595522202808-0e92df845210?q=80&w=600', tags: ['Garba', 'Colorful', 'Day'], url: '#' },
+            { id: 'w12', title: 'Dark Mode Luxury', img: 'https://images.unsplash.com/photo-1470075801209-17f9ec0cada6?q=80&w=600', tags: ['Modern', 'Sleek', 'Night'], url: '#' },
+            { id: 'w13', title: 'Rustic Forest', img: 'https://images.unsplash.com/photo-1445964047600-cdbdb873673d?q=80&w=600', tags: ['Green', 'Nature', 'Boho'], url: '#' },
+            { id: 'w14', title: 'Lavender Dream', img: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=600', tags: ['Purple', 'Soft', 'Romantic'], url: '#' },
+            { id: 'w15', title: 'Sunflower Bright', img: 'https://images.unsplash.com/photo-1470509037663-253afd7f0f51?q=80&w=600', tags: ['Yellow', 'Happy', 'Day'], url: '#' },
+            { id: 'w16', title: 'Midnight Star', img: 'https://images.unsplash.com/photo-1534863242826-c77a2a22f76d?q=80&w=600', tags: ['Blue', 'Space', 'Magic'], url: '#' },
+            { id: 'w17', title: 'Peachy Vibes', img: 'https://images.unsplash.com/photo-1522673607200-1645062cd4d4?q=80&w=600', tags: ['Soft', 'Peach', 'Modern'], url: '#' },
+            { id: 'w18', title: 'Emerald Luxury', img: 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=600', tags: ['Green', 'Gold', 'Rich'], url: '#' },
+            { id: 'w19', title: 'Vintage Paper', img: 'https://images.unsplash.com/photo-1527631746610-bca002678d65?q=80&w=600', tags: ['Old School', 'Classic', 'Sepia'], url: '#' },
+            { id: 'w20', title: 'Watercolor Art', img: 'https://images.unsplash.com/photo-1516876902012-58d550826c64?q=80&w=600', tags: ['Paint', 'Artistic', 'Colorful'], url: '#' }
+        ];
+
+        // --- 2. LOGIC: Populate Grid ---
+        window.onload = function() {
+            const grid = document.getElementById('gallery-grid');
+            let html = '';
+            myWebsites.forEach(item => {
+                html += `
+                <div class="template-card">
+                    <div class="card-image">
+                        <img src="${item.img}" alt="${item.title}">
+                    </div>
+                    <div class="card-details">
+                        <h3 class="card-title">${item.title}</h3>
+                        <div class="card-tags">
+                            ${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+                        </div>
+                        <button class="preview-btn" onclick="openPreview('${item.id}')">
+                            <i class="fas fa-eye"></i> Live Preview
+                        </button>
+                    </div>
+                </div>
+                `;
+            });
+            grid.innerHTML = html;
+        };
+
+        // --- 3. LOGIC: Preview System ---
+        function openPreview(id) {
+            const item = myWebsites.find(t => t.id === id);
+            if (!item) return;
+
+            const overlay = document.getElementById('preview-overlay');
+            const iframe = document.getElementById('preview-frame');
+            
+            overlay.style.display = 'flex';
+            
+            if(item.url === '#' || item.url === '') {
+                // Fallback for empty links
+                iframe.srcdoc = `
+                    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; font-family:sans-serif; color:#333;">
+                        <h1 style="font-size:2rem; margin-bottom:10px;">Link Not Configured</h1>
+                        <p>Please edit the <strong>myWebsites</strong> array in index.html</p>
+                        <p style="color:#666;">ID: ${item.id}</p>
+                    </div>
+                `;
+            } else {
+                iframe.src = item.url; // Load External URL
+            }
+        }
+
+        function closePreview() {
+            const overlay = document.getElementById('preview-overlay');
+            const iframe = document.getElementById('preview-frame');
+            overlay.style.display = 'none';
+            iframe.src = ""; // Stop loading/playing media
+            iframe.srcdoc = ""; 
+        }
+
+        function setDevice(type, btn) {
+            const iframe = document.getElementById('preview-frame');
+            const buttons = document.querySelectorAll('.device-toggles i');
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            iframe.className = type;
+        }
+    </script>
+</body>
+</html>

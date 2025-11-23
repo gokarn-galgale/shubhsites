@@ -1,0 +1,441 @@
+/* ====================================================== */
+/* == GLOBAL STYLES & FONT/COLOR SETUP == */
+/* ====================================================== */
+
+:root {
+    --font-heading: 'Modak', cursive;
+    --font-body: 'Baloo Bhai 2', cursive;
+    --color-red: #D90429; /* Traditional Red */
+    --color-gold: #B8860B; /* Muted Gold */
+    --color-cream: #FFFDD0; /* Cream Background */
+    --color-dark: #333;
+}
+
+/* Smooth scroll for anchor links */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--color-dark);
+    background-color: var(--color-cream);
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-red);
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+.font-modak {
+    font-family: var(--font-heading);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-gold);
+    display: inline-block;
+}
+
+.content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: var(--color-red);
+    color: white;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: var(--color-gold);
+}
+
+/* ====================================================== */
+/* == 1. SPLASH SCREEN & HANDSHAKE ANIMATION == */
+/* ====================================================== */
+
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-cream);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.8s ease-out;
+    overflow: hidden; /* ADDED: Prevents scrollbars during animation */
+}
+
+.hand-container {
+    position: relative;
+    width: 60vw; /* UPDATED: Responsive width */
+    max-width: 200px; /* UPDATED: Max width */
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hand {
+    width: 100px; /* Size of the SVG hands */
+    height: 100px;
+    position: absolute;
+    fill: var(--color-gold);
+    transition: transform 2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.hand-left {
+    /* UPDATED: Starts completely off-screen to the left */
+    transform: translateX(-100vw);
+}
+
+.hand-right {
+    /* UPDATED: Starts completely off-screen to the right */
+    transform: translateX(100vw);
+}
+
+#splash-screen.animate .hand-left {
+    transform: translateX(-40px); /* Adjust to meet */
+}
+
+#splash-screen.animate .hand-right {
+    transform: translateX(40px); /* Adjust to meet */
+}
+
+/* Heart Burst Animation */
+.heart-burst {
+    position: absolute;
+    font-size: 2rem;
+    color: var(--color-red);
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+.heart-burst.animate {
+    animation: burst 0.6s ease-out forwards;
+}
+
+@keyframes burst {
+    0% {
+        opacity: 1;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(3);
+    }
+}
+
+
+/* ====================================================== */
+/* == 2. MAIN WEBSITE STYLES == */
+/* ====================================================== */
+
+#main-website.hidden {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+#main-website.visible {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1s ease-in 0.5s;
+}
+
+/* Header & Nav */
+#header {
+    background-color: rgba(255, 253, 208, 0.8); /* Translucent cream */
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid var(--color-gold);
+}
+
+#header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#header .logo {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--color-red);
+}
+
+#header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+#header nav ul li {
+    margin-left: 20px;
+}
+
+#header nav ul li a {
+    text-decoration: none;
+    color: var(--color-dark);
+    font-weight: 700;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+#header nav ul li a:hover {
+    color: var(--color-red);
+}
+
+/* ADDED: Hamburger button (hidden on desktop) */
+#menu-toggle {
+    display: none;
+    font-size: 2rem;
+    color: var(--color-red);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* Section Styling */
+.section {
+    padding: 60px 20px;
+    border-bottom: 5px solid;
+    border-image: linear-gradient(to right, var(--color-gold), var(--color-red)) 1;
+}
+
+.alt-section {
+    background-color: rgba(184, 134, 11, 0.05); /* Very light gold */
+}
+
+/* Home Section */
+#home {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url('https://www.transparenttextures.com/patterns/traditional-meath.png'), var(--color-cream);
+}
+
+#home h1 {
+    font-size: 5rem;
+    margin: 0;
+}
+
+#home h2 {
+    font-family: var(--font-body);
+    font-size: 2rem;
+    color: var(--color-dark);
+    font-weight: 700;
+}
+
+#home h3 {
+    font-size: 1.5rem;
+    margin: 0;
+    color: var(--color-dark);
+}
+
+#home .date {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 20px;
+    background-color: var(--color-gold);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* Event Details */
+.event-details {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.event-item {
+    flex: 1;
+    min-width: 280px;
+    padding: 20px;
+    border: 2px solid var(--color-gold);
+    border-radius: 8px;
+}
+
+.event-item h3 {
+    font-size: 1.8rem;
+    border-bottom: 1px solid var(--color-red);
+    padding-bottom: 5px;
+}
+
+/* Family */
+.family-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.family-side {
+    flex: 1;
+    min-width: 280px;
+}
+
+.family-side h3 {
+    font-size: 1.8rem;
+}
+
+/* RSVP Form */
+.rsvp-form {
+    max-width: 500px;
+    margin: 20px auto;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    box-sizing: border-box; /* Fixes padding issue */
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--color-red);
+    color: white;
+}
+
+footer p {
+    margin: 5px 0;
+    font-family: var(--font-body);
+}
+
+/* Audio Player */
+#mute-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 101;
+    background: var(--color-red);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* ====================================================== */
+/* == 3. RESPONSIVE DESIGN == */
+/* ====================================================== */
+
+@media (max-width: 768px) {
+    
+    /* --- UPDATED: Hamburger Menu Logic --- */
+    
+    #header nav {
+        /* Keep logo and icon on one line */
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    #menu-toggle {
+        display: block; /* Show hamburger button */
+    }
+
+    #header nav ul {
+        display: none; /* Hide nav links by default */
+        position: absolute;
+        top: 60px; /* Position below header */
+        left: 0;
+        right: 0;
+        background-color: var(--color-cream);
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        padding: 10px 0;
+    }
+    
+    #header nav ul.active {
+        display: flex; /* Show when 'active' class is added */
+    }
+
+    #header nav ul li {
+        margin: 15px 0; /* Stack links vertically */
+        margin-left: 0;
+    }
+    /* --- End of Hamburger Menu Logic --- */
+
+
+    #home h1 {
+        font-size: 3.5rem;
+    }
+
+    #home h2 {
+        font-size: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+/* ADDED: Extra media query for very small screens */
+@media (max-width: 360px) {
+    #home h1 {
+        font-size: 3rem; /* Even smaller for tiny screens */
+    }
+    #home h2 {
+        font-size: 1.3rem;
+    }
+    .section-title {
+        font-size: 1.8rem;
+    }
+}
