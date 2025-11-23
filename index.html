@@ -742,93 +742,64 @@
             document.getElementById('ai-result').style.display = 'none';
         }
 
-        async function generateAIContent(e) {
-            e.preventDefault();
-            
-            // Direct Key Usage - No Popups
-            let key = apiKey; 
-            
-            if (!key || key === "") {
-                alert("Please add your Google Gemini API Key in the source code (inside the script tag) to use this feature.");
-                return;
-            }
-            
-            const loading = document.getElementById('ai-loading');
-            const resultBox = document.getElementById('ai-result');
-            const resultText = document.getElementById('ai-result-text');
-            const names = document.getElementById('ai-names').value;
-            const language = document.getElementById('ai-language').value;
-            
-            loading.style.display = 'block';
-            resultBox.style.display = 'none';
-            resultText.innerText = ""; // Clear previous text
-            
-            // FIX: Renamed variable from 'prompt' to 'aiPrompt' to avoid conflict with window.prompt()
-            let aiPrompt = ""; 
-            
-            if(currentAIMode === 'hashtag') {
-                const vibe = document.getElementById('ai-vibe-hash').value;
-                aiPrompt = `Generate 5 unique and catchy wedding hashtags for a couple named ${names}. The vibe is ${vibe}. Provide the output in ${language}. Return only the hashtags, one per line.`;
-            
-            } else if (currentAIMode === 'wording') {
-                const venue = document.getElementById('ai-venue').value;
-                const tone = document.getElementById('ai-vibe-word').value;
-                aiPrompt = `Write a ${tone} wedding invitation message for ${names} getting married at ${venue}. Write the message in ${language}. Keep it warm, inviting, and under 60 words.`;
-            
-            } else if (currentAIMode === 'timeline') {
-                const culture = document.getElementById('ai-culture').value;
-                const startTime = document.getElementById('ai-start-time').value;
-                aiPrompt = `Create a detailed hour-by-hour wedding day timeline for a ${culture} wedding starting at ${startTime}. Couple: ${names}. Output language: ${language}. Format as a clean list with emojis.`;
-            
-            } else if (currentAIMode === 'menu') {
-                const cuisine = document.getElementById('ai-cuisine').value;
-                const pref = document.getElementById('ai-food-pref').value;
-                aiPrompt = `Suggest a delicious 3-course wedding menu for a ${pref} ${cuisine} wedding. Include Starters, Main Course, and Desserts. Output language: ${language}. Format nicely.`;
-            }
+      async function generateAIContent(e) {
+    e.preventDefault();
+    
+    const loading = document.getElementById('ai-loading');
+    const resultBox = document.getElementById('ai-result');
+    const resultText = document.getElementById('ai-result-text');
+    
+    // Get Inputs
+    const names = document.getElementById('ai-names').value;
+    const language = document.getElementById('ai-language').value;
+    
+    loading.style.display = 'block';
+    resultBox.style.display = 'none';
+    resultText.innerText = ""; 
 
-            try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${key}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        contents: [{ parts: [{ text: aiPrompt }] }], // Updated variable usage
-                        // ADDED: Safety settings to prevent false positives blocking the response
-                        safetySettings: [
-                            { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_ONLY_HIGH" },
-                            { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_ONLY_HIGH" },
-                            { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_ONLY_HIGH" },
-                            { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_ONLY_HIGH" }
-                        ]
-                    })
-                });
-                const data = await response.json();
-                
-                console.log("AI API Response:", data); // Log full response for debugging
+    // Prepare Prompt
+    let aiPrompt = ""; 
+    if(currentAIMode === 'hashtag') {
+        const vibe = document.getElementById('ai-vibe-hash').value;
+        aiPrompt = `Generate 5 unique wedding hashtags for ${names}. Vibe: ${vibe}. Output Language: ${language}. Return only hashtags.`;
+    } else if (currentAIMode === 'wording') {
+        const venue = document.getElementById('ai-venue').value;
+        const tone = document.getElementById('ai-vibe-word').value;
+        aiPrompt = `Write a ${tone} wedding invitation for ${names} at ${venue}. Language: ${language}. Keep it under 60 words.`;
+    } else if (currentAIMode === 'timeline') {
+        const culture = document.getElementById('ai-culture').value;
+        const startTime = document.getElementById('ai-start-time').value;
+        aiPrompt = `Create a wedding timeline for a ${culture} wedding starting at ${startTime}. Couple: ${names}. Language: ${language}.`;
+    } else if (currentAIMode === 'menu') {
+        const cuisine = document.getElementById('ai-cuisine').value;
+        const pref = document.getElementById('ai-food-pref').value;
+        aiPrompt = `Suggest a 3-course menu for a ${pref} ${cuisine} wedding. Language: ${language}.`;
+    }
 
-                if (data.error) {
-                    throw new Error(data.error.message);
-                }
-                
-                // Check if we have a valid candidate with text
-                if (data.candidates && data.candidates.length > 0 && data.candidates[0].content && data.candidates[0].content.parts) {
-                    const text = data.candidates[0].content.parts[0].text;
-                    resultText.innerText = text;
-                } else if (data.candidates && data.candidates.length > 0 && data.candidates[0].finishReason) {
-                    // Handle cases where AI blocked the content
-                    resultText.innerText = `Text generation stopped. Reason: ${data.candidates[0].finishReason} (Likely safety filters)`;
-                } else {
-                    resultText.innerText = "No text generated. Please try again.";
-                }
-                
-                resultBox.style.display = 'block';
-            } catch (error) {
-                console.error("AI Error:", error);
-                resultText.innerText = "Error connecting to AI: " + error.message;
-                resultBox.style.display = 'block';
-            } finally {
-                loading.style.display = 'none';
-            }
-        }
+    try {
+        // === CHANGE IS HERE ===
+        // We now call OUR own hidden function, not Google directly
+        const response = await fetch('/.netlify/functions/ai_writer', {
+            method: 'POST',
+            body: JSON.stringify({ prompt: aiPrompt })
+        });
+
+        const data = await response.json();
+        
+        if (data.error) throw new Error(data.error);
+
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "Error generating text.";
+        resultText.innerText = text;
+        resultBox.style.display = 'block';
+
+    } catch (error) {
+        console.error("AI Error:", error);
+        resultText.innerText = "Error: " + error.message;
+        resultBox.style.display = 'block';
+    } finally {
+        loading.style.display = 'none';
+    }
+}
 
         function copyAIResult() {
             const text = document.getElementById('ai-result-text').innerText;
