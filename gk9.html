@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>राजवर्धन weds राजनंदिनी | राजेशाही विवाह</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sahitya:wght@400;700&family=Rozha+One&family=Tiro+Devanagari+Marathi:ital@0;1&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --royal-blue: #0f172a;
+            --night-blue: #020617;
+            --silver: #e2e8f0;
+            --silver-shine: #f8fafc;
+            --accent-red: #be123c;
+            
+            --font-heading: 'Rozha One', serif; 
+            --font-body: 'Tiro Devanagari Marathi', serif; 
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+        body { background-color: var(--night-blue); overflow-x: hidden; font-family: var(--font-body); color: var(--silver); }
+
+        /* --- ANIMATIONS --- */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        @keyframes flame-flicker {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.1) rotate(-2deg); opacity: 1; }
+        }
+
+        @keyframes curtain-left { to { transform: translateX(-100%); } }
+        @keyframes curtain-right { to { transform: translateX(100%); } }
+        @keyframes fadeOut { to { opacity: 0; pointer-events: none; } }
+        
+        @keyframes mogra-fall { 
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* STARS BACKGROUND */
+        .stars {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0;
+            background-image: radial-gradient(white 1px, transparent 1px), radial-gradient(white 1px, transparent 1px);
+            background-size: 50px 50px; background-position: 0 0, 25px 25px; opacity: 0.1;
+        }
+
+        /* --- INTRO: ROYAL CURTAINS --- */
+        #curtain-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 10000; display: flex; align-items: center; justify-content: center;
+        }
+
+        .curtain-panel {
+            position: absolute; top: 0; width: 50%; height: 100%;
+            background: linear-gradient(to right, #0f172a, #1e293b);
+            box-shadow: inset 0 0 100px #000;
+            border-bottom: 10px solid var(--silver);
+            z-index: 2; transition: transform 2s ease-in-out;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .curtain-left { left: 0; border-right: 2px solid #334155; transform-origin: left; }
+        .curtain-right { right: 0; border-left: 2px solid #334155; transform-origin: right; }
+
+        /* Curtain Texture */
+        .curtain-pattern {
+            position: absolute; width: 100%; height: 100%; opacity: 0.1;
+            background-image: url("https://www.transparenttextures.com/patterns/black-lozenge.png");
+        }
+
+        /* Central Emblem */
+        #royal-emblem {
+            z-index: 10001; position: absolute; cursor: pointer;
+            display: flex; flex-direction: column; align-items: center;
+            transition: opacity 0.5s;
+        }
+
+        .emblem-circle {
+            width: 140px; height: 140px;
+            background: radial-gradient(circle, #334155, #020617);
+            border: 4px solid var(--silver); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 40px rgba(226, 232, 240, 0.3);
+            animation: pulse-silver 3s infinite;
+        }
+        
+        @keyframes pulse-silver { 0% { box-shadow: 0 0 20px #334155; } 50% { box-shadow: 0 0 50px var(--silver); } }
+
+        /* Open State */
+        .curtains-open .curtain-left { animation: curtain-left 2s forwards; }
+        .curtains-open .curtain-right { animation: curtain-right 2s forwards; }
+        .curtains-open #royal-emblem { animation: fadeOut 0.5s forwards; }
+
+        /* --- MAIN SITE --- */
+        #main-content { display: none; opacity: 0; transition: opacity 2s ease; position: relative; z-index: 1; }
+        .visible { display: block !important; opacity: 1 !important; }
+
+        /* Header */
+        header {
+            text-align: center; padding: 60px 20px;
+            background: radial-gradient(circle at top, #1e293b, #020617);
+            border-bottom: 2px solid var(--silver);
+            position: relative;
+        }
+
+        /* Glowing Moon */
+        .moon-glow {
+            position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+            width: 300px; height: 300px; background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Hanging Lamps (Samai) */
+        .lamp-container {
+            position: absolute; top: 0; width: 60px; height: 150px;
+            display: flex; flex-direction: column; align-items: center;
+            transform-origin: top; animation: swing 5s ease-in-out infinite alternate;
+        }
+        .lamp-left { left: 10%; }
+        .lamp-right { right: 10%; }
+        
+        .chain { width: 2px; height: 100px; background: repeating-linear-gradient(to bottom, #94a3b8, #cbd5e1 5px, #94a3b8 10px); }
+        .lamp-bowl {
+            width: 40px; height: 30px; background: linear-gradient(to right, #64748b, #e2e8f0, #64748b);
+            border-radius: 0 0 20px 20px; position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .flame {
+            width: 12px; height: 20px; background: radial-gradient(circle, #fff, #facc15, #ea580c);
+            border-radius: 50% 50% 20% 20%; position: absolute; top: -15px; left: 14px;
+            filter: blur(2px); animation: flame-flicker 0.3s infinite alternate;
+        }
+
+        @keyframes swing { from { transform: rotate(-2deg); } to { transform: rotate(2deg); } }
+
+        /* Typography */
+        h1 { 
+            font-family: var(--font-heading); color: var(--silver-shine);
+            font-size: 3.5rem; text-transform: uppercase; letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(226, 232, 240, 0.5);
+            background: -webkit-linear-gradient(#f8fafc, #94a3b8);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .silver-text { color: #cbd5e1; font-family: var(--font-body); }
+
+        /* Silver Frame Container */
+        .silver-frame {
+            max-width: 900px; margin: 0 auto 60px;
+            background: rgba(30, 41, 59, 0.6);
+            border: 2px solid #475569;
+            border-radius: 12px; padding: 40px 20px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            position: relative;
+        }
+        .silver-frame::before {
+            content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px solid #64748b; border-radius: 8px; pointer-events: none;
+        }
+
+        /* Buttons */
+        .btn-silver {
+            background: linear-gradient(to bottom, #334155, #1e293b);
+            color: var(--silver); border: 1px solid #94a3b8;
+            padding: 10px 25px; border-radius: 50px; font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: all 0.3s;
+        }
+        .btn-silver:hover { background: #475569; box-shadow: 0 0 15px var(--silver); color: #fff; }
+
+        /* Mogra Flower Fixed */
+        .mogra {
+            position: fixed; 
+            top: -30px; /* Start off-screen */
+            width: 15px; height: 15px; 
+            background: #fff;
+            border-radius: 50% 0 50% 0; 
+            box-shadow: 0 0 8px #fff;
+            z-index: 9999; 
+            pointer-events: none; 
+            opacity: 0.9;
+            /* Default animation if JS fails to set it */
+            animation: mogra-fall 5s linear forwards;
+        }
+
+        /* AI Chat */
+        .royal-bot {
+            background: rgba(15, 23, 42, 0.9); border: 1px solid #475569;
+            border-radius: 12px; padding: 20px; margin-top: 40px;
+        }
+
+        @media(max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .lamp-container { width: 40px; height: 100px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- STARS BG -->
+    <div class="stars"></div>
+
+    <!-- AUDIO -->
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    <div onclick="toggleMusic()" class="fixed bottom-5 right-5 z-50 w-12 h-12 bg-slate-700 rounded-full flex items-center justify-center border border-slate-400 cursor-pointer shadow-lg hover:bg-slate-600 transition">
+        🎵
+    </div>
+
+    <!-- INTRO: CURTAINS -->
+    <div id="curtain-overlay">
+        <div class="curtain-panel curtain-left"><div class="curtain-pattern"></div></div>
+        <div class="curtain-panel curtain-right"><div class="curtain-pattern"></div></div>
+        
+        <div id="royal-emblem" onclick="openCurtains()">
+            <div class="emblem-circle">
+                <div class="text-center">
+                    <div class="text-3xl text-slate-200 font-bold font-serif">॥ श्री ॥</div>
+                    <div class="text-xs text-slate-400 mt-1 tracking-widest">CLICK</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main-content">
+        
+        <!-- LAMPS -->
+        <div class="lamp-container lamp-left"><div class="chain"></div><div class="lamp-bowl"><div class="flame"></div></div></div>
+        <div class="lamp-container lamp-right"><div class="chain"></div><div class="lamp-bowl"><div class="flame"></div></div></div>
+
+        <header>
+            <div class="moon-glow"></div>
+            <div class="relative z-10 mt-8">
+                <div class="text-slate-400 text-lg font-bold tracking-[0.3em] mb-2">|| शुभमंगल सावधान ||</div>
+                <img src="https://img.icons8.com/ios-filled/100/e2e8f0/ganesh.png" class="w-20 mx-auto mb-4 opacity-80" alt="Ganesh">
+                
+                <h1 class="mb-2">राजवर्धन</h1>
+                <div class="text-2xl text-slate-500 font-serif italic my-1">&</div>
+                <h1>राजनंदिनी</h1>
+
+                <div class="mt-8 inline-flex flex-col items-center border-y border-slate-600 py-4 px-8 bg-slate-900/50 backdrop-blur-sm">
+                    <span class="text-xl text-slate-200 font-bold">रविवार, ११ फेब्रुवारी २०१८</span>
+                    <span class="text-sm text-slate-400 mt-1">दुपारी १२:३५ वाजता</span>
+                </div>
+
+                <div class="mt-8">
+                    <button onclick="showerMogra()" class="btn-silver flex items-center gap-2 mx-auto z-50 relative">
+                        <span>🌼</span> मोगरा पुष्पवृष्टी (Flower Shower)
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="silver-frame mt-10">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl text-slate-300 font-bold mb-4 border-b border-slate-600 inline-block pb-2">स्नेहनिमंत्रण</h2>
+                <p class="text-lg text-slate-400 leading-relaxed">
+                    नम्र विनंती,<br>
+                    आमच्या येथे <strong>चि. राजवर्धन</strong> आणि <strong>चि.सौ.कां. राजनंदिनी</strong> 
+                    यांच्या शुभविवाह प्रसंगी आपण सहकुटुंब उपस्थित राहावे.
+                </p>
+            </div>
+
+            <!-- Family Section -->
+            <div class="grid md:grid-cols-2 gap-6 mb-12 text-left px-4">
+                <div class="p-4 bg-slate-800/50 rounded border border-slate-700">
+                    <h3 class="text-slate-300 font-bold text-lg mb-2">वर पक्ष (निकम)</h3>
+                    <p class="text-slate-400 text-sm">श्री. आनंदराव रामचंद्र निकम</p>
+                    <p class="text-slate-500 text-xs mt-1">रा. सांगली</p>
+                </div>
+                <div class="p-4 bg-slate-800/50 rounded border border-slate-700">
+                    <h3 class="text-slate-300 font-bold text-lg mb-2">वधू पक्ष (पाटील)</h3>
+                    <p class="text-slate-400 text-sm">श्री. सदाशिव आनंदराव पाटील</p>
+                    <p class="text-slate-500 text-xs mt-1">रा. सांगली</p>
+                </div>
+            </div>
+
+            <!-- Events -->
+            <h2 class="text-2xl text-slate-300 font-bold text-center mb-8">शुभ कार्यक्रम</h2>
+            <div class="space-y-6 px-4">
+                <div class="flex items-center gap-4 bg-slate-800 p-4 rounded-lg border-l-4 border-yellow-500 shadow-lg">
+                    <div class="text-3xl">🌻</div>
+                    <div>
+                        <h3 class="text-yellow-500 font-bold text-lg">हळदी समारंभ</h3>
+                        <p class="text-slate-400 text-sm">१० फेब्रुवारी २०१८ | स. १०:०० वा.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col bg-slate-800 p-4 rounded-lg border-l-4 border-red-500 shadow-lg">
+                    <div class="flex items-center gap-4">
+                        <div class="text-3xl">💍</div>
+                        <div>
+                            <h3 class="text-red-400 font-bold text-lg">शुभविवाह</h3>
+                            <p class="text-slate-400 text-sm">११ फेब्रुवारी २०१८ | दु. १२:३५ वा.</p>
+                        </div>
+                    </div>
+                    <div class="mt-3 pt-3 border-t border-slate-700 flex justify-between items-center">
+                        <span class="text-xs text-slate-500">स्थळ: गणेश हॉल, कराड</span>
+                        <button onclick="window.open('https://maps.google.com')" class="text-xs bg-slate-700 text-white px-3 py-1 rounded hover:bg-slate-600">नकाशा (Map)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Bot -->
+            <div class="royal-bot mx-4">
+                <div class="flex items-center gap-3 mb-3 border-b border-slate-700 pb-2">
+                    <div class="w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center">🤖</div>
+                    <div>
+                        <h3 class="font-bold text-slate-200 text-sm">वेडिंग असिस्टंट</h3>
+                    </div>
+                </div>
+                <div id="chat-display" class="h-24 overflow-y-auto bg-black/40 p-3 rounded mb-3 text-xs border border-slate-700">
+                    <div class="text-slate-500 italic">नमस्कार! मी कशी मदत करू?</div>
+                </div>
+                <div class="flex gap-2">
+                    <input type="text" id="userQuestion" placeholder="प्रश्न विचारा..." class="flex-1 p-2 rounded text-slate-200 bg-slate-800 border border-slate-600 text-sm">
+                    <button onclick="askBot()" class="bg-slate-600 text-white font-bold px-4 rounded text-sm hover:bg-slate-500">Send</button>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="text-center py-8 text-slate-600 text-xs">
+            © 2018 Nikam & Patil Family | Royal Edition
+        </footer>
+
+    </div>
+
+    <script>
+        // Audio
+        const audio = document.getElementById('bg-music');
+        function toggleMusic() {
+            if(audio.paused) { audio.play(); } else { audio.pause(); }
+        }
+
+        // Curtain Animation
+        function openCurtains() {
+            const overlay = document.getElementById('curtain-overlay');
+            overlay.classList.add('curtains-open');
+            
+            toggleMusic();
+
+            setTimeout(() => {
+                document.getElementById('main-content').classList.add('visible');
+                setTimeout(() => overlay.style.display = 'none', 2000);
+            }, 1000);
+        }
+
+        // Mogra Flower Shower
+        function showerMogra() {
+            for(let i=0; i<60; i++) {
+                const el = document.createElement('div');
+                el.classList.add('mogra');
+                el.style.left = Math.random() * 100 + 'vw';
+                // Random fall duration between 3s and 6s
+                el.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                // Random rotation start
+                el.style.transform = `rotate(${Math.random() * 360}deg)`;
+                document.body.appendChild(el);
+                
+                // Remove after animation
+                setTimeout(() => el.remove(), 7000);
+            }
+        }
+
+        // AI Bot
+        const apiKey = "AIzaSyBZGJevZZc61Qc5HaMxlM66M0jOdHcQRO4"; 
+
+        // Robust Helper for AI with Retries
+        async function callGemini(payload) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            let attempt = 0;
+            let delay = 1000;
+            const maxRetries = 3;
+
+            while (attempt <= maxRetries) {
+                try {
+                    const res = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!res.ok) {
+                        const errText = await res.text();
+                        // Don't retry client errors (4xx) except rate limit (429)
+                        if (res.status >= 400 && res.status < 500 && res.status !== 429) {
+                            throw new Error(`Server Error: ${errText}`);
+                        }
+                        throw new Error(`Network Error: ${res.status}`);
+                    }
+                    return await res.json();
+                } catch (error) {
+                    console.warn(`Attempt ${attempt + 1} failed:`, error);
+                    attempt++;
+                    if (attempt > maxRetries) throw error;
+                    await new Promise(r => setTimeout(r, delay));
+                    delay *= 2;
+                }
+            }
+        }
+
+        async function askBot() {
+            const input = document.getElementById('userQuestion');
+            const display = document.getElementById('chat-display');
+            const q = input.value;
+            if(!q) return;
+
+            display.innerHTML += `<div class="text-right text-slate-300 mb-2 text-xs bg-slate-700/50 inline-block ml-auto p-2 rounded border border-slate-600">You: ${q}</div><div class="clear-both"></div>`;
+            input.value = '';
+            display.scrollTop = display.scrollHeight;
+            
+            // Loading
+            const loadingId = 'load-' + Date.now();
+            display.innerHTML += `<div id="${loadingId}" class="text-left text-slate-500 mb-2 text-xs animate-pulse">विचार करत आहे...</div>`;
+            display.scrollTop = display.scrollHeight;
+
+            const prompt = `Role: Polite Marathi Wedding Assistant for Rajvardhan & Rajnandini.
+            Details:
+            - Date: Sunday, 11 Feb 2018.
+            - Muhurat: 12:35 PM (Goraj Muhurat).
+            - Haldi: Sat, 10 Feb 2018, 10 AM at Home.
+            - Venue: Shri Ganesh Multi Purpose Hall, Near Govt Polytechnic, Vidhannagar, Karad.
+            - Hosts: Nikam & Patil Family.
+            
+            User Question: ${q}
+            Instruction: Answer in polite, traditional Marathi (use words like 'नमस्कार', 'हो', 'नक्कीच'). Keep it short.`;
+            
+            try {
+                const data = await callGemini({ contents: [{ parts: [{ text: prompt }] }] });
+                
+                // Remove loading
+                const loader = document.getElementById(loadingId);
+                if(loader) loader.remove();
+
+                const ans = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                
+                if (ans) {
+                    display.innerHTML += `<div class="text-left text-slate-200 mb-2 p-2 bg-slate-800 rounded border border-slate-600 text-sm shadow-sm">${ans}</div>`;
+                } else {
+                    throw new Error("No response text");
+                }
+            } catch(e) { 
+                console.error(e);
+                const loader = document.getElementById(loadingId);
+                if(loader) loader.remove();
+                display.innerHTML += `<div class="text-left text-red-400 mb-2 text-xs">क्षमस्व, संपर्क होऊ शकला नाही. पुन्हा प्रयत्न करा.</div>`; 
+            }
+            display.scrollTop = display.scrollHeight;
+        }
+    </script>
+</body>
+</html>

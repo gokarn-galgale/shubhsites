@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>राजवर्धन weds राजनंदिनी | शिवकालीन विवाह सोहळा</title>
+    <meta name="description" content="राजवर्धन आणि राजनंदिनी यांच्या शुभविवाहाचे पारंपरिक मराठी आमंत्रण — रंग, संगीत आणि शौर्य यांचा संगम.">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gotu&family=Rozha+One&family=Yatra+One&family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root{
+            --bhagwa:#ff6b00; --bhagwa-dark:#cc5500; --gold:#e6b85a; --paper:#fbf6ea; --stone:#111213;
+            --title: 'Yatra One', cursive; --body: 'Gotu', sans-serif; --royal: 'Rozha One', serif; --fun: 'Baloo 2', cursive;
+        }
+        *{box-sizing:border-box}
+        html,body{height:100%}
+        body{font-family:var(--body);background:linear-gradient(180deg,#070606 0%, #0f0f10 40%);color:#222;overflow-x:hidden}
+
+        /* ---------- Gate Intro ---------- */
+        #fort-gate{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 30%, rgba(0,0,0,0.4), rgba(0,0,0,0.85));backdrop-filter:blur(2px)}
+        .gate-panel{width:50%;height:100%;display:flex;align-items:center;justify-content:center;background-image:url('https://www.transparenttextures.com/patterns/wood-pattern.png');background-color:#2b2b2b;position:relative;overflow:hidden}
+        .gate-left{border-right:3px solid #000}
+        .gate-right{border-left:3px solid #000}
+        .gate-studs{position:absolute;inset:0;background-image:radial-gradient(#0b0b0b 18%, transparent 19%);background-size:78px 78px;opacity:0.45}
+
+        .mudra{width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,#d4af37,#8a6d1f);display:flex;align-items:center;justify-content:center;flex-direction:column;border:6px solid rgba(90,74,0,0.95);box-shadow:0 0 60px rgba(255,215,0,0.42);cursor:pointer;transition:transform .25s}
+        .mudra:hover{transform:scale(1.06)}
+        #enter-tip{margin-top:12px;background:rgba(0,0,0,0.6);color:#ffd; padding:8px 18px;border-radius:999px;border:1px solid rgba(255,215,0,0.12);box-shadow:0 6px 18px rgba(0,0,0,0.6)}
+
+        .gate-open .gate-left{transform:translateX(-100%);transition:transform 1.6s cubic-bezier(.2,.9,.2,1)}
+        .gate-open .gate-right{transform:translateX(100%);transition:transform 1.6s cubic-bezier(.2,.9,.2,1)}
+        .gate-open #gate-seal{opacity:0;pointer-events:none;transition:opacity .5s}
+
+        /* ---------- Header ---------- */
+        header{position:relative;padding:70px 20px 60px;text-align:center;background:linear-gradient(180deg,#2a0b05 0%, #150404 60%);border-bottom:7px solid var(--bhagwa-dark);box-shadow:0 12px 40px rgba(0,0,0,0.7);color:var(--gold)}
+        .fort-bg{position:absolute;bottom:0;left:0;width:100%;height:140px;background-image:url('https://img.icons8.com/external-flaticons-lineal-color-flat-icons/512/external-fort-history-flaticons-lineal-color-flat-icons.png');background-repeat:repeat-x;opacity:0.14;filter:grayscale(100%);z-index:0}
+        h1.title{font-family:var(--title);font-size:3.2rem;letter-spacing:2px}
+        .weds-badge{display:inline-block;background:var(--bhagwa);color:#fff;padding:6px 22px;border-radius:999px;font-weight:700;border:2px solid rgba(255,255,255,0.08);box-shadow:0 8px 28px rgba(255,107,0,0.12)}
+
+        /* Torches */
+        .mashal{position:absolute;top:30px;width:64px;height:140px;z-index:10}
+        .mashal.left{left:18px}
+        .mashal.right{right:18px;transform:scaleX(-1)}
+        .torch-stick{width:12px;height:86px;background:#5d4037;margin:0 auto;border-radius:6px;position:relative;top:22px}
+        .torch-flame{width:42px;height:64px;border-radius:50% 50% 20% 20%;background:radial-gradient(circle,#fff59d,#ff9800,#e53935);filter:blur(4px);animation:flame 260ms infinite alternate}
+        @keyframes flame{0%{transform:scale(.98);opacity:.85}100%{transform:scale(1.12);opacity:1}}
+
+        /* ---------- Parchment ---------- */
+        .parchment{max-width:980px;margin:-40px auto 60px;background:var(--paper);padding:36px;border-radius:12px;position:relative;z-index:4;box-shadow:0 30px 60px rgba(0,0,0,0.6);border:10px solid #2c2c2c}
+        .corner-orn{position:absolute;width:64px;height:64px;opacity:.9;background-image:url('https://img.icons8.com/color/96/mandala.png');background-size:contain}
+        .tl{top:14px;left:14px}
+        .tr{top:14px;right:14px;transform:scaleX(-1)}
+
+        /* timeline */
+        .timeline{border-left:4px solid var(--bhagwa);padding-left:34px;margin:28px 10px}
+        .t-item{margin-bottom:30px;position:relative}
+        .t-icon{position:absolute;left:-62px;top:0;width:48px;height:48;border-radius:50%;background:#2c2c2c;border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;color:#fff}
+
+        /* gallery */
+        .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:14px}
+        .frame{background:#fff;padding:8px;border:1px solid var(--gold);box-shadow:6px 6px 22px rgba(0,0,0,0.18);transform:rotate(-2deg);transition:transform .28s}
+        .frame:nth-child(even){transform:rotate(2deg)}
+        .frame:hover{transform:rotate(0deg) scale(1.04);z-index:20}
+
+        /* Digital Gift */
+        .gift{background:#fff;border:2px dashed #f6c27a;padding:18px;border-radius:14px}
+
+        /* Mavla bot */
+        .mavla{background:#151515;border:2px solid #c89b42;color:var(--gold);padding:18px;border-radius:10px}
+        .chat-display{height:120px;overflow:auto;background:rgba(0,0,0,0.45);padding:10px;border-radius:6px;border:1px solid rgba(255,255,255,0.03)}
+
+        /* Music button */
+        #music-btn{position:fixed;left:18px;bottom:20px;width:64px;height:64px;border-radius:999px;background:linear-gradient(180deg,var(--bhagwa),var(--bhagwa-dark));display:flex;align-items:center;justify-content:center;color:#fff;z-index:200;box-shadow:0 12px 30px rgba(0,0,0,0.6);border:3px solid var(--gold)}
+
+        /* RSVP modal */
+        .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:120}
+        .modal{background:var(--paper);padding:20px;border-radius:10px;max-width:520px;width:94%;box-shadow:0 30px 60px rgba(0,0,0,0.7)}
+
+        /* subtle particle / confetti */
+        .confetti{position:fixed;inset:0;pointer-events:none;z-index:55}
+        .confetti span{position:absolute;width:9px;height:14px;background:var(--gold);opacity:.9;border-radius:2px;animation:fall linear infinite}
+        @keyframes fall{0%{transform:translateY(-10vh) rotate(0)}100%{transform:translateY(110vh) rotate(360deg)}}
+
+        /* responsive tweaks */
+        @media(max-width:768px){h1.title{font-size:2.2rem}.parchment{margin:10px;border-width:6px;padding:22px}.mashal{display:none}.chat-display{height:90px}}
+
+        /* accessibility focus */
+        button:focus, a:focus, input:focus{outline:3px solid rgba(255,215,0,0.18);outline-offset:2px}
+    </style>
+</head>
+<body>
+
+    <!-- Audio -->
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Confetti particles (subtle) -->
+    <div class="confetti" aria-hidden="true" id="confetti"></div>
+
+    <!-- Gate Intro -->
+    <div id="fort-gate" role="dialog" aria-label="Fort Gate Intro">
+        <div class="gate-panel gate-left"><div class="gate-studs"></div></div>
+        <div class="gate-panel gate-right"><div class="gate-studs"></div></div>
+
+        <div id="gate-seal" style="position:absolute;z-index:100;display:flex;flex-direction:column;align-items:center;gap:10px">
+            <div class="mudra" onclick="enterFort()" role="button" aria-label="Enter the wedding site">
+                <div style="font-family:var(--title);font-size:2.4rem;color:#3e2723;">॥ श्री ॥</div>
+                <div style="font-size:0.9rem;color:#3e2723;font-weight:700">शुभविवाह</div>
+            </div>
+            <div id="enter-tip" class="text-sm font-semibold">प्रवेश करा — Touch to Enter</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="opacity-0 pointer-events-none transition-all duration-700">
+
+        <header>
+            <div class="fort-bg" aria-hidden="true"></div>
+
+            <div class="mashal left">
+                <div class="torch-flame"></div>
+                <div class="torch-stick"></div>
+            </div>
+            <div class="mashal right">
+                <div class="torch-flame"></div>
+                <div class="torch-stick"></div>
+            </div>
+
+            <div class="relative z-10">
+                <div class="mb-2 text-yellow-300 text-lg font-bold tracking-widest">|| जय भवानी || जय शिवाजी ||</div>
+                <img src="https://img.icons8.com/color/96/ganesh.png" class="w-20 mx-auto mb-4 drop-shadow-xl brightness-110" alt="Ganesh">
+
+                <h1 class="title text-5xl md:text-6xl mb-2">राजवर्धन</h1>
+                <div class="weds-badge">शुभविवाह</div>
+                <h1 class="title text-5xl md:text-6xl mt-2">राजनंदिनी</h1>
+
+                <div class="mt-6 inline-block px-8 py-4 rounded-lg border border-yellow-600 shadow-lg bg-black/40">
+                    <p class="text-2xl text-yellow-300 font-bold font-serif">११ फेब्रुवारी २०१८</p>
+                    <p class="text-sm text-gray-200 mt-1 uppercase tracking-wide">दुपारी १२:३५ (गोरज मुहूर्त)</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="parchment" id="invitation" role="main">
+            <div class="corner-orn tl" aria-hidden="true"></div>
+            <div class="corner-orn tr" aria-hidden="true"></div>
+
+            <section class="text-center mb-8 px-4">
+                <h2 class="text-3xl font-bold text-orange-800 mb-3" style="font-family:var(--royal)">|| स्नेहनिमंत्रण ||</h2>
+                <p class="text-lg font-medium leading-loose text-gray-800">श्री गजाननाच्या कृपेने आणि आई तुळजाभवानीच्या आशीर्वादाने, आमच्या येथे <strong>चि. राजवर्धन</strong> आणि <strong>चि.सौ.कां. राजनंदिनी</strong> यांचा शुभविवाह सोहळा आयोजित केला आहे. आपण सहकुटुंब यावे, हेच आग्रहाचे आमंत्रण!</p>
+            </section>
+
+            <div class="shiv-divider my-6 text-center"><span class="bg-paper px-4 py-1 rounded text-lg">⚔️</span></div>
+
+            <section class="events grid md:grid-cols-2 gap-6 text-center px-4">
+                <article class="bg-orange-50 p-6 rounded-lg border-2 border-orange-200 shadow-md hover:shadow-lg transition transform hover:-translate-y-1">
+                    <div class="text-4xl mb-2">🌻</div>
+                    <h3 class="text-xl font-bold text-orange-800 mb-1">हळदी समारंभ</h3>
+                    <p class="font-bold text-gray-700">१० फेब्रुवारी २०१८</p>
+                    <p class="text-sm text-gray-600">सकाळी १०:०० वा. | स्थळ: स्वगृही</p>
+                </article>
+                <article class="bg-orange-100 p-6 rounded-lg border-2 border-orange-400 shadow-md hover:shadow-lg transition transform hover:-translate-y-1">
+                    <div class="text-4xl mb-2">🥁</div>
+                    <h3 class="text-xl font-bold text-orange-900 mb-1">विवाह सोहळा</h3>
+                    <p class="font-bold text-gray-800">११ फेब्रुवारी २०१८</p>
+                    <p class="text-sm text-gray-600">दुपारी १२:३५ वा.</p>
+                    <p class="text-sm font-bold mt-2 text-orange-800">श्री गणेश हॉल, कराड</p>
+                    <div class="mt-4 flex justify-center gap-2">
+                        <button onclick="window.open('https://maps.google.com','_blank')" class="bg-orange-700 text-white px-4 py-1 rounded text-sm hover:bg-orange-800 flex items-center gap-2">🗺️ नकाशा</button>
+                        <button onclick="openRSVP()" class="bg-yellow-400 text-black px-4 py-1 rounded text-sm hover:brightness-95">✅ RSVP</button>
+                    </div>
+                </article>
+            </section>
+
+            <div class="shiv-divider my-6 text-center"><span class="bg-paper px-4 py-1 rounded text-lg">📷</span></div>
+
+            <section class="gallery-section px-4">
+                <h2 class="text-2xl font-bold text-center text-gray-800 mb-4" style="font-family:var(--royal)">|| चित्रगाथा (Gallery) ||</h2>
+                <div class="gallery">
+                    <div class="frame"><img src="https://placehold.co/600x400/800000/FFF?text=Sakharpuda" class="w-full h-48 object-cover rounded"></div>
+                    <div class="frame"><img src="https://placehold.co/600x400/d4af37/000?text=Haldi" class="w-full h-48 object-cover rounded"></div>
+                    <div class="frame"><img src="https://placehold.co/600x400/1a1a1a/FFF?text=Pre-Wedding" class="w-full h-48 object-cover rounded"></div>
+                    <div class="frame"><img src="https://placehold.co/600x400/f2e6d6/000?text=Ring+Ceremony" class="w-full h-48 object-cover rounded"></div>
+                </div>
+            </section>
+
+            <div class="shiv-divider my-6 text-center"><span class="bg-paper px-4 py-1 rounded text-lg">🎁</span></div>
+
+            <section class="gift px-4 text-center">
+                <h3 class="text-xl font-bold text-gray-800 mb-3">डिजिटल आहेर (Digital Gift)</h3>
+                <p class="text-sm text-gray-600 mb-4">आपले प्रेम आणि आशीर्वाद हेच मोलाचे आहेत. तरीही इच्छा असल्यास:</p>
+                <div class="flex justify-center gap-4">
+                    <button class="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2 rounded-full"><img src="https://img.icons8.com/color/48/google-pay-india.png" class="w-6">GPay</button>
+                    <button class="flex items-center gap-2 bg-purple-600 text-white px-5 py-2 rounded-full"><img src="https://img.icons8.com/color/48/phone-pe.png" class="w-6">PhonePe</button>
+                </div>
+                <p class="text-xs text-gray-500 mt-3 select-all cursor-pointer">Mo: 9876543210</p>
+            </section>
+
+            <div class="shiv-divider my-6 text-center"><span class="bg-paper px-4 py-1 rounded text-lg">🛡️</span></div>
+
+            <section class="mavla mb-4">
+                <div class="flex items-center gap-3 mb-3 border-b border-gray-600 pb-2">
+                    <div class="w-10 h-10 bg-orange-600 rounded-full flex items-center justify-center text-2xl shadow-lg border border-white">🛡️</div>
+                    <div>
+                        <h3 class="font-bold text-yellow-300 text-lg">मावळा (AI मदतनीस)</h3>
+                        <p class="text-xs text-gray-400">लग्नाची माहिती विचारा...</p>
+                    </div>
+                </div>
+                <div id="chat-display" class="chat-display mb-3 text-sm text-gray-100 italic">"राम राम पाव्हणं! काय सेवा करू?"</div>
+                <div class="flex gap-2">
+                    <input id="userQuestion" type="text" placeholder="येथे प्रश्न विचारा..." class="flex-1 p-2 rounded text-black bg-gray-200 border-none focus:ring-2 focus:ring-orange-500">
+                    <button onclick="askBot()" class="bg-orange-600 text-white font-bold px-4 rounded">विचार</button>
+                </div>
+            </section>
+
+            <div class="text-center mt-8 pb-6">
+                <p class="font-bold text-gray-800 text-lg" style="font-family:var(--royal)">|| निमंत्रक ||</p>
+                <p class="text-gray-600">समस्त निकम आणि पाटील परिवार</p>
+                <p class="text-xs text-gray-400 mt-3 opacity-70">।। जय महाराष्ट्र ।।</p>
+            </div>
+        </main>
+
+        <!-- Music Button -->
+        <div id="music-btn" onclick="toggleMusic()" title="सनई चौघडा (Music)">🎺</div>
+
+        <!-- RSVP Modal -->
+        <div id="modal-backdrop" class="modal-backdrop" role="dialog" aria-hidden="true">
+            <div class="modal">
+                <h3 class="text-xl font-bold mb-2">RSVP — कृपया आपली उपस्थिती नोंदवा</h3>
+                <p class="text-sm text-gray-700 mb-4">कृपया खालील माहिती भरा, आम्ही तुमच्याशी लवकरच संपर्क करू.</p>
+                <form id="rsvp-form" onsubmit="submitRSVP(event)">
+                    <div class="grid grid-cols-1 gap-2 mb-3">
+                        <input type="text" id="rsvp-name" required placeholder="नाव" class="p-2 rounded border">
+                        <input type="tel" id="rsvp-phone" required placeholder="मोबाईल नं." class="p-2 rounded border">
+                        <select id="rsvp-attend" class="p-2 rounded border">
+                            <option value="yes">हां — उपस्थित राहीन</option>
+                            <option value="no">नाही — क्षमस्व</option>
+                        </select>
+                    </div>
+                    <div class="flex justify-end gap-2">
+                        <button type="button" onclick="closeRSVP()" class="px-4 py-2 rounded">रद्द करा</button>
+                        <button type="submit" class="px-4 py-2 bg-orange-600 text-white rounded">सबमिट</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const gate = document.getElementById('fort-gate');
+        const main = document.getElementById('main-content');
+        const audio = document.getElementById('bg-music');
+        const confetti = document.getElementById('confetti');
+
+        // Generate a few subtle confetti pieces for depth
+        function makeConfetti(n=12){
+            const colors = ['#ffd700','#e6b85a','#ff6b00','#d4af37','#f7c07b'];
+            for(let i=0;i<n;i++){
+                const s = document.createElement('span');
+                s.style.left = Math.random()*100 + '%';
+                s.style.top = Math.random()*-20 + 'vh';
+                s.style.background = colors[Math.floor(Math.random()*colors.length)];
+                s.style.width = (6 + Math.random()*10)+'px';
+                s.style.height = (10 + Math.random()*14)+'px';
+                s.style.animationDuration = (6 + Math.random()*6)+'s';
+                s.style.opacity = 0.95*Math.random()+0.05;
+                confetti.appendChild(s);
+            }
+        }
+        makeConfetti(18);
+
+        function enterFort(){
+            gate.classList.add('gate-open');
+            // small delay to reveal
+            setTimeout(()=>{
+                main.style.opacity = '1';
+                main.style.pointerEvents = 'auto';
+                // hide gate after animation
+                setTimeout(()=>{gate.style.display='none';},1400);
+            },900);
+            // play music softly
+            try{audio.volume=0.45; audio.play().catch(()=>{});}catch(e){}
+        }
+
+        function toggleMusic(){
+            if(audio.paused){audio.play().catch(()=>{});audio.volume=0.45}else{audio.pause()}
+        }
+
+        // RSVP modal
+        function openRSVP(){
+            const mb = document.getElementById('modal-backdrop'); mb.style.display='flex'; mb.setAttribute('aria-hidden','false');
+        }
+        function closeRSVP(){
+            const mb = document.getElementById('modal-backdrop'); mb.style.display='none'; mb.setAttribute('aria-hidden','true');
+        }
+        function submitRSVP(e){
+            e.preventDefault();
+            const name = document.getElementById('rsvp-name').value;
+            const phone = document.getElementById('rsvp-phone').value;
+            const attend = document.getElementById('rsvp-attend').value;
+            closeRSVP();
+            alert(`आभारी आहोत, ${name} — आपली माहिती नोंद करण्यात आली.`);
+            // You can replace this with an AJAX call to your server here
+        }
+
+        // Simple (safe) local bot placeholder
+        function askBot(){
+            const q = document.getElementById('userQuestion').value.trim();
+            if(!q) return;
+            const d = document.getElementById('chat-display');
+            d.innerHTML += `<div style=\"text-align:right;color:#f6e7c6;margin:6px 0;\">तुम्ही: ${escapeHtml(q)}</div>`;
+            document.getElementById('userQuestion').value=''; d.scrollTop=d.scrollHeight;
+            // Simple canned replies (since external API key not provided)
+            setTimeout(()=>{
+                const reply = simpleReply(q);
+                d.innerHTML += `<div style=\"text-align:left;color:#fff;margin:6px 0;background:rgba(217,115,36,0.12);padding:6px;border-radius:6px;\">मावळा: ${reply}</div>`;
+                d.scrollTop = d.scrollHeight;
+            },800);
+        }
+        function simpleReply(q){
+            const low = q.toLowerCase();
+            if(low.includes('वेळ')||low.includes('कधी')) return 'पाव्हणं, विवाह दिनांक ११ फेब्रुवारी २०१८, दुपारी १२:३५. अधिक माहिती हवी असेल तर सांगा.';
+            if(low.includes('नकाश')||low.includes('map')) return 'श्री गणेश हॉल, कराड — नकाशा बटणावर क्लिक करा.';
+            return 'राम राम पाव्हणं! काय सेवा हवी?';
+        }
+        function escapeHtml(s){ return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+
+        // Accessibility: allow Enter key to open gate when focused
+        document.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' && getComputedStyle(gate).display!=='none'){ enterFort(); } });
+
+        // reveal main if gate removed programmatically
+        if(location.hash === '#open') enterFort();
+
+    </script>
+</body>
+</html>

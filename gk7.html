@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>राजवर्धन weds राजनंदिनी | शिवकालीन विवाह सोहळा</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts: Yatra One (Bold Historic), Gotu (Body), Rozha One -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gotu&family=Rozha+One&family=Yatra+One&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bhagwa: #ff6b00;         /* Saffron */
+            --bhagwa-dark: #cc5500;
+            --stone: #1a1a1a;          /* Dark Stone */
+            --gold: #eebb55;           /* Antique Gold */
+            --gold-shiny: #ffd700;
+            --paper: #fdf5e6;          /* Royal Parchment */
+            
+            --font-title: 'Yatra One', cursive; 
+            --font-body: 'Gotu', sans-serif; 
+            --font-royal: 'Rozha One', serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+        body { background-color: #0f0f0f; overflow-x: hidden; font-family: var(--font-body); color: #333; }
+
+        /* --- ANIMATIONS --- */
+        @keyframes flame {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        
+        @keyframes slideOpenLeft { to { transform: translateX(-100%); } }
+        @keyframes slideOpenRight { to { transform: translateX(100%); } }
+        @keyframes fadeOut { to { opacity: 0; pointer-events: none; } }
+        
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        @keyframes glow { 0%, 100% { text-shadow: 0 0 5px var(--gold); } 50% { text-shadow: 0 0 20px var(--bhagwa); } }
+
+        /* --- INTRO: THE FORT GATE (MAHADARWAJA) --- */
+        #fort-gate {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 10000; display: flex;
+        }
+
+        .gate-panel {
+            width: 50%; height: 100%;
+            background-color: #2a2a2a;
+            background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
+            position: relative;
+            border-right: 4px solid #000;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: inset 0 0 50px #000;
+            transition: transform 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Iron Studs on Door */
+        .gate-studs {
+            position: absolute; width: 100%; height: 100%;
+            background-image: radial-gradient(#111 15%, transparent 16%);
+            background-size: 80px 80px; opacity: 0.4;
+        }
+
+        #gate-left { border-right: 2px solid #000; }
+        #gate-right { border-left: 2px solid #000; }
+
+        /* The Royal Seal (Mudra) */
+        #gate-seal {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            z-index: 10001; cursor: pointer; text-align: center;
+        }
+        
+        .mudra {
+            width: 160px; height: 160px;
+            background: radial-gradient(circle, #d4af37, #8a6d1f);
+            border-radius: 50%; border: 6px solid #5a4a00;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.5);
+            transition: transform 0.3s;
+            position: relative;
+        }
+        .mudra::after {
+            content: ''; position: absolute; width: 90%; height: 90%;
+            border: 2px dashed #5a4a00; border-radius: 50%;
+        }
+        .mudra:hover { transform: scale(1.1); }
+
+        .gate-open #gate-left { animation: slideOpenLeft 2.5s forwards; }
+        .gate-open #gate-right { animation: slideOpenRight 2.5s forwards; }
+        .gate-open #gate-seal { animation: fadeOut 0.5s forwards; }
+
+        /* --- MAIN SITE --- */
+        #main-content { display: none; opacity: 0; transition: opacity 2s ease; }
+        .visible { display: block !important; opacity: 1 !important; }
+
+        /* Header Section with Fort Silhouette */
+        header {
+            background: linear-gradient(to bottom, #2e0a0a, #1a0505);
+            color: var(--gold); padding: 80px 20px 60px;
+            text-align: center; position: relative; overflow: hidden;
+            border-bottom: 8px solid var(--bhagwa-dark);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+        
+        /* Fort Silhouette */
+        .fort-bg {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 150px;
+            background-image: url('https://img.icons8.com/external-flaticons-lineal-color-flat-icons/512/external-fort-history-flaticons-lineal-color-flat-icons.png');
+            background-size: contain; background-repeat: repeat-x; opacity: 0.2;
+            filter: grayscale(100%) brightness(0.5);
+            z-index: 0;
+        }
+
+        /* MASHAL (Torches) */
+        .mashal-container {
+            position: absolute; top: 50px; width: 60px; height: 120px; z-index: 10;
+        }
+        .mashal-left { left: 20px; }
+        .mashal-right { right: 20px; transform: scaleX(-1); }
+        
+        .torch-stick {
+            width: 10px; height: 80px; background: #5d4037; margin: 0 auto;
+            border-left: 2px solid #3e2723;
+            transform: rotate(-15deg); position: relative; top: 20px;
+        }
+        .torch-flame {
+            width: 40px; height: 60px; background: radial-gradient(circle, #ffeb3b, #ff9800, #f44336);
+            border-radius: 50% 50% 20% 20%; margin: 0 auto;
+            position: absolute; top: -20px; left: 10px;
+            filter: blur(5px); animation: flame 0.2s infinite alternate;
+            box-shadow: 0 -10px 30px #ff6b00;
+        }
+
+        /* Typography Effects */
+        h1 { 
+            font-family: var(--font-title); color: var(--gold-shiny); 
+            text-transform: uppercase; letter-spacing: 2px; 
+            text-shadow: 2px 2px 0 #3e2723, 0 0 20px rgba(255, 215, 0, 0.4);
+            background: -webkit-linear-gradient(#ffd700, #ffb300);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        h2 { font-family: var(--font-royal); color: #4a0a0a; }
+        
+        .weds-badge {
+            display: inline-block; background: var(--bhagwa); color: #fff;
+            padding: 5px 20px; border-radius: 50px; font-family: var(--font-body);
+            font-weight: bold; margin: 10px 0; border: 2px solid #fff;
+            box-shadow: 0 0 15px var(--bhagwa);
+        }
+
+        /* Parchment Container */
+        .parchment-bg {
+            background-color: var(--paper);
+            background-image: url("https://www.transparenttextures.com/patterns/aged-paper.png");
+            max-width: 900px; margin: -40px auto 50px;
+            position: relative; border-radius: 8px; z-index: 5;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            border: 12px solid #2c2c2c;
+            border-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png") 30 round;
+            padding: 40px 20px;
+        }
+        
+        /* Corner Ornaments */
+        .corner-ornament {
+            position: absolute; width: 60px; height: 60px; opacity: 0.8;
+            background-image: url('https://img.icons8.com/color/96/mandala.png');
+            background-size: contain;
+        }
+        .corner-tl { top: 10px; left: 10px; }
+        .corner-tr { top: 10px; right: 10px; transform: scaleX(-1); }
+        .corner-bl { bottom: 10px; left: 10px; transform: scaleY(-1); }
+        .corner-br { bottom: 10px; right: 10px; transform: rotate(180deg); }
+
+        /* Timeline */
+        .timeline { border-left: 4px solid var(--bhagwa); margin: 40px 10px md:margin-left 40px; padding-left: 30px; position: relative; }
+        .timeline-item { margin-bottom: 40px; position: relative; }
+        .timeline-icon {
+            position: absolute; left: -54px; top: 0; width: 45px; height: 45px;
+            background: #2c2c2c; border-radius: 50%; border: 3px solid var(--gold);
+            display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 2;
+        }
+        
+        /* Gallery (Chitragatha) */
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px;
+        }
+        .gallery-frame {
+            background: #fff; padding: 10px; border: 1px solid var(--gold);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2); transform: rotate(-2deg);
+            transition: transform 0.3s;
+        }
+        .gallery-frame:nth-child(even) { transform: rotate(2deg); }
+        .gallery-frame:hover { transform: rotate(0deg) scale(1.05); z-index: 10; }
+        .gallery-img { width: 100%; height: 200px; object-fit: cover; filter: sepia(30%); }
+
+        /* Divider */
+        .shivmudra-divider {
+            text-align: center; margin: 40px 0; position: relative;
+        }
+        .shivmudra-divider::before {
+            content: ""; display: block; height: 2px; width: 100%; 
+            background: radial-gradient(circle, var(--bhagwa), transparent);
+            position: absolute; top: 50%; z-index: 0;
+        }
+        .shivmudra-icon {
+            background: var(--paper); padding: 0 20px; position: relative; z-index: 1;
+            font-size: 2rem; color: var(--bhagwa-dark);
+        }
+
+        /* Tutari Music Button */
+        #music-btn {
+            position: fixed; bottom: 20px; left: 20px;
+            width: 60px; height: 60px; background: var(--bhagwa);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6); cursor: pointer; z-index: 200;
+            border: 3px solid var(--gold); animation: float 3s ease-in-out infinite;
+        }
+
+        /* AI Bot */
+        .mavla-bot {
+            background: #1e1e1e; color: var(--gold); border: 2px solid var(--gold);
+            border-radius: 10px; padding: 20px; margin-top: 40px;
+            box-shadow: inset 0 0 20px #000;
+        }
+
+        @media(max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .parchment-bg { margin: 0; border-width: 5px; border-radius: 0; }
+            .mashal-container { display: none; } /* Hide on small screens to save space */
+            .timeline { margin-left: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- AUDIO -->
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    <div id="music-btn" onclick="toggleMusic()" title="सनई चौघडा (Music)">🎺</div>
+
+    <!-- 1. INTRO: THE FORT GATE -->
+    <div id="fort-gate">
+        <div id="gate-left" class="gate-panel"><div class="gate-studs"></div></div>
+        <div id="gate-right" class="gate-panel"><div class="gate-studs"></div></div>
+        
+        <div id="gate-seal" onclick="enterFort()">
+            <div class="mudra">
+                <div style="font-family: 'Yatra One'; font-size: 2.5rem; color: #3e2723; margin-top: 20px;">॥ श्री ॥</div>
+                <div style="font-size: 0.8rem; color: #3e2723; font-weight: bold;">शुभविवाह</div>
+            </div>
+            <div class="mt-6 bg-black/80 text-yellow-400 px-6 py-2 rounded-full font-bold animate-pulse border border-yellow-600 cursor-pointer hover:bg-black hover:scale-105 transition">
+                प्रवेश करा (Enter)
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. MAIN CONTENT -->
+    <div id="main-content">
+        
+        <header>
+            <div class="fort-bg"></div>
+
+            <!-- Torches (Mashal) -->
+            <div class="mashal-container mashal-left">
+                <div class="torch-flame"></div>
+                <div class="torch-stick"></div>
+            </div>
+            <div class="mashal-container mashal-right">
+                <div class="torch-flame"></div>
+                <div class="torch-stick"></div>
+            </div>
+
+            <div class="relative z-10">
+                <div class="mb-2 text-yellow-500 text-lg font-bold tracking-widest">|| जय भवानी || जय शिवाजी ||</div>
+                
+                <img src="https://img.icons8.com/color/96/ganesh.png" class="w-20 mx-auto mb-4 drop-shadow-xl brightness-110" alt="Ganesh">
+                
+                <h1 class="text-5xl md:text-7xl mb-2">राजवर्धन</h1>
+                <div class="weds-badge">शुभविवाह</div>
+                <h1 class="text-5xl md:text-7xl mt-2">राजनंदिनी</h1>
+
+                <div class="mt-8 bg-black/60 backdrop-blur-sm inline-block px-8 py-4 rounded-lg border border-yellow-600 shadow-lg">
+                    <p class="text-2xl text-yellow-400 font-bold font-serif">११ फेब्रुवारी २०१८</p>
+                    <p class="text-sm text-gray-300 mt-1 uppercase tracking-wide">दुपारी १२:३५ (गोरज मुहूर्त)</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="parchment-bg">
+            <!-- Corners -->
+            <div class="corner-ornament corner-tl"></div>
+            <div class="corner-ornament corner-tr"></div>
+            <div class="corner-ornament corner-bl"></div>
+            <div class="corner-ornament corner-br"></div>
+
+            <!-- Introductory Text -->
+            <div class="text-center mb-10 px-4">
+                <h2 class="text-3xl font-bold text-orange-800 mb-4">|| स्नेहनिमंत्रण ||</h2>
+                <p class="text-lg font-medium leading-loose text-gray-800">
+                    श्री गजाननाच्या कृपेने आणि आई तुळजाभवानीच्या आशीर्वादाने, <br>
+                    आमच्या येथे <strong>चि. राजवर्धन</strong> आणि <strong>चि.सौ.कां. राजनंदिनी</strong> 
+                    यांचा शुभविवाह सोहळा आयोजित केला आहे. आपण सहकुटुंब यावे, हेच आग्रहाचे आमंत्रण!
+                </p>
+            </div>
+
+            <div class="shivmudra-divider">
+                <span class="shivmudra-icon">⚔️</span>
+            </div>
+
+            <!-- Events Section -->
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-8 font-serif">|| शुभ कार्यक्रम ||</h2>
+            <div class="grid md:grid-cols-2 gap-6 text-center px-4">
+                <div class="bg-orange-50 p-6 rounded-lg border-2 border-orange-200 shadow-md hover:shadow-lg transition transform hover:-translate-y-1">
+                    <div class="text-4xl mb-2">🌻</div>
+                    <h3 class="text-xl font-bold text-orange-800 mb-1">हळदी समारंभ</h3>
+                    <p class="font-bold text-gray-700">१० फेब्रुवारी २०१८</p>
+                    <p class="text-sm text-gray-600">सकाळी १०:०० वा. | स्थळ: स्वगृही</p>
+                </div>
+                <div class="bg-orange-100 p-6 rounded-lg border-2 border-orange-400 shadow-md hover:shadow-lg transition transform hover:-translate-y-1">
+                    <div class="text-4xl mb-2">🥁</div>
+                    <h3 class="text-xl font-bold text-orange-900 mb-1">विवाह सोहळा</h3>
+                    <p class="font-bold text-gray-800">११ फेब्रुवारी २०१८</p>
+                    <p class="text-sm text-gray-600">दुपारी १२:३५ वा.</p>
+                    <p class="text-sm font-bold mt-2 text-orange-800">श्री गणेश हॉल, कराड</p>
+                    <button onclick="window.open('https://maps.google.com')" class="mt-4 bg-orange-700 text-white px-4 py-1 rounded text-sm hover:bg-orange-800 flex items-center justify-center gap-2 mx-auto w-fit">
+                        <span>🗺️</span> नकाशा (Map)
+                    </button>
+                </div>
+            </div>
+
+            <div class="shivmudra-divider">
+                <span class="shivmudra-icon">📷</span>
+            </div>
+
+            <!-- NEW: Chitragatha (Gallery) -->
+            <div class="px-4">
+                <h2 class="text-2xl font-bold text-center text-gray-800 mb-6 font-serif">|| चित्रगाथा (Gallery) ||</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-frame">
+                        <img src="https://placehold.co/300x300/800000/FFF?text=Sakharpuda" class="gallery-img" alt="Photo 1">
+                    </div>
+                    <div class="gallery-frame">
+                        <img src="https://placehold.co/300x300/d4af37/000?text=Haldi" class="gallery-img" alt="Photo 2">
+                    </div>
+                    <div class="gallery-frame">
+                        <img src="https://placehold.co/300x300/1a1a1a/FFF?text=Pre-Wedding" class="gallery-img" alt="Photo 3">
+                    </div>
+                </div>
+            </div>
+
+            <div class="shivmudra-divider">
+                <span class="shivmudra-icon">🎁</span>
+            </div>
+
+            <!-- Digital Aher -->
+            <div class="bg-white border-2 border-dashed border-orange-400 rounded-xl p-6 mx-4 text-center shadow-inner">
+                <h3 class="text-xl font-bold text-gray-800 mb-2">डिजिटल आहेर (Digital Gift)</h3>
+                <p class="text-sm text-gray-600 mb-4">आपले प्रेम आणि आशीर्वाद हेच मोलाचे आहेत. तरीही इच्छा असल्यास:</p>
+                
+                <div class="flex justify-center gap-4">
+                    <button class="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2 rounded-full hover:bg-indigo-700 transition shadow-md">
+                        <img src="https://img.icons8.com/color/48/google-pay-india.png" class="w-6">
+                        <span>GPay</span>
+                    </button>
+                    <button class="flex items-center gap-2 bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition shadow-md">
+                        <img src="https://img.icons8.com/color/48/phone-pe.png" class="w-6">
+                        <span>PhonePe</span>
+                    </button>
+                </div>
+                <p class="text-xs text-gray-400 mt-3 select-all cursor-pointer hover:text-orange-600">Mo: 9876543210</p>
+            </div>
+
+            <!-- AI Bot (Mavla Style) -->
+            <div class="mavla-bot mx-4">
+                <div class="flex items-center gap-3 mb-3 border-b border-gray-600 pb-2">
+                    <div class="w-10 h-10 bg-orange-600 rounded-full flex items-center justify-center text-2xl shadow-lg border border-white">🛡️</div>
+                    <div>
+                        <h3 class="font-bold text-yellow-400 text-lg">मावळा (AI मदतनीस)</h3>
+                        <p class="text-xs text-gray-400">लग्नाची माहिती विचारा...</p>
+                    </div>
+                </div>
+                
+                <div id="chat-display" class="h-32 overflow-y-auto bg-black/40 p-3 rounded mb-3 text-sm border border-gray-700">
+                    <div class="text-gray-300 italic">"राम राम पाव्हणं! काय सेवा करू?"</div>
+                </div>
+                <div class="flex gap-2">
+                    <input type="text" id="userQuestion" placeholder="येथे प्रश्न विचारा..." class="flex-1 p-2 rounded text-black bg-gray-200 border-none focus:ring-2 focus:ring-orange-500">
+                    <button onclick="askBot()" class="bg-orange-600 text-white font-bold px-4 rounded hover:bg-orange-700 transition">विचार</button>
+                </div>
+            </div>
+
+            <div class="text-center mt-12 pb-4">
+                <p class="font-bold text-gray-800 text-lg font-serif">|| निमंत्रक ||</p>
+                <p class="text-gray-600">समस्त निकम आणि पाटील परिवार</p>
+                <p class="text-xs text-gray-400 mt-4 opacity-60">।। जय महाराष्ट्र ।।</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Audio Logic
+        const audio = document.getElementById('bg-music');
+        
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.volume = 0.5;
+                audio.play().catch(e => console.log("Audio play error:", e));
+            } else {
+                audio.pause();
+            }
+        }
+
+        // Gate Opening Animation
+        function enterFort() {
+            document.getElementById('fort-gate').classList.add('gate-open');
+            
+            // Play Music Automatically
+            toggleMusic();
+
+            // Reveal Website
+            setTimeout(() => {
+                document.getElementById('main-content').classList.add('visible');
+                // Remove overlay from DOM after animation
+                setTimeout(() => {
+                    document.getElementById('fort-gate').style.display = 'none';
+                }, 2000);
+            }, 1000);
+        }
+
+        // AI Bot
+        const apiKey = ""; 
+        async function askBot() {
+            const input = document.getElementById('userQuestion');
+            const display = document.getElementById('chat-display');
+            const q = input.value;
+            if(!q) return;
+
+            display.innerHTML += `<div class="text-right text-yellow-400 mb-2 bg-white/10 inline-block ml-auto p-2 rounded">तुम्ही: ${q}</div><div class="clear-both"></div>`;
+            input.value = '';
+            display.scrollTop = display.scrollHeight;
+            
+            const prompt = `You are a loyal Maratha soldier (Mavla) assisting guests for Rajvardhan's wedding. 
+            Date: 11 Feb 2018. Venue: Ganesh Hall, Karad.
+            Tone: Strong, Respectful Marathi (use 'जी रं', 'पाव्हणं', 'रयत', 'राम राम').
+            User asked: ${q}. Answer strictly in Marathi.`;
+            
+            try {
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                });
+                const data = await res.json();
+                const ans = data.candidates?.[0]?.content?.parts?.[0]?.text || "माफ करा, पुन्हा सांगा.";
+                display.innerHTML += `<div class="text-left text-white mb-2 p-2 bg-orange-900/50 rounded border border-orange-700/50">मावळा: ${ans}</div>`;
+                display.scrollTop = display.scrollHeight;
+            } catch(e) { console.error(e); }
+        }
+    </script>
+</body>
+</html>

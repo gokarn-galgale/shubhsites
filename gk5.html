@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>राजवर्धन weds राजनंदिनी | शाही विवाह सोहळा</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amita:wght@700&family=Rozha+One&family=Tiro+Devanagari+Marathi:ital@0;1&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --royal-maroon: #5a0000;        
+            --kumkum-red: #b71c1c; 
+            --turmeric-yellow: #fbc02d;       
+            --antique-gold: #c5a059; 
+            --parchment: #fdfbf7;      
+            
+            --font-title: 'Rozha One', serif; 
+            --font-heading: 'Amita', cursive; 
+            --font-body: 'Tiro Devanagari Marathi', serif; 
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+        body { background-color: #2a0a0a; overflow-x: hidden; font-family: var(--font-body); color: #3e2723; cursor: url('https://img.icons8.com/color/48/quill-pen.png'), auto; }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        @keyframes sway {
+            0% { margin-left: 0px; }
+            100% { margin-left: 50px; }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 10px var(--antique-gold); }
+            50% { box-shadow: 0 0 25px var(--turmeric-yellow); }
+        }
+
+        /* Flower & Akshata Particles */
+        .particle { position: fixed; top: -10px; z-index: 9998; pointer-events: none; }
+        .akshata { width: 6px; height: 10px; background: #fff; border-radius: 50%; animation: fall 3s linear infinite; }
+        
+        .petal { 
+            width: 15px; height: 15px; 
+            background: var(--turmeric-yellow); 
+            border-radius: 50% 0 50% 0; 
+            animation: fall 5s linear infinite, sway 3s ease-in-out infinite alternate;
+        }
+        .petal:nth-child(odd) { background: #ff9800; width: 20px; height: 20px; animation-duration: 6s, 4s; }
+
+        /* --- INTRO OVERLAY (Envelope) --- */
+        #intro-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #5a0000, #1a0000);
+            z-index: 10000; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; transition: opacity 1.5s ease;
+            padding: 20px;
+        }
+
+        .envelope-wrapper { 
+            position: relative; width: 320px; height: 220px; 
+            cursor: pointer; transition: transform 0.5s ease; margin-bottom: 20px; 
+            max-width: 100%;
+        }
+        .envelope-wrapper:hover { transform: scale(1.02); }
+
+        .invitation-card-preview { 
+            position: absolute; bottom: 0; left: 10px; width: 300px; height: 190px; 
+            background: #fff8e1; border: 2px solid var(--antique-gold); z-index: 2; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.3); transition: transform 1s ease 0.5s;
+            background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
+        }
+
+        .envelope-back { position: absolute; width: 100%; height: 100%; background: #7f1d1d; border-radius: 5px; z-index: 1; border: 2px solid #ffd700; }
+        .envelope-flap { 
+            position: absolute; top: 0; left: 0; width: 0; height: 0; 
+            border-left: 160px solid transparent; border-right: 160px solid transparent; 
+            border-top: 130px solid #991b1b; transform-origin: top; z-index: 6; 
+            transition: transform 0.8s ease, z-index 0.1s linear 0.4s; 
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3)); 
+        }
+        .envelope-pocket { 
+            position: absolute; bottom: 0; left: 0; width: 0; height: 0; 
+            border-left: 160px solid #7f1d1d; border-right: 160px solid #7f1d1d; 
+            border-top: 110px solid transparent; z-index: 7; 
+        }
+
+        .wax-seal {
+            position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%);
+            width: 60px; height: 60px; background: radial-gradient(circle, #ffd700, #b8860b);
+            border-radius: 50%; border: 4px double #5a0000;
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-heading); font-size: 1.8rem; color: #5a0000; font-weight: bold;
+            z-index: 10; cursor: pointer; animation: pulse-glow 2s infinite; transition: opacity 0.5s;
+        }
+
+        .envelope-wrapper.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
+        .envelope-wrapper.open .wax-seal { opacity: 0; pointer-events: none; }
+        .envelope-wrapper.open .invitation-card-preview { transform: translateY(-150px) scale(1.1); z-index: 8; }
+
+        /* --- MAIN SITE --- */
+        #main-site { display: none; opacity: 0; transition: opacity 2s ease; width: 100%; min-h-screen; position: relative; }
+
+        /* Background Texture */
+        .royal-bg {
+            background-color: #fdfbf7;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d4af37' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        /* Paithani Borders */
+        .border-top-bar, .border-bottom-bar {
+            position: fixed; left: 0; width: 100%; height: 15px; z-index: 100;
+            background: repeating-linear-gradient(45deg, #004d40, #004d40 10px, #ffd700 10px, #ffd700 20px, #b71c1c 20px, #b71c1c 30px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .border-top-bar { top: 0; }
+        .border-bottom-bar { bottom: 0; }
+
+        /* Container styling */
+        .royal-container {
+            max-width: 850px; margin: 40px auto 80px;
+            background: #fffbf0;
+            border: 2px solid var(--antique-gold);
+            border-radius: 5px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            position: relative; padding: 40px 20px;
+            text-align: center;
+        }
+
+        /* Corner Ornaments */
+        .corner-img { position: absolute; width: 100px; opacity: 0.8; pointer-events: none; }
+        .corner-tl { top: 0; left: 0; transform: rotate(0deg); }
+        .corner-tr { top: 0; right: 0; transform: scaleX(-1); }
+        
+        /* Typography */
+        h1 { font-family: var(--font-heading); color: var(--kumkum-red); text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+        h2 { font-family: var(--font-title); color: var(--royal-maroon); }
+        .sanskrit-shloka { font-size: 1.1rem; color: #5d4037; font-style: italic; margin: 15px 0; }
+
+        /* Countdown Timer */
+        .countdown-box {
+            display: flex; justify-content: center; gap: 15px; margin: 30px 0;
+        }
+        .time-unit {
+            background: var(--royal-maroon); color: var(--turmeric-yellow);
+            padding: 10px; border-radius: 8px; border: 1px solid var(--antique-gold);
+            min-width: 70px;
+        }
+        .time-val { font-size: 1.5rem; font-weight: bold; display: block; font-family: var(--font-title); }
+        .time-label { font-size: 0.8rem; text-transform: uppercase; }
+
+        /* Action Buttons */
+        .btn-royal {
+            background: linear-gradient(to bottom, #b71c1c, #7f1d1d);
+            color: #fff; border: 2px solid #ffd700;
+            padding: 10px 25px; font-family: var(--font-heading); font-size: 1.1rem;
+            border-radius: 50px; cursor: pointer; margin: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.2s;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-royal:hover { transform: translateY(-2px); background: linear-gradient(to bottom, #c62828, #b71c1c); }
+        
+        .flower-btn { background: linear-gradient(to bottom, #fbc02d, #f57f17); color: #3e2723; border-color: #b71c1c; }
+
+        /* Music Fab */
+        #music-fab {
+            position: fixed; bottom: 30px; right: 30px; z-index: 200;
+            width: 60px; height: 60px; border-radius: 50%;
+            background: var(--antique-gold); border: 3px solid var(--royal-maroon);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4); cursor: pointer;
+            animation: spin-slow 10s linear infinite;
+            transition: transform 0.3s;
+        }
+        #music-fab:hover { transform: scale(1.1); }
+        @keyframes spin-slow { 100% { transform: rotate(360deg); } }
+
+        /* Sections */
+        .section-divider { height: 2px; background: radial-gradient(circle, var(--antique-gold), transparent); margin: 40px auto; width: 80%; }
+        .family-box { background: rgba(255, 215, 0, 0.1); border: 1px dashed var(--royal-maroon); padding: 20px; border-radius: 10px; text-align: center; }
+
+        /* RSVP Form */
+        .rsvp-input {
+            width: 100%; padding: 10px; margin-bottom: 10px;
+            background: transparent; border: none; border-bottom: 2px solid var(--antique-gold);
+            font-family: var(--font-body); outline: none; text-align: center;
+        }
+        .rsvp-input:focus { border-bottom-color: var(--royal-maroon); }
+
+        /* Responsive Adjustments */
+        @media(max-width: 768px) {
+            .envelope-wrapper { transform: scale(0.85); }
+            h2 { font-size: 2.5rem; }
+            .countdown-box { gap: 5px; }
+            .time-unit { min-width: 60px; padding: 5px; }
+            .royal-container { padding: 20px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BACKGROUND AUDIO -->
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    <div id="music-fab" onclick="toggleMusic()" title="Play/Pause Music">
+        <span style="font-size: 24px;">🎺</span>
+    </div>
+
+    <!-- PARTICLE CONTAINER -->
+    <div id="particle-container"></div>
+
+    <!-- INTRO OVERLAY -->
+    <div id="intro-overlay">
+        <div class="text-center text-yellow-500 mb-8">
+            <p class="font-bold text-3xl tracking-widest" style="font-family: var(--font-heading);">|| श्री ||</p>
+            <p class="text-sm opacity-80 mt-2 tracking-wider uppercase">शुभविवाह निमंत्रण पत्रिका</p>
+        </div>
+        
+        <div class="envelope-wrapper" id="envelope">
+            <div class="invitation-card-preview">
+                <div class="text-red-800 text-3xl font-bold mb-2" style="font-family: var(--font-heading);">|| श्री ||</div>
+                <div class="text-center">
+                    <h2 class="text-2xl font-bold text-red-900" style="font-family: var(--font-heading);">राजवर्धन</h2>
+                    <div class="text-green-800 text-xs my-1 font-bold">सह</div>
+                    <h2 class="text-2xl font-bold text-red-900" style="font-family: var(--font-heading);">राजनंदिनी</h2>
+                </div>
+                <div class="mt-3 text-red-800 font-bold text-sm">११ . ०२ . २०१८</div>
+            </div>
+
+            <div class="envelope-back"></div>
+            <div class="envelope-pocket"></div>
+            <div class="envelope-flap"></div>
+            <div class="wax-seal" onclick="openEnvelope()">श्री</div>
+        </div>
+        <p class="text-yellow-200/60 mt-10 text-xs animate-pulse">पत्रिका पाहण्यासाठी शिक्क्यावर क्लिक करा</p>
+    </div>
+
+    <!-- MAIN WEBSITE -->
+    <div id="main-site" class="royal-bg">
+        <div class="border-top-bar"></div>
+
+        <div class="royal-container">
+            <!-- Corner Decorations -->
+            <img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-mandala-yoga-flaticons-lineal-color-flat-icons-2.png" class="corner-img corner-tl" alt="decor">
+            <img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-mandala-yoga-flaticons-lineal-color-flat-icons-2.png" class="corner-img corner-tr" alt="decor">
+
+            <!-- HEADER -->
+            <header class="relative z-10">
+                <div class="mb-4">
+                    <h1 class="text-4xl text-red-800">|| श्री गणेशाय नम: ||</h1>
+                </div>
+                <div class="sanskrit-shloka">
+                    "वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ ।<br>
+                    निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ॥"
+                </div>
+                
+                <div class="mt-8 mb-6">
+                    <h2 class="text-5xl md:text-7xl mb-2 text-red-900 drop-shadow-md font-serif">राजवर्धन</h2>
+                    <p class="text-xl text-green-800 font-bold my-2" style="font-family: var(--font-heading);">-- शुभविवाह --</p>
+                    <h2 class="text-5xl md:text-7xl mt-2 text-red-900 drop-shadow-md font-serif">राजनंदिनी</h2>
+                </div>
+
+                <div class="inline-block border-y-2 border-red-800 py-2 px-6 mb-6">
+                    <p class="text-xl font-bold text-red-800">रविवार, दि. ११ फेब्रुवारी २०१८</p>
+                    <p class="text-md text-gray-600 font-bold">दुपारी १२:३५ वाजता (गोरज मुहूर्त)</p>
+                </div>
+
+                <!-- COUNTDOWN TIMER -->
+                <div class="countdown-box" id="countdown">
+                    <!-- JS will populate this -->
+                    <div class="time-unit"><span class="time-val">00</span><span class="time-label">दिवस</span></div>
+                    <div class="time-unit"><span class="time-val">00</span><span class="time-label">तास</span></div>
+                    <div class="time-unit"><span class="time-val">00</span><span class="time-label">मिनिटे</span></div>
+                </div>
+
+                <!-- ACTION BUTTONS -->
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="triggerFlowers()" class="btn-royal flower-btn">🌺 पुष्पवृष्टी करा (Flower Shower)</button>
+                </div>
+            </header>
+
+            <div class="section-divider"></div>
+
+            <!-- INVITATION TEXT -->
+            <div class="max-w-2xl mx-auto px-4">
+                <p class="text-lg text-gray-800 leading-loose font-medium text-center">
+                    सस्नेह नमस्कार,<br>
+                    आमच्या लाडक्या <span class="text-red-800 font-bold">चि. राजवर्धन</span> आणि <span class="text-red-800 font-bold">चि.सौ.कां. राजनंदिनी</span> 
+                    यांच्या शुभविवाह सोहळ्यास आपण सहकुटुंब सहपरिवार उपस्थित राहून वधु-वरांस शुभाशिर्वाद द्यावेत, ही आमची आग्रहाची आणि नम्र विनंती.
+                </p>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- FAMILY TREE -->
+            <div class="mb-12">
+                <h3 class="text-2xl text-red-800 font-bold mb-6" style="font-family: var(--font-heading);">|| कुळवृत्तांत ||</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="family-box">
+                        <h4 class="text-xl font-bold text-red-900 mb-2">वर पक्ष (निकम परिवार)</h4>
+                        <p class="text-sm text-gray-600"><strong>आजोबा:</strong> कै. रामचंद्र शामराव निकम</p>
+                        <p class="text-sm text-gray-600"><strong>वडील:</strong> श्री. आनंदराव रामचंद्र निकम</p>
+                        <p class="text-xs text-gray-500 mt-2">रा. सांगली, ता. मिरज</p>
+                    </div>
+                    <div class="family-box">
+                        <h4 class="text-xl font-bold text-red-900 mb-2">वधू पक्ष (पाटील परिवार)</h4>
+                        <p class="text-sm text-gray-600"><strong>आजोबा:</strong> श्री. आनंदराव तुकाराम पाटील</p>
+                        <p class="text-sm text-gray-600"><strong>वडील:</strong> श्री. सदाशिव आनंदराव पाटील</p>
+                        <p class="text-xs text-gray-500 mt-2">रा. सांगली, ता. मिरज</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EVENTS -->
+            <div class="mb-12">
+                <h3 class="text-2xl text-red-800 font-bold mb-6" style="font-family: var(--font-heading);">|| शुभ कार्यक्रम ||</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Haldi -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-yellow-500 relative overflow-hidden">
+                        <div class="absolute -right-4 -top-4 text-6xl opacity-10 text-yellow-600">🌻</div>
+                        <h4 class="text-xl font-bold text-yellow-700 mb-2">हळदी समारंभ</h4>
+                        <p class="font-bold">शनिवार, १० फेब्रुवारी २०१८</p>
+                        <p class="text-gray-600">सकाळी १०:०० वाजता</p>
+                        <p class="text-sm font-bold text-green-700 mt-2">स्थळ: स्वगृही</p>
+                    </div>
+
+                    <!-- Wedding -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-red-700 relative overflow-hidden">
+                        <div class="absolute -right-4 -top-4 text-6xl opacity-10 text-red-600">🥁</div>
+                        <h4 class="text-xl font-bold text-red-800 mb-2">शुभविवाह</h4>
+                        <p class="font-bold">रविवार, ११ फेब्रुवारी २०१८</p>
+                        <p class="text-gray-600">दुपारी १२:३५ वाजता</p>
+                        
+                        <div class="mt-3 border-t pt-2 border-gray-200">
+                             <p class="text-sm font-bold text-red-700">स्थळ: श्री गणेश मल्टी पर्पज हॉल, कराड</p>
+                        </div>
+
+                        <!-- STYLIZED MAP CARD -->
+                        <div class="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded text-left flex items-center gap-3 cursor-pointer hover:bg-yellow-100 transition" onclick="window.open('https://maps.google.com', '_blank')">
+                            <img src="https://img.icons8.com/color/48/google-maps-old.png" class="w-10 h-10" alt="map">
+                            <div>
+                                <p class="text-xs font-bold text-gray-800">लोकेशन पहा (Map)</p>
+                                <p class="text-xs text-gray-500">गव्हर्नमेंट पॉलीटेक्निक जवळ</p>
+                            </div>
+                            <span class="ml-auto text-xl text-gray-400">&rsaquo;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- RSVP SECTION -->
+            <div class="mb-12 max-w-md mx-auto">
+                <h3 class="text-2xl text-red-800 font-bold mb-6" style="font-family: var(--font-heading);">|| येण्याची खात्री (RSVP) ||</h3>
+                <div class="bg-white p-6 rounded-lg border-2 border-dashed border-red-300 shadow-sm">
+                    <input type="text" id="guestName" class="rsvp-input" placeholder="आपले नाव (Your Name)">
+                    <input type="number" id="guestCount" class="rsvp-input" placeholder="एकूण व्यक्ती (Total Guests)">
+                    <button onclick="submitRSVP()" class="btn-royal w-full justify-center mt-4">उपस्थिती कळवा (Confirm)</button>
+                    <p id="rsvp-msg" class="text-green-700 font-bold mt-2 hidden">धन्यवाद! आपली माहिती मिळाली.</p>
+                </div>
+            </div>
+
+            <!-- FOOTER & AI -->
+            <div class="bg-stone-800 text-amber-100 p-6 rounded-xl border-2 border-amber-600 relative">
+                <h3 class="text-xl font-bold text-amber-400 mb-4 text-left flex items-center gap-2">
+                    <span>🤖</span> लग्नासाठी मदतनीस (AI)
+                </h3>
+                <div id="chat-display" class="h-32 overflow-y-auto bg-black/20 p-3 rounded mb-3 text-sm text-left border border-amber-900">
+                    <div class="opacity-60">नमस्कार! लग्नाबद्दल काहीही विचारा...</div>
+                </div>
+                <div class="flex gap-2">
+                    <input type="text" id="userQuestion" placeholder="प्रश्न विचारा..." class="flex-1 p-2 rounded text-black bg-amber-50 border-none">
+                    <button onclick="askBot()" class="bg-amber-600 text-white font-bold px-4 py-2 rounded hover:bg-amber-700 transition">विचार</button>
+                </div>
+            </div>
+
+            <div class="mt-8 text-sm text-gray-500">
+                || निमंत्रक: समस्त निकम आणि पाटील परिवार ||
+            </div>
+        </div>
+        
+        <div class="border-bottom-bar"></div>
+    </div>
+
+    <script>
+        // --- AUDIO LOGIC ---
+        const audio = document.getElementById('bg-music');
+        const btn = document.getElementById('music-fab');
+        
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.volume = 0.4;
+                audio.play().then(() => {
+                    btn.style.animationPlayState = 'running';
+                    btn.style.borderColor = '#4caf50';
+                }).catch(e => console.log("Autoplay blocked"));
+            } else {
+                audio.pause();
+                btn.style.animationPlayState = 'paused';
+                btn.style.borderColor = '#b71c1c';
+            }
+        }
+
+        // --- PARTICLES (Akshata & Flowers) ---
+        function createParticle(type) {
+            const container = document.getElementById('particle-container');
+            const el = document.createElement('div');
+            el.classList.add('particle', type);
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            
+            if (type === 'petal') {
+                el.style.transform = `rotate(${Math.random() * 360}deg)`;
+                el.innerText = Math.random() > 0.5 ? '🌸' : '🌼';
+                el.style.fontSize = (Math.random() * 10 + 15) + 'px';
+                el.style.background = 'transparent'; 
+            }
+            
+            container.appendChild(el);
+            setTimeout(() => el.remove(), 5000);
+        }
+
+        function triggerFlowers() {
+            for(let i=0; i<30; i++) {
+                setTimeout(() => createParticle('petal'), i * 100);
+            }
+        }
+
+        // --- ENVELOPE OPENING ---
+        function openEnvelope() {
+            document.getElementById('envelope').classList.add('open');
+            
+            // Initial shower
+            const akshataInt = setInterval(() => createParticle('akshata'), 200);
+            setTimeout(() => clearInterval(akshataInt), 5000);
+
+            toggleMusic();
+
+            setTimeout(() => {
+                document.getElementById('intro-overlay').style.opacity = '0';
+                document.getElementById('main-site').style.display = 'block';
+                setTimeout(() => { 
+                    document.getElementById('main-site').style.opacity = '1'; 
+                    document.getElementById('intro-overlay').style.display = 'none';
+                    startCountdown();
+                }, 500);
+            }, 1500);
+        }
+
+        // --- RSVP Logic ---
+        function submitRSVP() {
+            const name = document.getElementById('guestName').value;
+            const count = document.getElementById('guestCount').value;
+            if(name && count) {
+                document.getElementById('rsvp-msg').classList.remove('hidden');
+                // Trigger a celebration shower
+                triggerFlowers();
+            } else {
+                alert('कृपया नाव आणि संख्या भरा.');
+            }
+        }
+
+        // --- COUNTDOWN TIMER ---
+        function startCountdown() {
+            // Target date: 10 days from now for demo purposes
+            const targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + 10);
+
+            const timer = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+                const els = document.querySelectorAll('.time-val');
+                if(els.length > 0) {
+                    els[0].innerText = days;
+                    els[1].innerText = hours;
+                    els[2].innerText = minutes;
+                }
+
+                if (distance < 0) {
+                    clearInterval(timer);
+                    document.getElementById("countdown").innerHTML = "<div class='text-red-800 font-bold text-2xl'>।। शुभविवाह संपन्न ।।</div>";
+                }
+            }, 1000);
+        }
+
+        // --- AI BOT ---
+        const apiKey = ""; 
+        async function askBot() {
+            const input = document.getElementById('userQuestion');
+            const display = document.getElementById('chat-display');
+            const q = input.value;
+            if(!q) return;
+
+            display.innerHTML += `<div class="text-right text-amber-300 mb-1">तुम्ही: ${q}</div>`;
+            input.value = '';
+            display.scrollTop = display.scrollHeight;
+            
+            const prompt = `Context: Traditional Marathi wedding of Rajvardhan & Rajnandini. Date: 11 Feb 2018. Venue: Ganesh Hall, Karad. 
+            Tone: Polite, traditional Marathi (use words like 'हो', 'नक्कीच', 'आमच्या माहितीनुसार').
+            User asked: ${q}. Answer strictly in Marathi.`;
+            
+            try {
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                });
+                const data = await res.json();
+                const ans = data.candidates?.[0]?.content?.parts?.[0]?.text || "माफ करा, पुन्हा प्रयत्न करा.";
+                display.innerHTML += `<div class="text-left text-white mb-1 p-1 bg-white/10 rounded">AI: ${ans}</div>`;
+                display.scrollTop = display.scrollHeight;
+            } catch(e) { console.error(e); }
+        }
+    </script>
+</body>
+</html>

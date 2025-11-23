@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>राजवर्धन आणि राजनंदिनी | शुभविवाह निमंत्रण</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Tiro+Devanagari+Marathi:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --red: #800000;        /* Traditional Maroon */
+            --bright-red: #A52A2A; /* Kumkum Red */
+            --gold: #FFD700;       /* Haldi Gold */
+            --antique-gold: #D4AF37; 
+            --cream: #FFFDD0;      /* Paper Cream */
+            --text: #2C0E0E;       
+            
+            /* Fonts */
+            --font-fancy: 'Amita', cursive; /* For headings */
+            --font-body: 'Tiro Devanagari Marathi', serif; /* For readable text */
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--cream); overflow-x: hidden; font-family: var(--font-body); }
+
+        /* =========================================
+           1. ENVELOPE OVERLAY (INTRO)
+           ========================================= */
+        #intro-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, #3a0000 0%, #1a0000 100%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1.5s ease;
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            width: 320px;
+            height: 220px;
+            margin-top: 50px;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+        
+        .invitation-card {
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            width: 300px;
+            height: 200px; 
+            background-color: #fffdf5;
+            border: 2px solid var(--gold);
+            z-index: 2;
+            transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+            text-align: center;
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+        }
+        
+        .card-ganesh { font-size: 1.2rem; color: var(--red); font-weight: bold; margin-bottom: 5px;}
+        .card-names { font-family: var(--font-fancy); font-size: 1.6rem; color: var(--text); font-weight: 700; line-height: 1.3; }
+        .card-date { font-size: 1rem; color: #8B4513; margin-top: 8px; font-weight: bold; border-top: 1px solid var(--gold); padding-top: 5px; width: 80%;}
+
+        .envelope-back {
+            position: absolute;
+            width: 100%; height: 100%;
+            background: var(--red);
+            border-radius: 5px;
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0; left: 0;
+            width: 0; height: 0;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-top: 120px solid var(--bright-red);
+            transform-origin: top;
+            z-index: 6; 
+            transition: transform 0.8s ease 0.2s, z-index 0.1s linear 0.4s;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+        }
+
+        .envelope-pocket {
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 0;
+            border-left: 160px solid var(--red);
+            border-right: 160px solid var(--red);
+            border-top: 110px solid transparent;
+            z-index: 7;
+        }
+        
+        .envelope-pocket-bg {
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 0;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-bottom: 120px solid var(--bright-red);
+            z-index: 6;
+        }
+
+        .wax-seal {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -20%);
+            width: 60px; height: 60px;
+            background: radial-gradient(circle, #FFD700, #DAA520);
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #5a0000;
+            cursor: pointer;
+            border: 3px solid #B8860B;
+            animation: pulse 2s infinite;
+            transition: opacity 0.5s;
+            font-weight: bold;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -20%) scale(1); }
+            50% { transform: translate(-50%, -20%) scale(1.05); }
+            100% { transform: translate(-50%, -20%) scale(1); }
+        }
+
+        .envelope-wrapper.open .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 1; 
+        }
+        .envelope-wrapper.open .wax-seal { opacity: 0; pointer-events: none; }
+        .envelope-wrapper.open .invitation-card {
+            transform: translateY(-180px) scale(1.1);
+            z-index: 8;
+            transition-delay: 0.6s;
+        }
+
+        /* =========================================
+           2. MAIN WEBSITE
+           ========================================= */
+        #main-site {
+            display: none;
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+        
+        .mandala-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /* Mandala-like pattern */
+            background-image: 
+                radial-gradient(#d4af37 1px, transparent 1px),
+                radial-gradient(#d4af37 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header {
+            padding: 50px 20px;
+            border-bottom: 3px double var(--gold);
+            background: linear-gradient(to bottom, rgba(255,248,231,0.8) 0%, rgba(255,255,255,0.1) 100%);
+        }
+
+        .ganesh-header {
+            font-size: 2rem;
+            color: var(--red);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .wedding-title {
+            font-family: var(--font-fancy);
+            font-size: 2.5rem;
+            color: #D4AF37;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: var(--font-fancy);
+            font-size: 3.5rem;
+            color: var(--red);
+            margin: 10px 0;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .card-box {
+            background: #fff;
+            padding: 40px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(139,0,0,0.15);
+            position: relative;
+            margin-top: -40px;
+            margin-bottom: 40px;
+            border-radius: 15px;
+        }
+        
+        /* Traditional corners */
+        .card-box::before {
+            content: "卐";
+            position: absolute;
+            top: 10px; left: 15px;
+            font-size: 2rem;
+            color: var(--red);
+        }
+        .card-box::after {
+            content: "卐";
+            position: absolute;
+            top: 10px; right: 15px;
+            font-size: 2rem;
+            color: var(--red);
+        }
+
+        .event-item {
+            margin-bottom: 30px;
+            padding: 25px;
+            background-color: #fff5f5;
+            border: 1px dashed var(--red);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        .event-item::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 5px; height: 100%;
+            background: var(--gold);
+        }
+        
+        .event-item h3 {
+            font-family: var(--font-fancy);
+            color: var(--red);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .highlight-date {
+            color: #d35400;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--red), #a00000);
+            color: var(--gold);
+            padding: 15px 35px;
+            border: 2px solid var(--gold);
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 50px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+
+        /* AI Chat Styling */
+        .ai-chat-container {
+            background: linear-gradient(135deg, #2c0e0e 0%, #4a1a1a 100%);
+            color: var(--cream);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 40px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        @media(max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .envelope-wrapper { transform: scale(0.9); margin-top: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- INTRO OVERLAY -->
+    <div id="intro-overlay">
+        <div style="color: var(--gold); font-family: var(--font-fancy); font-size: 1.5rem; margin-bottom: 20px; text-align: center; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">
+            || श्री गणेशाय नम: ||<br>
+            <span style="font-size: 1rem; font-family: var(--font-body); opacity: 0.9; color: #fff;">(पत्रिकेसाठी शिक्क्यावर क्लिक करा)</span>
+        </div>
+        
+        <div class="envelope-wrapper" id="envelope">
+            <div class="invitation-card">
+                <div class="card-ganesh">|| श्री ||</div>
+                <div class="card-names">
+                    राजवर्धन<br>
+                    <span style="font-size: 1.2rem; color: #d4af37;">आणि</span><br>
+                    राजनंदिनी
+                </div>
+                <div class="card-date">रविवार, ११ फेब्रुवारी २०१८</div>
+            </div>
+
+            <div class="envelope-back"></div>
+            <div class="envelope-pocket-bg"></div>
+            <div class="envelope-pocket"></div>
+            <div class="envelope-flap"></div>
+            
+            <!-- Seal Button -->
+            <div class="wax-seal" onclick="openEnvelope()">
+                श्री
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN SITE -->
+    <div id="main-site">
+        <div class="mandala-bg"></div>
+        
+        <header>
+            <div class="ganesh-header">|| श्री गणेशाय नमः ||</div>
+            <div class="wedding-title">शुभविवाह सोहळा</div>
+            <h1>राजवर्धन <span style="font-size: 2rem; vertical-align: middle; color: var(--gold);">weds</span> राजनंदिनी</h1>
+            <div style="font-size: 1.2rem; color: #555; font-weight: bold; margin-top: 10px;">
+                रविवार, दि. ११ फेब्रुवारी २०१८
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="card-box">
+                <p style="font-size: 1.3rem; line-height: 1.8; color: var(--text); font-weight: 500;">
+                    सस्नेह नमस्कार,<br><br>
+                    श्री रामचंद्र शामराव निकम यांचे नातू आणि श्री. आनंदराव पाटील यांची कन्या यांच्या शुभविवाहास आपली उपस्थिती प्रार्थनीय आहे.
+                    <br><br>
+                    आपले आशीर्वाद आणि शुभेच्छा वधू-वरांच्या पुढील वाटचालीस अनमोल असतील.
+                </p>
+                <br>
+                <p style="font-size: 1.6rem; color: var(--red); font-family: var(--font-fancy);">
+                    अगत्याचे आमंत्रण!
+                </p>
+            </div>
+
+            <div class="event-details">
+                <div class="event-item">
+                    <h3>✨ हळदी समारंभ ✨</h3>
+                    <p class="highlight-date">शनिवार, दि. १० फेब्रुवारी २०१८</p>
+                    <p style="font-size: 1.1rem; margin-top: 5px;">वेळ: सकाळी १०:०० वाजता</p>
+                    <p style="color: #555; margin-top: 5px;">स्थळ: <strong>स्वगृही</strong></p>
+                </div>
+
+                <div class="event-item">
+                    <h3>✨ शुभविवाह सोहळा ✨</h3>
+                    <p class="highlight-date">रविवार, दि. ११ फेब्रुवारी २०१८</p>
+                    <p style="font-size: 1.1rem; margin-top: 5px;">शुभमुहूर्त: दुपारी १२:३५ (अक्षता)</p>
+                    <hr style="border: 0; border-top: 1px dashed #ccc; margin: 10px 0;">
+                    <p style="font-size: 1.2rem; color: var(--red); font-weight: bold;">श्री गणेश मल्टी पर्पज हॉल</p>
+                    <p style="color: #555;">गव्हर्नमेंट पॉलीटेक्निक जवळ, विधाननगर, कराड</p>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 50px;">
+                <a href="https://maps.google.com" target="_blank" class="cta-button">🗺️ लोकेशन (Google Map)</a>
+            </div>
+            
+            <!-- AI Helper Section -->
+            <div class="ai-chat-container">
+                <h3 style="font-family: var(--font-fancy); margin-bottom: 10px; color: var(--gold); font-size: 1.5rem;">🤖 लग्नासाठी मदतनीस (AI)</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 15px; opacity: 0.9;">लग्नाबद्दल कोणताही प्रश्न विचारा (उदा. मुहूर्त कधी आहे?)</p>
+                
+                <div id="chat-display" style="height: 120px; background: rgba(0,0,0,0.4); overflow-y: auto; text-align: left; padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid rgba(255,215,0,0.3);">
+                    <div style="color: #e0e0e0; font-style: italic; font-size: 0.9rem;">नमस्कार! मी इथे आहे मदतीसाठी...</div>
+                </div>
+                
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="userQuestion" placeholder="येथे प्रश्न विचारा..." style="flex: 1; padding: 12px; border-radius: 25px; border: none; outline: none; font-family: var(--font-body);">
+                    <button onclick="askBot()" style="background: linear-gradient(45deg, #FFD700, #FFA500); color: #5a0000; border: none; padding: 0 25px; border-radius: 25px; font-weight: bold; cursor: pointer; transition: transform 0.2s;">विचार</button>
+                </div>
+            </div>
+
+        </div>
+
+        <footer style="padding: 20px; background: #3a0000; color: #ffd700; text-align: center; margin-top: 30px; border-top: 3px solid var(--gold);">
+            शुभविवाह प्रसंग २०२५<br>
+            <span style="font-size: 0.9rem; opacity: 0.8;">निमंत्रक: समस्त निकम आणि पाटील परिवार</span>
+        </footer>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        function openEnvelope() {
+            const envelope = document.getElementById('envelope');
+            const overlay = document.getElementById('intro-overlay');
+            const mainSite = document.getElementById('main-site');
+            const audio = document.getElementById('bg-music');
+
+            envelope.classList.add('open');
+
+            // Attempt audio play
+            audio.volume = 0.3;
+            audio.play().catch(e => console.log("Audio autoplay blocked"));
+
+            setTimeout(() => {
+                overlay.style.opacity = '0';
+                mainSite.style.display = 'block';
+                setTimeout(() => { mainSite.style.opacity = '1'; }, 100);
+            }, 1500);
+
+            setTimeout(() => { overlay.style.display = 'none'; }, 3000);
+        }
+
+        // --- Gemini API Logic ---
+        const apiKey = ""; 
+
+        async function askBot() {
+            const input = document.getElementById('userQuestion');
+            const display = document.getElementById('chat-display');
+            const q = input.value;
+            if(!q) return;
+
+            display.innerHTML += `<div style="text-align: right; color: #FFD700; margin: 8px 0;">तुम्ही: ${q}</div>`;
+            input.value = '';
+            
+            const prompt = `You are a polite Marathi wedding assistant for Rajvardhan & Rajnandini. 
+            Details:
+            - Wedding Date: Sun, 11 Feb 2018.
+            - Muhurat: 12:35 PM.
+            - Haldi: Sat, 10 Feb 2018, 10 AM at Home.
+            - Venue: Ganesh Multi Purpose Hall, Karad.
+            - User Question: ${q}
+            
+            Answer strictly in Marathi. Keep it short and sweet.`;
+            
+            try {
+                display.innerHTML += `<div style="text-align: left; color: #ccc; font-size: 0.8rem;">लिहित आहे...</div>`;
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                });
+                const data = await res.json();
+                const ans = data.candidates?.[0]?.content?.parts?.[0]?.text || "माफ करा, पुन्हा प्रयत्न करा.";
+                
+                display.lastElementChild.remove();
+                display.innerHTML += `<div style="text-align: left; color: #fff; margin: 8px 0; background: rgba(255,255,255,0.1); padding: 8px; border-radius: 8px;">सहाय्यक: ${ans}</div>`;
+                display.scrollTop = display.scrollHeight;
+            } catch(e) {
+                console.error(e);
+                display.lastElementChild.innerText = "Error connecting.";
+            }
+        }
+    </script>
+</body>
+</html>

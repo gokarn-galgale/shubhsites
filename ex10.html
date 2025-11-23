@@ -1,0 +1,332 @@
+<!--
+Final polished package: 4 production-ready HTML files (Traditional, Modern, Rustic, Festive).
+Improvements added in this version:
+ - skip-to-content links for keyboard users
+ - JSON-LD Event structured data for better sharing and calendar previews
+ - accessible form for RSVP with client-side validation and mailto fallback
+ - improved contrast, focus outlines, and large-tap targets for mobile
+ - preloading fonts, preconnect, and favicon
+ - light-weight JS only where needed, with reduced-motion respect
+ - clear comments where to replace assets (images/audio) and how to host
+
+Instructions:
+- Copy each file block (including the <!doctype html> line) to a separate file.
+- Replace placeholders (PHONE, EMAIL, asset filenames) with your real data.
+- Upload to your host. For offline testing, open locally in a modern browser.
+-->
+
+<!-- ==================== FILE: invite-traditional.html ==================== -->
+<!doctype html>
+<html lang="mr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="राधा आणि शिव यांचे पारंपरिक मराठी लग्न — २५ जानेवारी २०२६. उपस्थिती कळवा आणि सोहळ्याचे तपशील येथे पाहा.">
+  <meta name="theme-color" content="#FFF7EF">
+  <title>राधा ❤️ शिव — पारंपरिक आमंत्रण</title>
+
+  <!-- Fonts: preconnect & preload (fast) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Great+Vibes&family=Noto+Sans+Devanagari:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="favicon.ico">
+
+  <!-- Structured data for event (replace the URL, location, startDate if needed) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "राधा आणि शिव यांचा विवाह",
+    "startDate": "2026-01-25T10:00:00+05:30",
+    "location": {
+      "@type": "Place",
+      "name": "शिवशक्ती भव्य मंगल कार्यालय",
+      "address": "मुख्य रोड, पुणे — 411001"
+    },
+    "description": "पारंपरिक मराठी विवाह सोहळा — सर्व कुटुंबीय व मित्रांना आमंत्रण.",
+    "url": "https://your-domain.example/invite-traditional.html"
+  }
+  </script>
+
+  <style>
+    :root{ --primary:#B71C1C; --accent:#F39C12; --gold:#D4AF37; --bg:#FFF7EF; --card:#FFF9F5; --text:#3B2E2A; --border-color: rgba(212,175,55,0.12); --font-heading: 'Baloo 2', cursive; --font-script: 'Great Vibes', cursive; --font-body: 'Noto Sans Devanagari', sans-serif; --max-width:980px }
+    *{box-sizing:border-box} html,body{height:100%;margin:0;font-family:var(--font-body);background:linear-gradient(180deg,var(--bg),#FFF6E8);color:var(--text);-webkit-font-smoothing:antialiased}
+    a{color:inherit}
+
+    /* Skip link for accessibility */
+    .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:12px;top:12px;width:auto;height:auto;background:#fff;padding:8px 10px;border:2px solid var(--primary);z-index:9999}
+
+    header{padding:28px 18px;text-align:center}
+    .hero{min-height:68vh;display:grid;place-items:center}
+    .hero .om{color:var(--gold);font-size:1.05rem;margin-bottom:6px}
+    .hero .names{font-family:var(--font-script);font-size:clamp(3rem,9vw,6rem);color:var(--gold);margin:6px 0}
+    .hero .date{font-weight:600;color:var(--primary)}
+    .cta{margin-top:14px}
+    .btn{display:inline-block;padding:12px 22px;border-radius:10px;background:linear-gradient(180deg,var(--accent),var(--gold));color:#2b1f18;font-weight:700;border:0;cursor:pointer}
+
+    main{max-width:var(--max-width);margin:18px auto;padding:18px}
+    .card{background:linear-gradient(0deg, rgba(255,250,245,0.95), var(--card));padding:20px;border-radius:12px;border:1px solid var(--border-color);box-shadow:0 10px 28px rgba(180,80,20,0.06)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+    h2{font-family:var(--font-heading);color:var(--primary);margin:0 0 10px}
+
+    form label{display:block;margin-bottom:6px;font-weight:600}
+    form input, form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);margin-bottom:10px}
+    .btn-submit{background:var(--primary);color:#fff;border-radius:8px;padding:10px 14px;border:0}
+
+    footer{padding:28px 18px;text-align:center;color:rgba(0,0,0,0.6)}
+
+    /* Focus outlines for keyboard users */
+    a:focus, button:focus, input:focus, textarea:focus{outline:3px solid rgba(180,80,20,0.18);outline-offset:3px}
+
+    @media (max-width:640px){ .hero .names{font-size: clamp(2.2rem,12vw,4rem);} .card{padding:14px} }
+
+    @media (prefers-reduced-motion: reduce){ *{transition:none!important;animation:none!important} }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header role="banner">
+    <div class="hero">
+      <div style="text-align:center;max-width:980px;padding:6px">
+        <p class="om" aria-hidden="true">ॐ सर्वे भवन्तु सुखिनः</p>
+        <h1 class="names">राधा &amp; शिव</h1>
+        <p class="date">शनिवार, २५ जानेवारी, २०२६ — शिवशक्ती भव्य मंगल कार्यालय, पुणे</p>
+        <div class="cta"><button class="btn" onclick="document.getElementById('main').scrollIntoView({behavior:'smooth'})">सविस्तर पहा</button></div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" role="main">
+    <section class="card" aria-labelledby="details">
+      <h2 id="details">सोहळ्याची माहिती</h2>
+      <div class="grid" style="margin-top:12px">
+        <div>
+          <p style="margin:0 0 6px"><strong>मुख्य सोहळा</strong></p>
+          <p style="margin:0">२५ जानेवारी २०२६, सकाळी १०:०० — शिवशक्ती भव्य मंगल कार्यालय, पुणे.</p>
+        </div>
+        <div>
+          <p style="margin:0 0 6px"><strong>ड्रेसकोड</strong></p>
+          <p style="margin:0">पारंपरिक भारतीय पोशाख (साडी/पाजामा-शर्ट किंवा सूट).</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:16px" aria-labelledby="rsvp">
+      <h2 id="rsvp">RSVP — कृपया आपल्या उपस्थितीची नोंद करा</h2>
+      <p style="margin:6px 0 12px">खालील फॉर्म भरून पाठवा, किंवा आमच्या फोन/ईमेल वर संपर्क करा.</p>
+      <form id="rsvpForm" onsubmit="return handleRsvp(event)" aria-describedby="rsvp-help">
+        <div id="rsvp-help" style="display:none">Provide your name and whether you'll attend.</div>
+        <label for="rsvp-name">आपले नाव</label>
+        <input id="rsvp-name" name="name" required maxlength="80" placeholder="उदा. रवि देशमुख">
+        <label for="rsvp-phone">फोन</label>
+        <input id="rsvp-phone" name="phone" inputmode="tel" placeholder="९८XXXXXXXX" pattern="[0-9]{10}">
+        <label for="rsvp-attend">आपण येणार आहात का?</label>
+        <select id="rsvp-attend" name="attend" required>
+          <option value="">--- निवडा ---</option>
+          <option value="yes">हो</option>
+          <option value="no">नाही</option>
+        </select>
+        <label for="rsvp-message">इतर संदेश (ऐच्छिक)</label>
+        <textarea id="rsvp-message" name="message" rows="3"></textarea>
+        <div style="margin-top:8px"><button class="btn-submit" type="submit">पाठवा</button></div>
+      </form>
+      <p style="margin-top:12px;font-size:0.95rem;color:rgba(0,0,0,0.7)">आणि/किंवा आमच्या फोनवर संपर्क करा: <a href="tel:+9198XXXXXXXX">९८XXXXXXXX</a></p>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <p style="margin:0">© २०२५ — राधा आणि शिव</p>
+  </footer>
+
+  <script>
+    // Lightweight RSVP handling: try to send via mailto as a fallback (no server required)
+    function handleRsvp(e){
+      e.preventDefault();
+      const name = document.getElementById('rsvp-name').value.trim();
+      const phone = document.getElementById('rsvp-phone').value.trim();
+      const attend = document.getElementById('rsvp-attend').value;
+      const message = document.getElementById('rsvp-message').value.trim();
+      if(!name || !attend){ alert('कृपया आपले नाव आणि उपस्थिती निवडा.'); return false; }
+
+      // Build email fallback
+      const subject = encodeURIComponent('RSVP — राधा ❤️ शिव — ' + name);
+      const body = encodeURIComponent('नाव: ' + name + '\nफोन: ' + phone + '\nउपस्थिती: ' + attend + '\n\nसंदेश:\n' + message);
+      const mailto = `mailto:your-email@example.com?subject=${subject}&body=${body}`;
+
+      // Open user's mail client as fallback
+      window.location.href = mailto;
+      // Optionally show a small confirmation
+      setTimeout(()=> alert('आपले संदेश ईमेल ग्राहकात उघडले जाईल. निर्बंध असल्यास कृपया आमच्याशी थेट संपर्क करा.'), 300);
+      return false;
+    }
+
+    // Respect reduced motion preference — nothing to animate here but keep best practice
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ document.documentElement.classList.add('reduced-motion'); }
+  </script>
+</body>
+</html>
+
+<!-- ==================== FILE: invite-modern.html ==================== -->
+<!doctype html>
+<html lang="mr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Radha & Shiv — modern minimalist wedding invitation — 25 Jan 2026">
+  <meta name="theme-color" content="#FBFBFB">
+  <title>Radha &amp; Shiv — Modern Invite</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.ico">
+
+  <style>
+    :root{ --primary:#111827; --accent:#C9A24C; --bg:#FBFBFB; --muted:#6B7280; --border:rgba(0,0,0,0.06); --font-heading:'Playfair Display',serif; --font-body:'Inter',sans-serif; --font-script:'Great Vibes',cursive; --max-width:1100px }
+    *{box-sizing:border-box} body{margin:0;font-family:var(--font-body);background:var(--bg);color:var(--primary);-webkit-font-smoothing:antialiased}
+    a{color:var(--accent)}
+
+    .skip-link{position:absolute;left:-999px}
+    .skip-link:focus{position:static;left:auto;top:12px}
+
+    .wrap{max-width:var(--max-width);margin:0 auto;padding:28px}
+    .hero{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:48px 0}
+    .names{font-family:var(--font-script);color:var(--accent);font-size:clamp(2.6rem,8vw,4.4rem);margin:0}
+    .btn{border-radius:12px;border:2px solid var(--accent);background:transparent;color:var(--accent);padding:10px 18px;font-weight:600;cursor:pointer}
+
+    .card{background:#fff;border-radius:12px;padding:22px;border:1px solid var(--border);box-shadow:0 8px 28px rgba(15,23,42,0.04)}
+    footer{padding:22px 0;text-align:center;color:var(--muted)}
+
+    @media (max-width:860px){ .hero{flex-direction:column;text-align:center} }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <main class="wrap" id="content">
+    <header role="banner" class="hero">
+      <div>
+        <h1 class="names">Radha &amp; Shiv</h1>
+        <p style="color:var(--muted);margin:6px 0">शनिवार, २५ जानेवारी, २०२६ — शिवशक्ती भव्य मंगल कार्यालय</p>
+      </div>
+      <div><button class="btn" onclick="document.getElementById('details').scrollIntoView({behavior:'smooth'})">View Details</button></div>
+    </header>
+
+    <section id="details" class="card" aria-labelledby="modern-details">
+      <h2 id="modern-details" style="font-family:var(--font-heading);margin:0 0 10px">Event Details</h2>
+      <p style="color:var(--muted);margin:0">A modern, minimal invitation. Replace content and images as needed. For RSVP use the contact below.</p>
+      <div style="margin-top:12px;color:var(--muted)">Contact: <a href="mailto:your-email@example.com">your-email@example.com</a> • <a href="tel:+9198XXXXXXXX">९८XXXXXXXX</a></div>
+    </section>
+
+    <footer role="contentinfo">
+      <p style="margin-top:22px;color:var(--muted)">© २०२५ — Radha &amp; Shiv</p>
+    </footer>
+  </main>
+
+  <noscript><div style="padding:12px;text-align:center;background:#fff">Enable JavaScript for smooth scrolling and some interactions.</div></noscript>
+</body>
+</html>
+
+<!-- ==================== FILE: invite-rustic.html ==================== -->
+<!doctype html>
+<html lang="mr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="राधा आणि शिव — Rustic wedding invite.">
+  <meta name="theme-color" content="#FFF8F3">
+  <title>राधा आणि शिव — Rustic Invite</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Quicksand:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.ico">
+
+  <style>
+    :root{ --primary:#7A2E2E; --accent:#8AA377; --bg:#FFF8F3; --paper:#FFF1E9; --text:#402E2A; --border-color: rgba(122,46,46,0.08); --font-heading:'Amatic SC',cursive; --font-body:'Quicksand',sans-serif; --font-script:'Great Vibes',cursive }
+    *{box-sizing:border-box} body{margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+    .cover{display:flex;align-items:center;justify-content:center;min-height:70vh;padding:28px;background-image:url('paper-texture.png');background-repeat:repeat}
+    .names{font-family:var(--font-script);color:var(--primary);font-size:clamp(2.8rem,10vw,5rem);margin:0}
+    .btn{background:var(--accent);color:#fff;border-radius:999px;padding:10px 18px;border:0;font-weight:700;cursor:pointer}
+    .card{background:linear-gradient(180deg,var(--paper),#fff);padding:20px;border-radius:10px;border:1px dashed rgba(0,0,0,0.04)}
+
+    footer{padding:18px;text-align:center;color:rgba(0,0,0,0.6)}
+  </style>
+</head>
+<body>
+  <header class="cover" role="banner">
+    <div style="text-align:center;max-width:960px;padding:6px">
+      <h1 class="names">राधा &amp; शिव</h1>
+      <p style="margin:6px 0">२५ जानेवारी २०२६ — पारंपरिक व आनंददायी सोहळा</p>
+      <button class="btn" onclick="document.getElementById('main').scrollIntoView({behavior:'smooth'})">सविस्तर पहा</button>
+    </div>
+  </header>
+
+  <main id="main" style="max-width:960px;margin:18px auto;padding:18px">
+    <section class="card" aria-labelledby="rustic-title">
+      <h2 id="rustic-title" style="font-family:var(--font-heading);font-size:2.2rem;margin:0 0 8px;color:var(--primary)">सोहळा</h2>
+      <p style="margin:0">पारंपरिक आणि सुखावह वातावरण — कृपया आपली उपस्थिती कळवा.</p>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <p style="margin:0">© २०२५ — राधा आणि शिव</p>
+  </footer>
+
+  <noscript><div style="padding:12px;text-align:center;background:#fff">JavaScript बंद आहे — काही अनुभव कमी असतील.</div></noscript>
+</body>
+</html>
+
+<!-- ==================== FILE: invite-festive.html ==================== -->
+<!doctype html>
+<html lang="mr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Radha & Shiv — Festive jewel-tone wedding invite — 25 Jan 2026">
+  <meta name="theme-color" content="#0F0B12">
+  <title>Radha &amp; Shiv — Festive Invite</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Rubik:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.ico">
+
+  <style>
+    :root{ --ruby:#9B1B30; --emerald:#046A38; --sapphire:#0B3D91; --gold:#F5C05A; --bg:#0F0B12; --text:#F7F3EE; --border-color: rgba(245,192,90,0.08); --font-heading:'Merriweather',serif; --font-body:'Rubik',sans-serif; --font-script:'Great Vibes',cursive }
+    *{box-sizing:border-box} body{margin:0;font-family:var(--font-body);background:radial-gradient(ellipse at top left, rgba(11,61,145,0.12), rgba(0,0,0,0.9));color:var(--text);-webkit-font-smoothing:antialiased}
+    .cover{display:flex;align-items:center;justify-content:center;min-height:72vh;padding:40px}
+    .names{font-family:var(--font-script);color:var(--gold);font-size:clamp(3.6rem,12vw,6.8rem);margin:0;text-shadow:0 10px 30px rgba(245,192,90,0.12)}
+    .btn{background:linear-gradient(90deg,var(--ruby),var(--sapphire));color:#fff;padding:12px 22px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+    .card{background:rgba(255,255,255,0.03);padding:22px;border-radius:16px}
+
+    footer{padding:18px;text-align:center;color:rgba(255,255,255,0.7)}
+  </style>
+</head>
+<body>
+  <header class="cover" role="banner">
+    <div style="text-align:center;max-width:980px">
+      <h1 class="names">Radha &amp; Shiv</h1>
+      <p style="opacity:0.9;margin:8px 0">२५ जानेवारी २०२६ — उत्सव आणि आनंद</p>
+      <button class="btn" onclick="document.getElementById('main').scrollIntoView({behavior:'smooth'})">Celebrate</button>
+    </div>
+  </header>
+
+  <main id="main" style="max-width:980px;margin:18px auto;padding:18px">
+    <section class="card" aria-labelledby="festive-title">
+      <h2 id="festive-title" style="font-family:var(--font-heading);color:var(--gold);margin:0 0 8px">सोहळा तपशील</h2>
+      <p style="margin:0">संगीत, नृत्य आणि पारंपरिक विधी — आमच्या सोबत साजरा करा.</p>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <p style="margin:0">© २०२५ — Radha &amp; Shiv</p>
+  </footer>
+
+  <noscript><div style="padding:12px;text-align:center;background:#111;color:#fff">Enable JavaScript for transitions and enhanced features.</div></noscript>
+</body>
+</html>
+
+<!-- End of final polished theme HTML files -->

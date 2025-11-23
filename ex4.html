@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>अनिकेत आणि प्रिया - विवाह सोहळा</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Marathi:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* === RESET & BODY === */
+        body {
+            background-color: #fdfbf7; margin: 0; padding: 20px;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; font-family: 'Tiro Devanagari Marathi', serif; color: #5d4037;
+        }
+
+        /* === MAIN CARD === */
+        .card-container {
+            width: 100%; max-width: 600px; background-color: #fffdf5;
+            border: 2px solid #d4af37; box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            position: relative; border-radius: 12px;
+        }
+
+        /* === ORNAMENTAL BORDER === */
+        .inner-border {
+            border: 4px double #d4af37; margin: 12px;
+            padding: 40px 20px 100px 20px; border-radius: 8px;
+            position: relative; text-align: center; z-index: 2;
+            background-color: #fffdf5;
+        }
+
+        /* === ORIGINAL MOTIFS (Silhouettes behind content) === */
+        .motif {
+            position: absolute; z-index: 1; opacity: 0.85;
+            /* Changes black SVG to theme color */
+            filter: sepia(100%) saturate(1000%) hue-rotate(350deg) brightness(70%) contrast(90%);
+        }
+        .elephant { width: 70px; top: 10px; }
+        .ele-left { left: 10px; } .ele-right { right: 10px; transform: scaleX(-1); }
+        .horse { width: 80px; bottom: 10px; }
+        .horse-left { left: 10px; transform: scaleX(-1); } .horse-right { right: 10px; }
+        .peacock { width: 50px; top: 42%; opacity: 0.6; }
+        .pea-left { left: 5px; transform: scaleX(-1); } .pea-right { right: 5px; }
+        .ganesh-img { width: 50px; margin-bottom: 10px; filter: sepia(100%) saturate(2000%) hue-rotate(0deg) brightness(90%); }
+
+        /* =========================================
+           === नवीन कटआउट्ससाठी CSS (NEW CSS) ===
+           ========================================= */
+        .cutout-motif {
+            position: absolute;
+            z-index: 20; /* सर्वात वर */
+            
+            /* --- रंग बदलणारा फिल्टर (COLOR CHANGING FILTER) --- */
+            /* हा फिल्टर लाल/गडद रंगाच्या इमेजला थीमच्या सोनेरी/तपकिरी रंगात बदलतो आणि सावली देतो */
+            filter: sepia(1) saturate(1.5) hue-rotate(-15deg) brightness(0.6) contrast(1.2) drop-shadow(3px 3px 2px rgba(0,0,0,0.3));
+            
+            pointer-events: none; /* क्लिक अडवू नये म्हणून */
+        }
+
+        /* पोझिशनिंग (Positioning) */
+        .cutout-dancer { width: 90px; top: -25px; left: -30px; }
+        .cutout-horseman { width: 110px; top: -35px; right: -35px; }
+        .cutout-drummer { width: 70px; top: 50%; left: -40px; transform: translateY(-50%); }
+        .cutout-shehnai { width: 60px; top: 45%; right: -30px; transform: translateY(-50%) scaleX(-1); }
+        .cutout-musicians { width: 120px; bottom: -30px; left: -40px; }
+        .cutout-elephant { width: 140px; bottom: -40px; right: -40px; }
+
+
+        /* === TEXT STYLES === */
+        .mantra { color: #c0392b; font-size: 1.4rem; font-weight: bold; margin-bottom: 15px; }
+        .sub-text { font-size: 1.1rem; margin: 5px 0; line-height: 1.6; }
+        .bold { font-weight: 700; color: #3e2723; }
+        .couple-names { margin: 25px 0; position: relative; }
+        .name { font-size: 2.2rem; color: #d4af37; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); font-weight: 700; margin: 5px 0; }
+        .weds { font-size: 1.2rem; color: #c0392b; }
+        .event-box { background: #fff; border: 1px dashed #d4af37; padding: 20px; margin: 20px 10px; border-radius: 10px; position: relative; z-index: 10; }
+        .event-row { margin: 8px 0; font-size: 1.2rem; }
+        .event-label { color: #d4af37; font-weight: bold; margin-right: 5px; }
+        .request-text { font-style: italic; margin: 20px 0; font-size: 1.1rem; }
+        .footer-names { font-weight: bold; margin-top: 10px; }
+
+        /* === WHATSAPP BUTTON === */
+        .btn-container { margin-top: 30px; position: relative; z-index: 20; }
+        .whatsapp-btn { background: #25D366; color: white; border: none; padding: 12px 30px; font-size: 1.1rem; border-radius: 50px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-weight: bold; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4); transition: 0.3s; }
+        .whatsapp-btn:hover { background: #128C7E; transform: scale(1.05); }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .elephant, .horse, .peacock { opacity: 0.3; } /* जुने आयकॉन फिकट करा */
+            .inner-border { padding: 30px 10px 80px 10px; margin: 8px;}
+            .name { font-size: 1.8rem; }
+
+            /* मोबाईलसाठी नवीन कटआउट्स ऍडजस्ट करणे */
+            .cutout-dancer { width: 70px; top: -20px; left: -20px; }
+            .cutout-horseman { width: 80px; top: -25px; right: -25px; }
+            .cutout-drummer, .cutout-shehnai { display: none; } /* गर्दी टाळण्यासाठी लपवा */
+            .cutout-musicians { width: 100px; bottom: -20px; left: -20px; }
+            .cutout-elephant { width: 110px; bottom: -25px; right: -25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        
+        <img src="http://gokarn.page.gd/temp/images/elephant.jpeg" class="cutout-motif cutout-dancer" alt="Dancer">
+        <img src="http://gokarn.page.gd/temp/images/br.jpeg" class="cutout-motif cutout-horseman" alt="Horseman">
+        <img src="PLACEHOLDER_FOR_DRUMMER.png" class="cutout-motif cutout-drummer" alt="Drummer">
+        <img src="PLACEHOLDER_FOR_SHEHNAI.png" class="cutout-motif cutout-shehnai" alt="Shehnai">
+        <img src="PLACEHOLDER_FOR_MUSICIANS.png" class="cutout-motif cutout-musicians" alt="Musicians">
+        <img src="PLACEHOLDER_FOR_ELEPHANT.png" class="cutout-motif cutout-elephant" alt="Elephant Procession">
+
+
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Horse_silhouette.svg" class="motif horse horse-left" style="bottom: 80px; opacity: 0.4;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Horse_silhouette.svg" class="motif horse horse-right" style="bottom: 80px; opacity: 0.4;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Peacock_silhouette.svg" class="motif peacock pea-left">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Peacock_silhouette.svg" class="motif peacock pea-right">
+
+        <div class="inner-border">
+            
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Ganesha_silhouette.svg" class="ganesh-img">
+            
+            <div class="mantra">|| श्री गणेशाय नमः ||</div>
+
+            <p class="sub-text">
+                <span class="bold">श्री. अशोक पाटील</span> आणि <span class="bold">सौ. अंजली पाटील</span> (पुणे)<br>यांचे सुपुत्र
+            </p>
+
+            <div class="couple-names">
+                <div class="name">चिरंजीव अनिकेत</div>
+                <div class="weds"><i class="fas fa-heart" style="font-size:0.8rem;"></i> शुभ विवाह <i class="fas fa-heart" style="font-size:0.8rem;"></i></div>
+                <div class="name">चि. सौ. कां. प्रिया</div>
+            </div>
+
+            <p class="sub-text">
+                <span class="bold">श्री. रमेश देशमुख</span> आणि <span class="bold">सौ. सविता देशमुख</span> (नाशिक)<br>यांची सुकन्या
+            </p>
+
+            <div class="event-box">
+                <div class="event-row"><span class="event-label"><i class="far fa-calendar-alt"></i> दिनांक:</span> रविवार, २१ डिसेंबर २०२५</div>
+                <div class="event-row"><span class="event-label"><i class="far fa-clock"></i> वेळ:</span> सायं. ५:३५ (शुभ मुहूर्त)</div>
+                <div class="event-row"><span class="event-label"><i class="fas fa-map-marker-alt"></i> स्थळ:</span> 'स्वप्नगंधा' हॉल, सिंहगड रोड, पुणे</div>
+            </div>
+
+            <p class="request-text">
+                तरी या मंगलप्रसंगी आपण सहकुटुंब सहपरिवार उपस्थित राहून<br>वधू-वरांस शुभाशीर्वाद द्यावेत, ही नम्र विनंती.
+            </p>
+
+            <div class="footer-names">आपले नम्र,<br>पाटील आणि देशमुख कुटुंबिय</div>
+
+            <div class="btn-container">
+                <button onclick="shareToWhatsApp()" class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i> निमंत्रण पाठवा
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function shareToWhatsApp() {
+            const groom = "अनिकेत"; const bride = "प्रिया"; const date = "२१ डिसेंबर २०२५"; const time = "सायं. ५:३५"; const venue = "'स्वप्नगंधा' हॉल, पुणे"; const link = window.location.href;
+            const msg = `*सप्रेम नमस्कार,*%0A%0A✨ *${groom}* weds *${bride}* ✨%0A%0Aआमच्या मुलाच्या लग्नाला आपली उपस्थिती प्रार्थनीय आहे.%0A%0A📅 *तारीख:* ${date}%0A⏰ *वेळ:* ${time}%0A📍 *ठिकाण:* ${venue}%0A%0Aकृपया नक्की या!%0A👇 डिजिटल पत्रिका पहा:%0A${link}`;
+            window.open(`https://wa.me/?text=${msg}`, '_blank');
+        }
+    </script>
+
+</body>
+</html>
