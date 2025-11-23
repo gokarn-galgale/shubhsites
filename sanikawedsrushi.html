@@ -10,7 +10,7 @@
     <meta property="og:description" content="दिनांक: ०२ डिसेंबर २०२५. या मंगल प्रसंगी आपण उपस्थित राहून वधु-वरास शुभाशीर्वाद द्यावेत ही नम्र विनंती." />
     
     <meta property="og:image" content="/temp/cust/sanika&rushi/couple.jpg" />
-   
+    
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:type" content="website" />
@@ -241,6 +241,33 @@
             const [generatedBlessing, setGeneratedBlessing] = useState('');
             const [musicAllowed, setMusicAllowed] = useState(false);
             const audioRef = useRef(null);
+            
+            // --- COUNTDOWN LOGIC START ---
+            const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+            useEffect(() => {
+                const targetDate = new Date("December 02, 2025 12:21:00").getTime();
+
+                const interval = setInterval(() => {
+                    const now = new Date().getTime();
+                    const distance = targetDate - now;
+
+                    if (distance < 0) {
+                        clearInterval(interval);
+                        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+                    } else {
+                        setTimeLeft({
+                            days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+                            hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+                            minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+                            seconds: Math.floor((distance % (1000 * 60)) / 1000)
+                        });
+                    }
+                }, 1000);
+
+                return () => clearInterval(interval);
+            }, []);
+            // --- COUNTDOWN LOGIC END ---
 
             useEffect(() => {
                 // Used the provided path from your code, but fell back to a public URL if that fails or is local. 
@@ -278,9 +305,8 @@
 
 आमच्या घरी,
 👰 *चि. सौ. का. सनिका* 
-         आणि 
+       आणि 
 🤵 *चि. ऋषिकेश* 
-
 यांचा विवाह सोहळा निश्चित झाला आहे. 💍
 
 या मंगल प्रसंगी आपण उपस्थित राहून वधु-वरास शुभाशीर्वाद द्यावेत, ही नम्र विनंती. 🌸
@@ -413,6 +439,38 @@ ${currentUrl}
                             <p className="text-sm text-gray-600 mt-1">दुपारी १२ वा. २१ मि.</p>
                             </div>
 
+                            {/* --- COUNTDOWN UI START --- */}
+                            <div className="mt-8">
+                                <p className="text-orange-800 text-sm font-semibold mb-3 tracking-widest uppercase">शुभ विवाह सोहळ्यासाठी उरलेला वेळ</p>
+                                
+                                <div className="flex flex-wrap justify-center gap-3 md:gap-6">
+                                    {/* Days */}
+                                    <div className="flex flex-col items-center bg-white/60 backdrop-blur-md p-3 rounded-xl border border-orange-200 shadow-sm min-w-[70px] md:min-w-[80px]">
+                                        <span className="text-2xl md:text-3xl font-bold text-orange-700 royal-font">{timeLeft.days}</span>
+                                        <span className="text-xs font-semibold text-gray-600 mt-1">दिवस</span>
+                                    </div>
+
+                                    {/* Hours */}
+                                    <div className="flex flex-col items-center bg-white/60 backdrop-blur-md p-3 rounded-xl border border-orange-200 shadow-sm min-w-[70px] md:min-w-[80px]">
+                                        <span className="text-2xl md:text-3xl font-bold text-orange-700 royal-font">{timeLeft.hours}</span>
+                                        <span className="text-xs font-semibold text-gray-600 mt-1">तास</span>
+                                    </div>
+
+                                    {/* Minutes */}
+                                    <div className="flex flex-col items-center bg-white/60 backdrop-blur-md p-3 rounded-xl border border-orange-200 shadow-sm min-w-[70px] md:min-w-[80px]">
+                                        <span className="text-2xl md:text-3xl font-bold text-orange-700 royal-font">{timeLeft.minutes}</span>
+                                        <span className="text-xs font-semibold text-gray-600 mt-1">मिनिटे</span>
+                                    </div>
+
+                                    {/* Seconds */}
+                                    <div className="flex flex-col items-center bg-white/60 backdrop-blur-md p-3 rounded-xl border border-orange-200 shadow-sm min-w-[70px] md:min-w-[80px]">
+                                        <span className="text-2xl md:text-3xl font-bold text-orange-700 royal-font w-[40px]">{timeLeft.seconds}</span>
+                                        <span className="text-xs font-semibold text-gray-600 mt-1">सेकंद</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* --- COUNTDOWN UI END --- */}
+
                             <div className="mt-8 animate-bounce">
                             <p className="text-sm text-gray-500">खाली स्क्रोल करा</p>
                             <div className="w-6 h-6 border-b-2 border-r-2 border-orange-400 rotate-45 mx-auto mt-2"></div>
@@ -459,6 +517,17 @@ ${currentUrl}
                             </div>
                         </div>
                         </section>
+
+                        {/* --- NEW PLACEMENT: Yancha Shubh Vivah (FIXED SPACING) --- */}
+                        <div className="bg-white text-center py-12 marathi-font relative z-10">
+                            <h3 className="text-2xl md:text-3xl font-bold text-orange-800 mb-2 drop-shadow-sm">
+                                ✨ यांचा शुभ विवाह सोहळा ✨
+                            </h3>
+                            <p className="text-gray-600 text-lg max-w-xl mx-auto px-4">
+                                आपल्या साक्षीने व आशीर्वादाने संपन्न करण्याचे योजिले आहे.
+                            </p>
+                            <div className="w-24 h-1 bg-gradient-to-r from-transparent via-orange-400 to-transparent mx-auto mt-6"></div>
+                        </div>
 
                         {/* Main Verse Section */}
                         <section className="py-12 bg-orange-800 text-white text-center marathi-font px-4 relative overflow-hidden">
