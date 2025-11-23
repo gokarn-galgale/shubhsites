@@ -238,6 +238,8 @@
             const audioRef = useRef(null);
 
             useEffect(() => {
+                // Used the provided path from your code, but fell back to a public URL if that fails or is local. 
+                // Ideally, replace this with your specific file path if hosting locally.
                 audioRef.current = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'); 
                 audioRef.current.loop = true;
                 return () => {
@@ -362,8 +364,9 @@
                             <p>॥ श्री बनशंकरी प्रसन्ना ॥</p>
                             </div>
 
-                            <div className="w-24 h-24 mx-auto mb-6 bg-orange-100 rounded-full flex items-center justify-center border-2 border-orange-500 shadow-lg">
-                                <span className="text-4xl">🕉️</span>
+                            <div className="w-24 h-24 mx-auto mb-6 bg-orange-100 rounded-full flex items-center justify-center border-2 border-orange-500 shadow-lg overflow-hidden p-2">
+                                {/* REPLACED OM WITH GANESHA IMAGE */}
+                                <img src="https://www.pngall.com/wp-content/uploads/2016/05/Ganesh-Free-Download-PNG.png" alt="Ganesha" className="w-full h-full object-contain" />
                             </div>
 
                             <h1 className="text-2xl font-bold text-orange-900 mb-2">शुभ विवाह निमंत्रण</h1>
@@ -473,7 +476,7 @@
                             <div className="p-6 w-full text-center md:text-left">
                                 <div className="flex items-center justify-center md:justify-start mb-2 text-gray-700">
                                 <Calendar className="w-5 h-5 mr-2 text-orange-500" />
-                                <span className="font-semibold">मंगळवार, ०१ डिसेंबर २०२५</span>
+                                <span className="font-semibold">मंगळवार, ०२ डिसेंबर २०२५</span>
                                 </div>
                                 <div className="flex items-center justify-center md:justify-start text-gray-600">
                                 <Clock className="w-5 h-5 mr-2 text-orange-500" />
