@@ -240,7 +240,7 @@
             useEffect(() => {
                 // Used the provided path from your code, but fell back to a public URL if that fails or is local. 
                 // Ideally, replace this with your specific file path if hosting locally.
-                audioRef.current = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'); 
+                audioRef.current = new Audio('/temp/music/tabla.mp3'); 
                 audioRef.current.loop = true;
                 return () => {
                     if (audioRef.current) audioRef.current.pause();
