@@ -742,64 +742,77 @@
             document.getElementById('ai-result').style.display = 'none';
         }
 
-      async function generateAIContent(e) {
-    e.preventDefault();
-    
-    const loading = document.getElementById('ai-loading');
-    const resultBox = document.getElementById('ai-result');
-    const resultText = document.getElementById('ai-result-text');
-    
-    // Get Inputs
-    const names = document.getElementById('ai-names').value;
-    const language = document.getElementById('ai-language').value;
-    
-    loading.style.display = 'block';
-    resultBox.style.display = 'none';
-    resultText.innerText = ""; 
+              async function generateAIContent(e) {
+            e.preventDefault();
+            
+            const loading = document.getElementById('ai-loading');
+            const resultBox = document.getElementById('ai-result');
+            const resultText = document.getElementById('ai-result-text');
+            
+            // Get Inputs
+            const names = document.getElementById('ai-names').value;
+            const language = document.getElementById('ai-language').value;
+            
+            loading.style.display = 'block';
+            resultBox.style.display = 'none';
+            resultText.innerText = ""; 
 
-    // Prepare Prompt
-    let aiPrompt = ""; 
-    if(currentAIMode === 'hashtag') {
-        const vibe = document.getElementById('ai-vibe-hash').value;
-        aiPrompt = `Generate 5 unique wedding hashtags for ${names}. Vibe: ${vibe}. Output Language: ${language}. Return only hashtags.`;
-    } else if (currentAIMode === 'wording') {
-        const venue = document.getElementById('ai-venue').value;
-        const tone = document.getElementById('ai-vibe-word').value;
-        aiPrompt = `Write a ${tone} wedding invitation for ${names} at ${venue}. Language: ${language}. Keep it under 60 words.`;
-    } else if (currentAIMode === 'timeline') {
-        const culture = document.getElementById('ai-culture').value;
-        const startTime = document.getElementById('ai-start-time').value;
-        aiPrompt = `Create a wedding timeline for a ${culture} wedding starting at ${startTime}. Couple: ${names}. Language: ${language}.`;
-    } else if (currentAIMode === 'menu') {
-        const cuisine = document.getElementById('ai-cuisine').value;
-        const pref = document.getElementById('ai-food-pref').value;
-        aiPrompt = `Suggest a 3-course menu for a ${pref} ${cuisine} wedding. Language: ${language}.`;
-    }
+            // Prepare Prompt
+            let aiPrompt = ""; 
+            if(currentAIMode === 'hashtag') {
+                const vibe = document.getElementById('ai-vibe-hash').value;
+                aiPrompt = `Generate 5 unique wedding hashtags for ${names}. Vibe: ${vibe}. Output Language: ${language}. Return only hashtags.`;
+            } else if (currentAIMode === 'wording') {
+                const venue = document.getElementById('ai-venue').value;
+                const tone = document.getElementById('ai-vibe-word').value;
+                aiPrompt = `Write a ${tone} wedding invitation for ${names} at ${venue}. Language: ${language}. Keep it under 60 words.`;
+            } else if (currentAIMode === 'timeline') {
+                const culture = document.getElementById('ai-culture').value;
+                const startTime = document.getElementById('ai-start-time').value;
+                aiPrompt = `Create a wedding timeline for a ${culture} wedding starting at ${startTime}. Couple: ${names}. Language: ${language}.`;
+            } else if (currentAIMode === 'menu') {
+                const cuisine = document.getElementById('ai-cuisine').value;
+                const pref = document.getElementById('ai-food-pref').value;
+                aiPrompt = `Suggest a 3-course menu for a ${pref} ${cuisine} wedding. Language: ${language}.`;
+            }
 
-    try {
-        // === CHANGE IS HERE ===
-        // We now call OUR own hidden function, not Google directly
-        const response = await fetch('/.netlify/functions/ai_writer', {
-            method: 'POST',
-            body: JSON.stringify({ prompt: aiPrompt })
-        });
+            try {
+                // Call Netlify Function
+                const response = await fetch('/.netlify/functions/ai_writer', {
+                    method: 'POST',
+                    body: JSON.stringify({ prompt: aiPrompt })
+                });
 
-        const data = await response.json();
-        
-        if (data.error) throw new Error(data.error);
+                // Check if the network request itself failed (e.g., 404 or 500)
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    // Extract specific error message if available, or use status text
+                    const errorMessage = errorData.error || errorData.message || response.statusText;
+                    throw new Error(typeof errorMessage === 'object' ? JSON.stringify(errorMessage) : errorMessage);
+                }
 
-        const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "Error generating text.";
-        resultText.innerText = text;
-        resultBox.style.display = 'block';
+                const data = await response.json();
+                
+                // Handle API errors returned inside a 200 OK response
+                if (data.error) {
+                    throw new Error(typeof data.error === 'object' ? JSON.stringify(data.error) : data.error);
+                }
 
-    } catch (error) {
-        console.error("AI Error:", error);
-        resultText.innerText = "Error: " + error.message;
-        resultBox.style.display = 'block';
-    } finally {
-        loading.style.display = 'none';
-    }
-}
+                // Extract the text
+                const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "No text generated. Try again.";
+                resultText.innerText = text;
+                resultBox.style.display = 'block';
+
+            } catch (error) {
+                console.error("Detailed AI Error:", error);
+                // Display the cleaner error message
+                resultText.innerText = "Error: " + error.message.replace(/['"]+/g, '');
+                resultBox.style.display = 'block';
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
 
         function copyAIResult() {
             const text = document.getElementById('ai-result-text').innerText;
