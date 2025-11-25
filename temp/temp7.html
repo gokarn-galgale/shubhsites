@@ -357,10 +357,16 @@
 
     <!-- Audio Player -->
     <!-- Note: 'tabla.mp3' needs to be replaced with a real file path for music to work. -->
-    <audio id="bgMusic" loop preload="auto">
-        <source src="/temp/music/tabla.mp3" type="audio/mpeg">
-    </audio>
-    <button class="fab music-fab" id="musicBtn" aria-pressed="false" aria-label="संगीत प्ले करा" title="संगीत प्ले/पॉज करा">▶</button>
+   <!-- ===== Replace your existing audio element with this ===== -->
+<audio id="bgMusic" loop preload="auto" autoplay playsinline>
+  <source src="/temp/music/tabla.mp3" type="audio/mpeg">
+  <!-- fallback -->
+</audio>
+
+<!-- small floating inline enable-sound button (hidden by default) -->
+<button id="enableSoundBtn" style="position:fixed; right:18px; bottom:86px; z-index:1200; display:none; background:#800020; color:#fff; border:none; padding:10px 12px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.3); font-weight:700; cursor:pointer;">
+  🔊 आवाज चालू करा
+</button>
 
     <!-- WhatsApp Share -->
     <a class="fab whatsapp-fab" id="whatsappBtn" href="#" aria-label="WhatsApp वर शेअर करा" title="WhatsApp वर शेअर करा">
@@ -593,46 +599,159 @@
         })();
 
         /* ---------- MUSIC TOGGLE ---------- */
-        (function music() {
-            const audio = document.getElementById('bgMusic');
-            const btn = document.getElementById('musicBtn');
-            let playing = true;
+       /* ===== Replace your previous music IIFE with this improved logic ===== */
+(function musicAutoplay() {
+  const audio = document.getElementById('bgMusic');
+  const enableBtn = document.getElementById('enableSoundBtn');
+  const musicFab = document.getElementById('musicBtn'); // keep existing FAB sync
+  let playing = false;
+  let audible = false; // whether currently unmuted
 
-            function setBtnUI(isPlaying) {
-                btn.textContent = isPlaying ? '⏸' : '▶';
-                btn.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
-                btn.title = isPlaying ? 'संगीत थांबवा' : 'संगीत प्ले करा';
-            }
+  // UI sync helper
+  function setUI() {
+    if (playing && audible) {
+      musicFab.textContent = '⏸';
+      musicFab.title = 'संगीत थांबवा';
+      musicFab.setAttribute('aria-pressed', 'true');
+    } else if (playing && !audible) {
+      musicFab.textContent = '🔈';
+      musicFab.title = 'संगीत प्ले (म्यूट)';
+      musicFab.setAttribute('aria-pressed', 'true');
+    } else {
+      musicFab.textContent = '▶';
+      musicFab.title = 'संगीत प्ले करा';
+      musicFab.setAttribute('aria-pressed', 'false');
+    }
+  }
 
-            // User interaction needed to unlock audio on modern browsers
-            function toggleMusic(e) {
-                e.stopPropagation();
-                if (!playing) {
-                    const playPromise = audio.play();
-                    if (playPromise !== undefined) {
-                        playPromise.then(() => {
-                            playing = true;
-                            setBtnUI(true);
-                        }).catch(error => {
-                            console.log("Audio play failed (likely no file or blocked):", error);
-                            // Do not alert the user, just keep UI as paused
-                            playing = false;
-                            setBtnUI(false);
-                            // Optional: Shake button to indicate error
-                            btn.style.transform = 'translateX(5px)';
-                            setTimeout(() => btn.style.transform = 'none', 100);
-                        });
-                    }
-                } else {
-                    audio.pause();
-                    playing = false;
-                    setBtnUI(false);
-                }
-            }
+  // Try an immediate play attempt (may succeed on some desktops)
+  function tryPlayUnmuted() {
+    audio.muted = false;
+    audio.play().then(() => {
+      playing = true;
+      audible = true;
+      setUI();
+      hideEnableBtn();
+    }).catch(() => {
+      // Couldn't play unmuted — try muted autoplay fallback
+      tryMutedAutoplay();
+    });
+  }
 
-            btn.addEventListener('click', toggleMusic);
-            setBtnUI(false);
-        })();
+  // Fallback: autoplay muted (allowed on most browsers), show enable hint
+  function tryMutedAutoplay() {
+    audio.muted = true;
+    audio.play().then(() => {
+      playing = true;
+      audible = false;
+      setUI();
+      // try to unmute after short delay — some browsers allow unmute after muted playback started
+      setTimeout(() => {
+        // Attempt to unmute silently; if blocked this will throw or be rejected
+        audio.muted = false;
+        audio.play().then(() => {
+          audible = true;
+          setUI();
+          hideEnableBtn();
+        }).catch(() => {
+          // still blocked — put it back to muted and show enable button
+          audio.muted = true;
+          audible = false;
+          setUI();
+          showEnableBtn();
+        });
+      }, 700); // small delay to allow playback to start
+    }).catch(() => {
+      // muted autoplay blocked too (rare) — show enable prompt
+      playing = false;
+      audible = false;
+      setUI();
+      showEnableBtn();
+    });
+  }
+
+  // Show the on-screen button prompting user to enable sound
+  function showEnableBtn() {
+    if (!enableBtn) return;
+    enableBtn.style.display = 'block';
+    enableBtn.onclick = function() {
+      // User tapped — enable audible playback immediately
+      audio.muted = false;
+      audio.play().then(() => {
+        playing = true;
+        audible = true;
+        setUI();
+        hideEnableBtn();
+      }).catch(err => {
+        // if still failing, keep muted but try again
+        console.warn('Failed to enable audible playback:', err);
+        audio.muted = true;
+        audible = false;
+        setUI();
+      });
+    };
+  }
+  function hideEnableBtn() {
+    if (!enableBtn) return;
+    enableBtn.style.display = 'none';
+  }
+
+  // Wire up FAB toggle (keeps behavior consistent)
+  musicFab.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (!playing) {
+      // start playback (try unmuted first)
+      tryPlayUnmuted();
+    } else {
+      if (audible) {
+        // pause music
+        audio.pause();
+        playing = false;
+        setUI();
+      } else {
+        // currently muted but playing -> unmute attempt
+        audio.muted = false;
+        audio.play().then(() => {
+          audible = true;
+          setUI();
+          hideEnableBtn();
+        }).catch(() => {
+          // cannot unmute without gesture; show button
+          audio.muted = true;
+          audible = false;
+          setUI();
+          showEnableBtn();
+        });
+      }
+    }
+  });
+
+  // On first user gesture anywhere, try to enable audible playback (helps many mobile browsers)
+  function onFirstGesture() {
+    if (playing && audible) return cleanupGesture();
+    // If not playing at all, try unmuted play
+    tryPlayUnmuted();
+  }
+  function cleanupGesture() {
+    document.removeEventListener('click', onFirstGesture);
+    document.removeEventListener('touchstart', onFirstGesture);
+    document.removeEventListener('keydown', onFirstGesture);
+  }
+  document.addEventListener('click', onFirstGesture, { once: false });
+  document.addEventListener('touchstart', onFirstGesture, { once: false });
+  document.addEventListener('keydown', onFirstGesture, { once: false });
+
+  // Initialize: try unmuted first (desktop may allow)
+  tryPlayUnmuted();
+
+  // keep UI in sync if playback paused/ended from other sources
+  audio.addEventListener('pause', () => { playing = false; setUI(); });
+  audio.addEventListener('play', () => { playing = true; setUI(); });
+  audio.addEventListener('volumechange', () => {
+    audible = !audio.muted && audio.volume > 0;
+    setUI();
+  });
+})();
 
         /* ---------- WHATSAPP SHARE ---------- */
         (function whatsapp() {
