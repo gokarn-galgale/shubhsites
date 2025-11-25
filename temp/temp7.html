@@ -112,7 +112,7 @@
         header {
             height: 100vh;
             min-height: 600px;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('/temp/images/background.jpg');
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('http://googleusercontent.com/image_generation_content/3');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -221,39 +221,48 @@
             flex-direction: column;
             border-left: 6px solid var(--primary);
         }
-        @media(min-width: 768px) {
-            .event-box { flex-direction: row; }
-        }
-
-        .event-img {
-            min-height: 220px;
-            background-size: cover;
-            background-position: center;
-        }
-        @media(min-width: 768px) {
-            .event-img { width: 300px; }
-        }
-
-        .event-info { padding: 30px; flex: 1; }
+        
+        .event-info { padding: 20px; flex: 1; text-align: center; }
         
         .event-title { 
             /* Using Rozha One here for complex words if needed, otherwise Yatra */
             font-family: var(--font-main);
             font-size: 2.2rem; 
             color: var(--primary); 
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         
         .info-item {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            justify-content: center;
+            margin-bottom: 5px;
             font-size: 1.1rem;
             color: #555;
         }
         .icon { width: 30px; color: var(--primary); font-size: 1.2rem; }
 
-        /* --- COUNTDOWN (Kshan) --- */
+        /* --- FAMILY / AAPLE NAMR --- */
+        .family-section {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: var(--white);
+            border-top: 1px solid #eee;
+        }
+        .family-title {
+            font-family: var(--font-fix); /* Rozha One */
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .family-names {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #444;
+            font-weight: bold;
+        }
+
+        /* --- COUNTDOWN (KSHAN) --- */
         .countdown-overlay {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1596200213190-2544a7f05c36?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
@@ -319,7 +328,6 @@
             .weds-text { font-size: 2.5rem; }
             h2.section-title { font-size: 2.5rem; }
             .kshan-heading { font-size: 2.2rem; }
-            .event-img { height: 200px; }
             .t-block { min-width: 80px; padding: 15px; }
             .t-num { font-size: 2rem; }
         }
@@ -331,7 +339,7 @@
     <div id="petals-container"></div>
 
     <!-- Music -->
-    <audio id="bgMusic" loop>
+    <audio id="bgMusic" loop autoplay>
         <source src="/temp/music/tabla.mp3" type="audio/mpeg">
     </audio>
     <div class="music-fab" id="musicBtn">🎵</div>
@@ -353,8 +361,6 @@
                 आम्ही आपल्याला आमच्या लग्नासाठी आणि पुढील कार्यक्रमांसाठी सहर्ष आमंत्रित करत आहोत.
             </p>
         </div>
-        
-        <div style="position: absolute; bottom: 20px; color: #fff; animation: fall 2s infinite;">⬇</div>
     </header>
 
     <!-- GANESHA -->
@@ -382,7 +388,7 @@
             <!-- Bride -->
             <div class="profile-card" data-aos="fade-right">
                 <div class="img-ring">
-                    <img src="/temp/images/bride.jpg" alt="Bride">
+                    <img src="/temp/image/bride.jpg&auto=format&fit=crop&w=500&q=60" alt="Bride">
                 </div>
                 <div class="name-text">आदिती</div>
                 <p style="color: #666; margin-bottom: 0;">(कन्या)</p>
@@ -392,12 +398,17 @@
             <!-- Groom -->
             <div class="profile-card" data-aos="fade-left">
                 <div class="img-ring">
-                    <img src="/temp/images/groom.jpg" alt="Groom">
+                    <img src="/temp/image/groom.jpg&auto=format&fit=crop&w=500&q=60" alt="Groom">
                 </div>
                 <div class="name-text">रोहन</div>
                 <p style="color: #666; margin-bottom: 0;">(सुपुत्र)</p>
                 <p style="font-size: 0.95rem;">श्री. रमेश व सौ. सुनिता देशमुख</p>
             </div>
+        </div>
+
+        <!-- New Added Text -->
+        <div style="text-align: center; margin-top: 40px;" data-aos="fade-up">
+            <h3 class="rozha-font" style="color: var(--primary); font-size: 1.8rem;">यांचा शुभ विवाह आयोजित केला आहे</h3>
         </div>
     </section>
 
@@ -411,7 +422,6 @@
         <div class="events-container">
             <!-- Haldi -->
             <div class="event-box" data-aos="fade-up">
-                <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1623861386221-50e58607a723?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
                 <div class="event-info">
                     <div class="event-title">हळद आणि संगीत</div>
                     <div class="info-item"><span class="icon">📅</span> १४ डिसेंबर २०२५</div>
@@ -422,7 +432,6 @@
 
             <!-- Wedding -->
             <div class="event-box" data-aos="fade-up" data-aos-delay="100">
-                <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1585671759296-3c2242142d72?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
                 <div class="event-info">
                     <div class="event-title">शुभ विवाह सोहळा</div>
                     <div class="info-item"><span class="icon">📅</span> १५ डिसेंबर २०२५</div>
@@ -437,9 +446,21 @@
         </div>
     </section>
 
+    <!-- AAPLE NAMR SECTION (Moved Up) -->
+    <section class="family-section">
+        <div data-aos="fade-up">
+            <h2 class="family-title rozha-font">आपले नम्र</h2>
+            <div class="family-names">
+                श्री. सुरेश आणि सौ. अनिता पाटील<br>
+                श्री. रमेश आणि सौ. सुनिता देशमुख<br>
+                तसेच<br>
+                समस्त पाटील आणि देशमुख परिवार
+            </div>
+        </div>
+    </section>
+
     <!-- COUNTDOWN (KSHAN) -->
     <section class="countdown-overlay">
-        <!-- Using Rozha One specifically for this heading -->
         <h2 class="kshan-heading rozha-font">शुभविवाहासाठी उरलेले क्षण</h2>
         
         <div class="timer-display" id="timer">
@@ -511,7 +532,28 @@
         const btn = document.getElementById('musicBtn');
         let playing = false;
 
-        btn.addEventListener('click', () => {
+        // Try to play automatically on load
+        window.addEventListener('load', () => {
+            bgMusic.play().then(() => {
+                playing = true;
+                btn.innerText = '⏸';
+            }).catch(error => {
+                console.log("Autoplay prevented by browser. Waiting for user interaction.");
+            });
+        });
+
+        // Fallback: Play on first click if autoplay failed
+        document.body.addEventListener('click', () => {
+            if (!playing) {
+                bgMusic.play().then(() => {
+                    playing = true;
+                    btn.innerText = '⏸';
+                }).catch(console.error);
+            }
+        }, { once: true });
+
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent body click from firing
             if (playing) {
                 bgMusic.pause();
                 btn.innerText = '🎵';
