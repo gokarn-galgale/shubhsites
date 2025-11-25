@@ -3,29 +3,31 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#FFF8E7" />
+    <meta name="theme-color" content="#800020" />
+    <meta name="description" content="आदिती आणि रोहन यांच्या शुभ विवाहाचे निमंत्रण.">
     <title>शुभ विवाह | आदिती आणि रोहन</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Baloo 2 & Noto Serif Devanagari for Marathi, Great Vibes for English -->
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Noto+Serif+Devanagari:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Noto+Serif+Devanagari:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
-    <!-- AOS -->
+    <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <style>
         /* --- THEME VARIABLES --- */
         :root {
             --primary: #800020; /* Royal Maroon */
+            --primary-dark: #5a0016;
             --gold: #FFD700;
             --cream: #FFF8E7;
             --text: #2c1810;
             --white: #ffffff;
             --gold-grad: linear-gradient(90deg, #bf953f 0%, #fbf5b7 40%, #aa771c 100%);
-            --font-title: 'Noto Serif Devanagari', 'Baloo 2', serif;
-            --font-body: 'Baloo 2', 'Noto Serif Devanagari', sans-serif;
+            --font-title: 'Noto Serif Devanagari', serif;
+            --font-body: 'Baloo 2', sans-serif;
             --font-english: 'Great Vibes', cursive;
         }
 
@@ -43,94 +45,102 @@
             font-size: 18px;
         }
 
-        /* gold text gradient */
+        /* Gold Text Effect */
         .gold-text {
             background: var(--gold-grad);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             display: inline-block;
+            font-weight: 700;
         }
 
-        /* header / hero */
+        /* --- HEADER / HERO --- */
         header {
             height: 100vh;
-            min-height: 560px;
+            min-height: 600px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             border-bottom: 5px solid var(--gold);
-            background: linear-gradient(rgba(0,0,0,0.28), rgba(0,0,0,0.45)), url('/temp/images/background.jpg') center/cover no-repeat fixed;
+            /* Updated Background Image */
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.5)), 
+                        url('/temp/images/background.jpg') center/cover no-repeat fixed;
         }
 
         .hero-content {
             max-width: 920px;
-            width: calc(100% - 40px);
+            width: 90%;
             text-align: center;
-            padding: 36px;
-            border-radius: 18px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.12);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.35);
-            backdrop-filter: blur(4px);
+            padding: 40px 20px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #fff;
         }
 
         .shlok-top {
             color: var(--gold);
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-family: var(--font-title);
-            letter-spacing: 0.6px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
 
         h1 {
             font-family: var(--font-title);
             font-weight: 700;
             color: #fff;
-            font-size: 3.5rem;
-            margin: 6px 0;
+            font-size: 4rem;
+            margin: 0;
             line-height: 1.1;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
         }
 
         .weds-text {
             font-family: var(--font-english);
-            font-size: 2.6rem;
+            font-size: 3rem;
             color: var(--gold);
-            display: inline-block;
-            margin: 4px 0 12px;
+            display: block;
+            margin: 5px 0 15px;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
         }
 
         .date-badge {
-            margin-top: 12px;
-            border-top: 1px solid rgba(255,255,255,0.18);
-            border-bottom: 1px solid rgba(255,255,255,0.12);
-            padding: 10px 0;
+            margin: 20px auto;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            padding: 10px 30px;
             width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-            border-radius: 8px;
-            background: rgba(0,0,0,0.08);
+            border-radius: 50px;
+            background: rgba(0,0,0,0.3);
         }
 
         .date-text {
             color: #fff;
             font-family: var(--font-title);
             font-weight: 700;
-            font-size: 1.15rem;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
         }
 
         header p.lead {
-            color: #eee;
-            margin-top: 18px;
-            font-size: 1.05rem;
-            max-width: 680px;
+            color: #f0f0f0;
+            margin-top: 20px;
+            font-size: 1.1rem;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.8;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
 
-        /* petals */
+        /* --- PETALS ANIMATION --- */
         #petals-container { position: fixed; inset: 0; pointer-events: none; z-index: 900; overflow: hidden; }
         .petal {
             position: absolute;
@@ -147,103 +157,197 @@
             100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
         }
 
-        /* sections */
-        section { padding: 56px 20px; }
+        /* --- SECTIONS --- */
+        section { padding: 60px 20px; }
         .bg-cream { background-color: var(--cream); }
         .bg-white { background-color: var(--white); }
 
-        .ganesha-wrapper { text-align: center; max-width: 900px; margin: 0 auto; padding: 20px 12px; }
-        .om { font-size: 4.2rem; display: block; margin-bottom: 8px; font-family: var(--font-title); line-height: 1; }
-        .section-title { font-family: var(--font-title); font-size: 2.4rem; color: var(--primary); margin-bottom: 8px; display: inline-block; padding-bottom: 6px; position: relative; }
-        .section-title::after { content: '✻'; display: block; color: #c5a059; font-size: 1.2rem; margin-top: 6px; line-height: 0.6; }
+        .ganesha-wrapper { text-align: center; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .om { font-size: 5rem; display: block; margin-bottom: 10px; font-family: var(--font-title); line-height: 1; }
+        
+        .section-title { 
+            font-family: var(--font-title); 
+            font-size: 2.6rem; 
+            color: var(--primary); 
+            margin-bottom: 15px; 
+            display: inline-block; 
+            position: relative; 
+            font-weight: 700;
+        }
+        .section-title::after { 
+            content: '✻'; 
+            display: block; 
+            color: #c5a059; 
+            font-size: 1.5rem; 
+            margin-top: 5px; 
+            line-height: 0.6; 
+        }
 
-        .poem-text { font-family: var(--font-body); color: #444; font-size: 1.15rem; line-height: 1.7; }
+        .poem-text { 
+            font-family: var(--font-title); 
+            color: #444; 
+            font-size: 1.3rem; 
+            line-height: 1.8; 
+            margin-top: 10px;
+        }
 
-        /* couple */
-        .couple-wrapper { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-top: 26px; }
+        /* --- COUPLE PROFILE --- */
+        .couple-wrapper { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 30px; }
+        
         .profile-card {
             text-align: center;
             background: var(--white);
-            padding: 18px;
-            border-radius: 14px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-            border: 1px solid rgba(0,0,0,0.04);
-            flex: 1 1 280px;
-            max-width: 360px;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(128, 0, 32, 0.1);
+            border: 1px solid rgba(128, 0, 32, 0.1);
+            flex: 1 1 300px;
+            max-width: 380px;
+            transition: transform 0.3s ease;
         }
-        .img-ring { width: 200px; height: 200px; border-radius: 50%; padding: 6px; background: var(--gold-grad); margin: 0 auto 12px; display: grid; place-items: center; }
-        .img-ring img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 3px solid #fff; display:block; }
-        .name-text { font-family: var(--font-title); font-size: 1.8rem; color: var(--primary); margin-bottom: 6px; }
-        .relation { color: #666; font-weight: 700; margin-bottom: 6px; }
+        .profile-card:hover { transform: translateY(-5px); }
 
-        /* events */
-        .events-container { max-width: 940px; margin: 0 auto; }
-        .event-box { background: var(--white); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); margin-bottom: 24px; display:flex; flex-direction: column; border-left: 6px solid var(--primary); overflow:hidden; }
-        .event-info { padding: 20px; text-align: center; }
-        .event-title { font-family: var(--font-title); font-size: 1.6rem; color: var(--primary); margin-bottom: 8px; }
-        .info-item { display:flex; gap:8px; align-items:center; justify-content:center; color: #555; margin-bottom:6px; }
-        .info-item .icon { width: 26px; font-size: 1.2rem; display:inline-block; }
+        .img-ring { 
+            width: 220px; 
+            height: 220px; 
+            border-radius: 50%; 
+            padding: 6px; 
+            background: var(--gold-grad); 
+            margin: 0 auto 15px; 
+            display: grid; 
+            place-items: center; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .img-ring img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            border-radius: 50%; 
+            border: 4px solid #fff; 
+            display: block; 
+        }
+
+        .name-text { font-family: var(--font-title); font-size: 2rem; color: var(--primary); margin-bottom: 5px; font-weight: 700; }
+        .relation { color: #888; font-weight: 600; font-size: 1rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .parents-info { font-size: 1.1rem; color: #555; line-height: 1.4; }
+
+        /* --- EVENTS --- */
+        .events-container { max-width: 800px; margin: 0 auto; }
+        
+        .event-box { 
+            background: var(--white); 
+            border-radius: 16px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05); 
+            margin-bottom: 30px; 
+            display: flex; 
+            flex-direction: column; 
+            border-left: 8px solid var(--primary); 
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .event-box:hover { transform: scale(1.02); }
+
+        .event-info { padding: 30px; text-align: center; }
+        .event-title { font-family: var(--font-title); font-size: 1.8rem; color: var(--primary); margin-bottom: 15px; font-weight: 700; }
+        
+        .info-item { 
+            display: flex; 
+            gap: 10px; 
+            align-items: center; 
+            justify-content: center; 
+            color: #555; 
+            margin-bottom: 8px; 
+            font-size: 1.1rem;
+        }
+        .info-item .icon { font-size: 1.4rem; min-width: 30px; text-align: center; }
 
         .map-link {
             display: inline-block;
-            margin-top: 12px;
+            margin-top: 15px;
             text-decoration: none;
-            color: var(--primary);
-            font-weight: 700;
-            border-bottom: 2px solid var(--gold);
-            padding-bottom: 2px;
+            color: var(--white);
+            background-color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background 0.3s;
+            box-shadow: 0 4px 10px rgba(128, 0, 32, 0.3);
         }
+        .map-link:hover { background-color: var(--primary-dark); }
 
-        /* family */
-        .family-section { text-align:center; background: transparent; padding: 28px 12px; }
-        .family-title { font-family: var(--font-title); font-size: 1.6rem; color: var(--primary); margin-bottom: 10px; }
-        .family-names { font-size: 1.05rem; color: #444; line-height: 1.7; font-weight: 700; }
+        /* --- FAMILY --- */
+        .family-section { text-align: center; padding: 40px 20px; }
+        .family-title { font-family: var(--font-title); font-size: 1.8rem; color: var(--primary); margin-bottom: 15px; }
+        .family-names { font-size: 1.2rem; color: #444; line-height: 1.8; font-weight: 600; }
 
-        /* countdown */
-        .countdown-overlay { background: linear-gradient(rgba(0,0,0,0.66), rgba(0,0,0,0.66)), url('/temp/images/background.jpg') center/cover no-repeat fixed; color: #fff; text-align: center; padding: 44px 18px; }
-        .kshan-heading { font-family: var(--font-title); font-size: 2rem; color: var(--gold); margin-bottom: 18px; }
-        .timer-display { display:flex; gap: 12px; justify-content:center; flex-wrap:wrap; margin-top: 18px; }
-        .t-block { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 12px 14px; min-width: 90px; border: 1px solid rgba(255,255,255,0.12); }
-        .t-num { font-family: var(--font-title); font-size: 1.6rem; color: var(--gold); display:block; }
-        .t-text { font-size: 0.85rem; margin-top:6px; text-transform: uppercase; letter-spacing: 0.6px; }
+        /* --- COUNTDOWN --- */
+        .countdown-overlay { 
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('/temp/images/background.jpg') center/cover no-repeat fixed; 
+            color: #fff; 
+            text-align: center; 
+            padding: 60px 20px; 
+        }
+        .kshan-heading { font-family: var(--font-title); font-size: 2.2rem; color: var(--gold); margin-bottom: 25px; }
+        
+        .timer-display { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
+        .t-block { 
+            background: rgba(255, 255, 255, 0.1); 
+            border-radius: 12px; 
+            padding: 15px 20px; 
+            min-width: 100px; 
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        .t-num { font-family: var(--font-title); font-size: 2rem; color: var(--gold); display: block; font-weight: 700; line-height: 1; }
+        .t-text { font-size: 0.9rem; margin-top: 5px; text-transform: uppercase; letter-spacing: 1px; color: #ddd; }
 
-        /* footer */
-        footer { background: #2b110e; color: #d4af37; text-align:center; padding: 28px 20px 80px; }
-        footer p { margin-bottom: 8px; }
+        /* --- FOOTER --- */
+        footer { background: #2b110e; color: #d4af37; text-align: center; padding: 40px 20px 100px; border-top: 4px solid var(--gold); }
+        footer p { margin-bottom: 10px; }
 
-        /* FABs */
+        /* --- FABs (Floating Action Buttons) --- */
         .fab {
             position: fixed;
-            bottom: 18px;
-            width: 52px; height: 52px;
+            bottom: 25px;
+            width: 55px; height: 55px;
             border-radius: 50%;
-            display:flex; align-items:center; justify-content:center;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.4);
             cursor: pointer;
             z-index: 1001;
-            transition: transform .16s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s;
             user-select: none;
+            border: none;
+            outline: none;
         }
-        .fab:active { transform: scale(.94); }
-        .music-fab { right: 18px; background: var(--primary); border: 2px solid var(--gold); color: #fff; font-size: 1.2rem; }
-        .whatsapp-fab { left: 18px; background: #25D366; border: 2px solid #fff; color: #fff; }
+        .fab:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(0,0,0,0.5); }
+        .fab:active { transform: scale(0.95); }
+        
+        .music-fab { right: 25px; background: var(--primary); border: 2px solid var(--gold); color: #fff; font-size: 1.4rem; }
+        .whatsapp-fab { left: 25px; background: #25D366; border: 2px solid #fff; color: #fff; }
 
-        /* responsive */
+        /* --- RESPONSIVE --- */
         @media(max-width: 768px) {
-            h1 { font-size: 2.4rem; }
-            .weds-text { font-size: 1.9rem; }
-            .hero-content { padding: 22px; }
-            .img-ring { width: 160px; height: 160px; }
-            .name-text { font-size: 1.5rem; }
-            .section-title { font-size: 1.6rem; }
-            .kshan-heading { font-size: 1.6rem; }
-            .t-num { font-size: 1.3rem; }
+            h1 { font-size: 2.8rem; }
+            .weds-text { font-size: 2.2rem; }
+            .hero-content { padding: 30px 15px; }
+            .img-ring { width: 180px; height: 180px; }
+            .name-text { font-size: 1.6rem; }
+            .section-title { font-size: 2rem; }
+            .kshan-heading { font-size: 1.8rem; }
+            .t-num { font-size: 1.5rem; }
+            .t-block { min-width: 80px; padding: 10px; }
+            .om { font-size: 4rem; }
         }
 
-        @media(max-width: 420px) {
-            .t-block { min-width: 48%; }
-            .hero-content { width: calc(100% - 24px); padding: 16px; }
+        @media(max-width: 480px) {
+            .t-block { min-width: 45%; margin-bottom: 5px; }
+            .hero-content { width: 95%; }
             .petal { font-size: 16px; }
+            h1 { font-size: 2.4rem; }
+            .weds-text { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -251,17 +355,18 @@
     <!-- Petals Container -->
     <div id="petals-container" aria-hidden="true"></div>
 
-    <!-- Audio (start paused — user toggles) -->
+    <!-- Audio Player -->
+    <!-- Note: 'tabla.mp3' needs to be replaced with a real file path for music to work. -->
     <audio id="bgMusic" loop preload="auto">
-        <source src="/temp/music/tabla.mp3" type="audio/mpeg">
-        <!-- fallback text -->
+        <source src="music_placeholder.mp3" type="audio/mpeg">
     </audio>
     <button class="fab music-fab" id="musicBtn" aria-pressed="false" aria-label="संगीत प्ले करा" title="संगीत प्ले/पॉज करा">▶</button>
 
     <!-- WhatsApp Share -->
     <a class="fab whatsapp-fab" id="whatsappBtn" href="#" aria-label="WhatsApp वर शेअर करा" title="WhatsApp वर शेअर करा">
-        <!-- inline svg icon -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.017-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487 2.982 1.288 2.982.858 3.526.809.544-.05 1.758-.718 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.017-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487 2.982 1.288 2.982.858 3.526.809.544-.05 1.758-.718 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+        </svg>
     </a>
 
     <!-- HERO -->
@@ -299,26 +404,28 @@
             <!-- Bride -->
             <article class="profile-card" data-aos="fade-right" aria-labelledby="bride-name">
                 <figure class="img-ring" aria-hidden="false">
-                    <img src="/temp/images/bride.jpg" alt="आदिती यांच्या छायाचित्र" />
+                    <!-- Placeholder image used for preview -->
+                    <img src="/temp/images/bride.jpg" alt="आदिती यांचे छायाचित्र" />
                 </figure>
                 <div id="bride-name" class="name-text">आदिती</div>
                 <p class="relation">(कन्या)</p>
-                <p>श्री. सुरेश व सौ. अनिता पाटील</p>
+                <p class="parents-info">श्री. सुरेश व सौ. अनिता पाटील</p>
             </article>
 
             <!-- Groom -->
             <article class="profile-card" data-aos="fade-left" aria-labelledby="groom-name">
                 <figure class="img-ring">
-                    <img src="/temp/images/groom.jpg" alt="रोहन यांच्या छायाचित्र" />
+                    <!-- Placeholder image used for preview -->
+                    <img src="/temp/images/groom.jpg" alt="रोहन यांचे छायाचित्र" />
                 </figure>
                 <div id="groom-name" class="name-text">रोहन</div>
                 <p class="relation">(सुपुत्र)</p>
-                <p>श्री. रमेश व सौ. सुनिता देशमुख</p>
+                <p class="parents-info">श्री. रमेश व सौ. सुनिता देशमुख</p>
             </article>
         </div>
 
-        <div style="text-align:center; margin-top: 22px;" data-aos="fade-up">
-            <h3 class="section-title" style="font-size:1.2rem; color:var(--primary);">यांचा शुभ विवाह आयोजित केला आहे</h3>
+        <div style="text-align:center; margin-top: 30px;" data-aos="fade-up">
+            <h3 style="font-family:var(--font-title); font-size:1.4rem; color:var(--primary);">यांचा शुभ विवाह आयोजित केला आहे</h3>
         </div>
     </section>
 
@@ -340,16 +447,17 @@
             </div>
 
             <!-- Wedding -->
-            <div class="event-box" data-aos="fade-up" data-aos-delay="80">
+            <div class="event-box" data-aos="fade-up" data-aos-delay="100">
                 <div class="event-info">
                     <div class="event-title">शुभ विवाह सोहळा</div>
                     <div class="info-item"><span class="icon">📅</span><span>१५ डिसेंबर २०२५</span></div>
                     <div class="info-item"><span class="icon">⏰</span><span>सकाळी १०:३० (गोरज मुहूर्त)</span></div>
                     <div class="info-item"><span class="icon">📍</span><span>वृन्दावन लॉन्स, कोल्हापूर</span></div>
 
-                    <div style="margin-top: 12px;">
-                        <!-- Use a maps query so link works even with placeholder -->
-                        <a class="map-link" id="mapLink" href="https://www.google.com/maps/search/?api=1&query=Vrudhavan+Lawns+Kolhapur" target="_blank" rel="noopener noreferrer" aria-label="नकाशा पहा">🗺️ नकाशा पहा (Map)</a>
+                    <div style="margin-top: 20px;">
+                        <a class="map-link" id="mapLink" href="https://www.google.com/maps/search/?api=1&query=Vrudhavan+Lawns+Kolhapur" target="_blank" rel="noopener noreferrer" aria-label="नकाशा पहा">
+                            🗺️ नकाशा पहा (View Map)
+                        </a>
                     </div>
                 </div>
             </div>
@@ -371,31 +479,33 @@
 
     <!-- COUNTDOWN -->
     <section class="countdown-overlay" aria-labelledby="countdown-title">
-        <h2 id="countdown-title" class="kshan-heading">शुभविवाहासाठी उरलेले क्षण</h2>
+        <div data-aos="zoom-in">
+            <h2 id="countdown-title" class="kshan-heading">शुभविवाहासाठी उरलेले क्षण</h2>
 
-        <div class="timer-display" id="timer" role="timer" aria-live="polite">
-            <div class="t-block">
-                <span class="t-num" id="days">00</span>
-                <span class="t-text">दिवस</span>
-            </div>
-            <div class="t-block">
-                <span class="t-num" id="hours">00</span>
-                <span class="t-text">तास</span>
-            </div>
-            <div class="t-block">
-                <span class="t-num" id="mins">00</span>
-                <span class="t-text">मिनिटे</span>
-            </div>
-            <div class="t-block">
-                <span class="t-num" id="secs">00</span>
-                <span class="t-text">सेकंद</span>
+            <div class="timer-display" id="timer" role="timer" aria-live="polite">
+                <div class="t-block">
+                    <span class="t-num" id="days">00</span>
+                    <span class="t-text">दिवस</span>
+                </div>
+                <div class="t-block">
+                    <span class="t-num" id="hours">00</span>
+                    <span class="t-text">तास</span>
+                </div>
+                <div class="t-block">
+                    <span class="t-num" id="mins">00</span>
+                    <span class="t-text">मिनिटे</span>
+                </div>
+                <div class="t-block">
+                    <span class="t-num" id="secs">00</span>
+                    <span class="t-text">सेकंद</span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer role="contentinfo">
-        <p style="font-family:var(--font-title); font-size:1.3rem; color:var(--gold);">।। शुभ भवतु ।।</p>
+        <p style="font-family:var(--font-title); font-size:1.5rem; color:var(--gold);">।। शुभ भवतु ।।</p>
         <p style="font-size:0.9rem; color:#ccc;">&copy; 2025 Aditi & Rohan.</p>
     </footer>
 
@@ -407,12 +517,12 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Init AOS
-        AOS.init({ once: true, offset: 60 });
+        AOS.init({ once: true, offset: 80, duration: 800 });
 
-        /* ---------- PETALS ---------- */
+        /* ---------- PETALS ANIMATION ---------- */
         (function petals() {
             const container = document.getElementById('petals-container');
-            const maxPetals = 18; // limit for performance
+            const maxPetals = 15; // Optimized limit
             let active = 0;
 
             function createPetal() {
@@ -420,39 +530,35 @@
                 active++;
                 const p = document.createElement('div');
                 p.className = 'petal';
-                const types = ['🌸','🌺','🌼','🌷'];
+                const types = ['🌸','🌺','🌼','🌷','🌹'];
                 p.textContent = types[Math.floor(Math.random() * types.length)];
-                // random horizontal start between 2% and 94% viewport
-                const left = 2 + Math.random() * 92;
+                
+                // Random position and size
+                const left = 5 + Math.random() * 90;
                 p.style.left = left + 'vw';
-                // random size
-                const size = 14 + Math.random() * 28;
+                const size = 15 + Math.random() * 20;
                 p.style.fontSize = size + 'px';
-                // duration and delay
-                const duration = 5 + Math.random() * 6; // 5s - 11s
-                const delay = Math.random() * 2;
+                
+                // Random animation duration
+                const duration = 6 + Math.random() * 5; 
                 p.style.animationDuration = duration + 's';
-                p.style.animationDelay = delay + 's';
-
+                
                 container.appendChild(p);
 
-                // remove later
+                // Cleanup
                 setTimeout(() => {
                     p.remove();
                     active--;
-                }, (duration + delay) * 1000 + 300);
+                }, duration * 1000);
             }
 
-            // initial burst
-            for (let i = 0; i < 6; i++) setTimeout(createPetal, i * 300);
-            // then interval
-            setInterval(createPetal, 700);
+            // Start animation loop
+            setInterval(createPetal, 800);
         })();
 
         /* ---------- COUNTDOWN ---------- */
         (function countdown() {
-            // Use exact wedding date/time in local time (India timezone assumed)
-            const weddingDate = new Date('2025-12-15T10:30:00'); // local time
+            const weddingDate = new Date('2025-12-15T10:30:00'); // Target Date
             const daysEl = document.getElementById('days');
             const hoursEl = document.getElementById('hours');
             const minsEl = document.getElementById('mins');
@@ -466,7 +572,7 @@
                 const dist = weddingDate - now;
 
                 if (dist <= 0) {
-                    timerWrapper.innerHTML = '<h3 style="color:var(--gold); font-family:var(--font-title); font-size:1.6rem;">लग्न सोहळा संपन्न!</h3>';
+                    timerWrapper.innerHTML = '<h3 style="color:var(--gold); font-family:var(--font-title); font-size:2rem; margin-top:20px;">लग्न सोहळा संपन्न!</h3>';
                     clearInterval(interval);
                     return;
                 }
@@ -492,62 +598,51 @@
             const btn = document.getElementById('musicBtn');
             let playing = false;
 
-            function setBtnUI() {
-                btn.textContent = playing ? '⏸' : '▶';
-                btn.setAttribute('aria-pressed', playing ? 'true' : 'false');
-                btn.title = playing ? 'संगीत थांबवा' : 'संगीत प्ले करा';
+            function setBtnUI(isPlaying) {
+                btn.textContent = isPlaying ? '⏸' : '▶';
+                btn.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
+                btn.title = isPlaying ? 'संगीत थांबवा' : 'संगीत प्ले करा';
             }
 
-            // Try to play on first meaningful user interaction (some browsers require user gesture)
-            function userGesturePlay() {
-                if (playing) return;
-                audio.play().then(() => {
-                    playing = true;
-                    setBtnUI();
-                    // remove listener once played
-                    document.removeEventListener('click', userGesturePlay);
-                    document.removeEventListener('touchstart', userGesturePlay);
-                    document.removeEventListener('keydown', userGesturePlay);
-                }).catch(() => {
-                    // still blocked, keep waiting; user can press the button
-                });
-            }
-
-            // attach listeners to attempt autoplay on gesture
-            document.addEventListener('click', userGesturePlay, { once: false });
-            document.addEventListener('touchstart', userGesturePlay, { once: false });
-            document.addEventListener('keydown', userGesturePlay, { once: false });
-
-            // toggle button
-            btn.addEventListener('click', function(e) {
+            // User interaction needed to unlock audio on modern browsers
+            function toggleMusic(e) {
                 e.stopPropagation();
                 if (!playing) {
-                    audio.play().then(() => { playing = true; setBtnUI(); }).catch((err) => {
-                        // autoplay blocked or other error
-                        playing = false;
-                        setBtnUI();
-                        console.warn('Playback blocked or failed:', err);
-                        alert('संगीत प्ले करण्यासाठी कृपया पेजवर कुठेही टॅप/क्लिक करा किंवा परवानगी द्या.');
-                    });
+                    const playPromise = audio.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            playing = true;
+                            setBtnUI(true);
+                        }).catch(error => {
+                            console.log("Audio play failed (likely no file or blocked):", error);
+                            // Do not alert the user, just keep UI as paused
+                            playing = false;
+                            setBtnUI(false);
+                            // Optional: Shake button to indicate error
+                            btn.style.transform = 'translateX(5px)';
+                            setTimeout(() => btn.style.transform = 'none', 100);
+                        });
+                    }
                 } else {
                     audio.pause();
                     playing = false;
-                    setBtnUI();
+                    setBtnUI(false);
                 }
-            });
+            }
 
-            // initialize UI
-            setBtnUI();
+            btn.addEventListener('click', toggleMusic);
+            setBtnUI(false);
         })();
 
         /* ---------- WHATSAPP SHARE ---------- */
         (function whatsapp() {
             const btn = document.getElementById('whatsappBtn');
             const mapLink = document.getElementById('mapLink').href;
+            
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 const url = window.location.href;
-                const message = `सस्नेह निमंत्रण! ✨%0A%0Aआदिती आणि रोहन यांच्या शुभ विवाहाचे निमंत्रण.%0A%0Aतारीख: १५ डिसेंबर २०२५%0Aठिकाण: वृन्दावन लॉन्स, कोल्हापूर%0A%0Aनकाशा: ${mapLink}%0A%0Aसंपूर्ण निमंत्रण पाहण्यासाठी हा दुवा पहा:%0A${url}%0A%0Aआपली उपस्थिती प्रार्थनीय आहे. 🙏`;
+                const message = `सस्नेह निमंत्रण! ✨%0A%0Aआदिती आणि रोहन यांच्या शुभ विवाहाचे निमंत्रण.%0A%0Aतारीख: १५ डिसेंबर २०२५%0Aठिकाण: वृन्दावन लॉन्स, कोल्हापूर%0A%0Aनकाशा: ${mapLink}%0A%0Aसंपूर्ण निमंत्रण पाहण्यासाठी:%0A${url}%0A%0Aआपली उपस्थिती प्रार्थनीय आहे. 🙏`;
                 const whatsappUrl = `https://wa.me/?text=${message}`;
                 window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
             });
