@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>शुभ विवाह | आदिती आणि रोहन</title>
     
-    <!-- Fonts: Added 'Shree Devanagari 714' -->
+    <!-- Fonts: Using 'Shree Devanagari 714' as the primary font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Great+Vibes&family=Shree+Devanagari+714:wght@400;700&family=Rozha+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Shree+Devanagari+714:wght@400;700&display=swap" rel="stylesheet">
     
     <!-- Animate On Scroll (AOS) -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -21,11 +21,12 @@
             --cream: #FFF8E7;   /* Cream */
             --text: #2c1810;    /* Dark Brown */
             
-            /* Font Variables */
-            --font-title: 'Rozha One', serif;        /* Big Titles */
-            --font-body: 'Shree Devanagari 714', sans-serif; /* NEW: Shree Font for Body */
-            --font-poem: 'Amita', cursive;           /* Poems */
-            --font-english: 'Great Vibes', cursive;  /* English */
+            /* Font Variables - ALL set to Shree Devanagari 714 */
+            --font-title: 'Shree Devanagari 714', sans-serif;        /* Big Titles */
+            --font-body: 'Shree Devanagari 714', sans-serif;         /* Body text */
+            --font-poem: 'Shree Devanagari 714', sans-serif;         /* Poems */
+            --font-fix: 'Shree Devanagari 714', sans-serif;          /* Fix font */
+            --font-english: 'Great Vibes', cursive;                  /* English (Weds) */
             
             /* Gold Gradient */
             --gold-grad: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
@@ -54,7 +55,7 @@
 
         .rozha-font {
             font-family: var(--font-title) !important;
-            font-weight: 400;
+            font-weight: 700; /* Made bold for Shree */
         }
 
         /* --- ANIMATIONS --- */
@@ -76,7 +77,7 @@
         h1, h2, h3 { 
             font-family: var(--font-title); 
             text-align: center; 
-            font-weight: 400;
+            font-weight: 700; /* Bold for Shree headers */
         }
         
         h1 { 
@@ -90,7 +91,7 @@
         h2.section-title {
             font-size: 3rem;
             color: var(--primary);
-            margin-bottom: 20px; /* Reduced margin */
+            margin-bottom: 20px;
             position: relative;
             display: inline-block;
             padding-bottom: 10px;
@@ -108,10 +109,10 @@
         p { text-align: center; line-height: 1.7; margin-bottom: 15px; }
 
         .poem-text {
-            font-family: var(--font-title); /* Changed to Rozha One to fix rendering */
-            font-size: 1.5rem;
+            font-family: var(--font-poem);
+            font-size: 1.4rem;
             color: #555;
-            line-height: 1.6;
+            line-height: 1.8;
         }
 
         /* --- HEADER (HERO) --- */
@@ -146,8 +147,8 @@
             color: #FFD700;
             font-size: 1.8rem;
             margin-bottom: 10px;
-            font-family: var(--font-body); /* Changed to Shree */
-            font-weight: bold;
+            font-family: var(--font-fix);
+            font-weight: 700;
         }
 
         .weds-text {
@@ -244,19 +245,17 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             display: flex;
             flex-direction: column;
-            border-left: 5px solid var(--primary);
+            border-left: 6px solid var(--primary);
         }
         
-        /* Reduced Padding here */
         .event-info { padding: 20px; flex: 1; text-align: center; }
         
         .event-title { 
-            /* Using Rozha One here for complex words if needed, otherwise Yatra */
             font-family: var(--font-title);
-            font-size: 2rem; 
+            font-size: 2.2rem; 
             color: var(--primary); 
             margin-bottom: 10px;
         }
@@ -265,30 +264,28 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 5px; /* Reduced margin */
+            margin-bottom: 5px;
             font-size: 1.1rem;
             color: #555;
-            font-family: var(--font-body);
-            font-weight: 500;
         }
         .icon { width: 30px; color: var(--primary); font-size: 1.2rem; margin-right: 5px; }
 
         /* --- FAMILY / AAPLE NAMR --- */
         .family-section {
             text-align: center;
-            padding: 30px 20px; /* Reduced padding */
+            padding: 30px 20px;
             background-color: var(--white);
             border-top: 1px solid #eee;
         }
         .family-title {
-            font-family: var(--font-title);
+            font-family: var(--font-fix);
             font-size: 2.2rem;
             color: var(--primary);
             margin-bottom: 15px;
         }
         .family-names {
             font-size: 1.2rem;
-            line-height: 1.6; /* Tighter line height */
+            line-height: 1.6;
             color: #444;
             font-weight: bold;
         }
