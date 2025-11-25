@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>शुभ विवाह | आदिती आणि रोहन</title>
+    
+    <!-- Fonts: Loading both Yatra One (Style) and Rozha One (Fix for complex words) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Rozha+One&family=Yatra+One&family=Noto+Serif+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Animate On Scroll (AOS) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- THEME VARIABLES --- */
+        :root {
+            --primary: #800020; /* Royal Maroon */
+            --gold: #FFD700;    /* Gold */
+            --cream: #FFF8E7;   /* Cream */
+            --text: #2c1810;    /* Dark Brown */
+            
+            /* Font Variables */
+            --font-main: 'Yatra One', cursive;       /* Main Stylish Font */
+            --font-fix: 'Rozha One', serif;          /* Fix for complex words */
+            --font-body: 'Noto Serif Devanagari', serif; 
+            --font-english: 'Great Vibes', cursive;
+            
+            /* Gold Gradient */
+            --gold-grad: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-body);
+            color: var(--text);
+            background-color: var(--cream);
+            overflow-x: hidden;
+            font-size: 19px;
+            text-rendering: optimizeLegibility; 
+        }
+
+        /* --- UTILITIES --- */
+        .gold-text {
+            background: var(--gold-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #b38728; /* Fallback */
+            display: inline-block;
+        }
+
+        /* Use this class for Karyakram & Kshan to fix rendering */
+        .rozha-font {
+            font-family: var(--font-fix) !important;
+            font-weight: 400;
+        }
+
+        /* --- ANIMATIONS --- */
+        .petal {
+            position: fixed;
+            top: -10%;
+            z-index: 9999;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { opacity: 0; top: -10%; transform: translateX(0) rotate(0deg); }
+            10% { opacity: 1; }
+            100% { top: 110%; transform: translateX(20px) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 { 
+            font-family: var(--font-main); 
+            text-align: center; 
+            font-weight: 400;
+        }
+        
+        h1 { 
+            font-size: 4rem; 
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.6);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        h2.section-title {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        h2.section-title::after {
+            content: '✻';
+            display: block;
+            color: #c5a059;
+            font-size: 1.5rem;
+            margin-top: 5px;
+            line-height: 0.5;
+        }
+
+        p { text-align: center; line-height: 1.7; margin-bottom: 15px; }
+
+        /* --- HEADER (HERO) --- */
+        header {
+            height: 100vh;
+            min-height: 600px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1545239351-ef35f43d514b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            border-bottom: 5px solid var(--gold);
+        }
+
+        .hero-content {
+            border: 2px solid rgba(255,255,255,0.6);
+            padding: 40px;
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(3px);
+            border-radius: 20px;
+            text-align: center;
+            max-width: 90%;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.2);
+        }
+
+        .shlok-top {
+            color: #FFD700;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-family: var(--font-fix); /* Changed to Rozha One */
+        }
+
+        .weds-text {
+            font-family: var(--font-english);
+            font-size: 3.5rem;
+            color: #FFD700;
+            margin: -10px 0;
+            display: block;
+        }
+
+        /* --- GANESHA SECTION --- */
+        .ganesha-wrapper {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .om { 
+            font-size: 5rem; 
+            display: block; 
+            margin-bottom: 10px; 
+            font-family: var(--font-main); 
+            line-height: 1;
+        } 
+
+        /* --- SECTIONS --- */
+        section { padding: 70px 20px; }
+        .bg-cream { background-color: var(--cream); }
+        .bg-white { background-color: #ffffff; }
+
+        /* --- COUPLE --- */
+        .couple-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .profile-card {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .img-ring {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            padding: 5px;
+            background: var(--gold-grad);
+            margin: 0 auto 15px;
+        }
+        .img-ring img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+        }
+        .name-text {
+            font-family: var(--font-main);
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        /* --- EVENTS (Karyakram) --- */
+        .events-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .event-box {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            border-left: 6px solid var(--primary);
+        }
+        @media(min-width: 768px) {
+            .event-box { flex-direction: row; }
+        }
+
+        .event-img {
+            min-height: 220px;
+            background-size: cover;
+            background-position: center;
+        }
+        @media(min-width: 768px) {
+            .event-img { width: 300px; }
+        }
+
+        .event-info { padding: 30px; flex: 1; }
+        
+        .event-title { 
+            /* Using Rozha One here for complex words if needed, otherwise Yatra */
+            font-family: var(--font-main);
+            font-size: 2.2rem; 
+            color: var(--primary); 
+            margin-bottom: 15px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        .icon { width: 30px; color: var(--primary); font-size: 1.2rem; }
+
+        /* --- COUNTDOWN (Kshan) --- */
+        .countdown-overlay {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1596200213190-2544a7f05c36?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+        }
+        
+        /* Specific fix for the problematic heading */
+        .kshan-heading {
+            font-family: var(--font-fix); /* Rozha One */
+            font-size: 3rem; 
+            color: #FFD700; 
+            margin-bottom: 20px;
+        }
+
+        .timer-display {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        .t-block {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 20px;
+            min-width: 100px;
+            border-radius: 10px;
+        }
+        .t-num { font-family: var(--font-main); font-size: 2.5rem; color: #FFD700; line-height: 1; display: block; }
+        .t-text { font-size: 1rem; margin-top: 5px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #2b110e;
+            color: #d4af37;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        /* --- MUSIC FAB --- */
+        .music-fab {
+            position: fixed;
+            bottom: 25px; right: 25px;
+            width: 55px; height: 55px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            cursor: pointer;
+            z-index: 1000;
+            border: 2px solid #FFD700;
+        }
+
+        /* Media Queries */
+        @media(max-width: 768px) {
+            h1 { font-size: 3.5rem; }
+            .weds-text { font-size: 2.5rem; }
+            h2.section-title { font-size: 2.5rem; }
+            .kshan-heading { font-size: 2.2rem; }
+            .event-img { height: 200px; }
+            .t-block { min-width: 80px; padding: 15px; }
+            .t-num { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Falling Petals -->
+    <div id="petals-container"></div>
+
+    <!-- Music -->
+    <audio id="bgMusic" loop>
+        <source src="/temp/music/tabla.mp3" type="audio/mpeg">
+    </audio>
+    <div class="music-fab" id="musicBtn">🎵</div>
+
+    <!-- HERO -->
+    <header>
+        <div class="hero-content" data-aos="zoom-in" data-aos-duration="1500">
+            <!-- Using Rozha One for Shree -->
+            <div class="shlok-top">|| श्री गणेशाय नमः ||</div>
+            <h1>आदिती</h1>
+            <span class="weds-text">Weds</span>
+            <h1>रोहन</h1>
+            
+            <div style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.5); border-bottom: 1px solid rgba(255,255,255,0.5); padding: 12px 0;">
+                <span style="color: #fff; font-family: var(--font-main); font-size: 1.8rem;">१५ डिसेंबर २०२५</span>
+            </div>
+            
+            <p style="color: #eee; margin-top: 20px; font-size: 1.1rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+                आम्ही आपल्याला आमच्या लग्नासाठी आणि पुढील कार्यक्रमांसाठी सहर्ष आमंत्रित करत आहोत.
+            </p>
+        </div>
+        
+        <div style="position: absolute; bottom: 20px; color: #fff; animation: fall 2s infinite;">⬇</div>
+    </header>
+
+    <!-- GANESHA -->
+    <section class="bg-cream">
+        <div class="ganesha-wrapper" data-aos="fade-up">
+            <!-- RESTORED: Golden Gradient Om -->
+            <span class="om gold-text">ॐ</span>
+            
+            <h2 class="section-title">शुभ विवाह</h2>
+            <p style="font-size: 1.3rem; color: #555;">
+                वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।<br>
+                निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥
+            </p>
+        </div>
+    </section>
+
+    <!-- COUPLE -->
+    <section class="bg-white" id="couple">
+        <h2 class="section-title">वर आणि वधू</h2>
+        
+        <div class="couple-wrapper">
+            <!-- Bride -->
+            <div class="profile-card" data-aos="fade-right">
+                <div class="img-ring">
+                    <img src="https://images.unsplash.com/photo-1583934555035-1f9d34383187?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Bride">
+                </div>
+                <div class="name-text">आदिती</div>
+                <p style="color: #666; margin-bottom: 0;">(कन्या)</p>
+                <p style="font-size: 0.95rem;">श्री. सुरेश व सौ. अनिता पाटील</p>
+            </div>
+
+            <!-- Groom -->
+            <div class="profile-card" data-aos="fade-left">
+                <div class="img-ring">
+                    <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Groom">
+                </div>
+                <div class="name-text">रोहन</div>
+                <p style="color: #666; margin-bottom: 0;">(सुपुत्र)</p>
+                <p style="font-size: 0.95rem;">श्री. रमेश व सौ. सुनिता देशमुख</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENTS (KARYAKRAM) -->
+    <section class="bg-cream">
+        <!-- Using Rozha One specifically for this heading -->
+        <h2 class="section-title rozha-font">मंगल कार्यक्रम</h2>
+        
+        <div class="events-container">
+            <!-- Haldi -->
+            <div class="event-box" data-aos="fade-up">
+                <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1623861386221-50e58607a723?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="event-info">
+                    <div class="event-title">हळद आणि संगीत</div>
+                    <div class="info-item"><span class="icon">📅</span> १४ डिसेंबर २०२५</div>
+                    <div class="info-item"><span class="icon">⏰</span> सायं ४:०० वाजता</div>
+                    <div class="info-item"><span class="icon">📍</span> हॉटेल ग्रँड पॅलेस, पुणे</div>
+                </div>
+            </div>
+
+            <!-- Wedding -->
+            <div class="event-box" data-aos="fade-up" data-aos-delay="100">
+                <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1585671759296-3c2242142d72?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="event-info">
+                    <div class="event-title">शुभ विवाह सोहळा</div>
+                    <div class="info-item"><span class="icon">📅</span> १५ डिसेंबर २०२५</div>
+                    <div class="info-item"><span class="icon">⏰</span> सकाळी १०:३० (गोरज मुहूर्त)</div>
+                    <div class="info-item"><span class="icon">📍</span> वृन्दावन लॉन्स, कोल्हापूर</div>
+                    
+                    <div style="margin-top: 20px;">
+                        <a href="#" style="color: var(--primary); font-weight: bold; text-decoration: none; border-bottom: 2px solid var(--gold);">🗺️ नकाशा पहा (Map)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COUNTDOWN (KSHAN) -->
+    <section class="countdown-overlay">
+        <!-- Using Rozha One specifically for this heading -->
+        <h2 class="kshan-heading rozha-font">शुभविवाहासाठी उरलेले क्षण</h2>
+        
+        <div class="timer-display" id="timer">
+            <div class="t-block">
+                <span class="t-num" id="days">00</span>
+                <span class="t-text">दिवस</span>
+            </div>
+            <div class="t-block">
+                <span class="t-num" id="hours">00</span>
+                <span class="t-text">तास</span>
+            </div>
+            <div class="t-block">
+                <span class="t-num" id="mins">00</span>
+                <span class="t-text">मिनिटे</span>
+            </div>
+            <div class="t-block">
+                <span class="t-num" id="secs">00</span>
+                <span class="t-text">सेकंद</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p style="font-family: var(--font-main); font-size: 1.5rem; color: #FFD700; margin-bottom: 10px;">।। शुभ भवतु ।।</p>
+        <p style="font-size: 0.9rem; color: #aaa;">&copy; 2025 Aditi & Rohan.</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 80 });
+
+        // Petals Logic
+        function createPetal() {
+            const container = document.getElementById('petals-container');
+            const p = document.createElement('div');
+            p.classList.add('petal');
+            const types = ['🌸', '🌼', '🌺'];
+            p.innerText = types[Math.floor(Math.random() * types.length)];
+            
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.fontSize = Math.random() * 15 + 15 + 'px';
+            p.style.animationDuration = Math.random() * 3 + 4 + 's';
+            
+            container.appendChild(p);
+            setTimeout(() => p.remove(), 7000);
+        }
+        setInterval(createPetal, 400);
+
+        // Countdown Logic
+        const weddingDate = new Date("Dec 15, 2025 10:30:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const dist = weddingDate - now;
+
+            if (dist > 0) {
+                document.getElementById("days").innerText = Math.floor(dist / (1000 * 60 * 60 * 24));
+                document.getElementById("hours").innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("mins").innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("secs").innerText = Math.floor((dist % (1000 * 60)) / 1000);
+            } else {
+                document.getElementById("timer").innerHTML = "<h3 style='color:#FFD700; font-size:2rem; font-family: \"Yatra One\"'>लग्न सोहळा संपन्न!</h3>";
+            }
+        }, 1000);
+
+        // Music Logic
+        const bgMusic = document.getElementById('bgMusic');
+        const btn = document.getElementById('musicBtn');
+        let playing = false;
+
+        btn.addEventListener('click', () => {
+            if (playing) {
+                bgMusic.pause();
+                btn.innerText = '🎵';
+            } else {
+                bgMusic.play().catch(console.error);
+                btn.innerText = '⏸';
+            }
+            playing = !playing;
+        });
+    </script>
+</body>
+</html>
