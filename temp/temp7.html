@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>शुभ विवाह | आदिती आणि रोहन</title>
     
-    <!-- Fonts -->
+    <!-- Fonts: Added 'Shree Devanagari 714' -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Great+Vibes&family=Noto+Serif+Devanagari:wght@400;700&family=Rozha+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Great+Vibes&family=Shree+Devanagari+714:wght@400;700&family=Rozha+One&display=swap" rel="stylesheet">
     
     <!-- Animate On Scroll (AOS) -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -23,7 +23,7 @@
             
             /* Font Variables */
             --font-title: 'Rozha One', serif;        /* Big Titles */
-            --font-body: 'Noto Serif Devanagari', serif; /* Body text */
+            --font-body: 'Shree Devanagari 714', sans-serif; /* NEW: Shree Font for Body */
             --font-poem: 'Amita', cursive;           /* Poems */
             --font-english: 'Great Vibes', cursive;  /* English */
             
@@ -90,7 +90,7 @@
         h2.section-title {
             font-size: 3rem;
             color: var(--primary);
-            margin-bottom: 25px;
+            margin-bottom: 20px; /* Reduced margin */
             position: relative;
             display: inline-block;
             padding-bottom: 10px;
@@ -108,10 +108,10 @@
         p { text-align: center; line-height: 1.7; margin-bottom: 15px; }
 
         .poem-text {
-            font-family: var(--font-poem);
-            font-size: 1.4rem;
+            font-family: var(--font-title); /* Changed to Rozha One to fix rendering */
+            font-size: 1.5rem;
             color: #555;
-            line-height: 1.8;
+            line-height: 1.6;
         }
 
         /* --- HEADER (HERO) --- */
@@ -146,7 +146,7 @@
             color: #FFD700;
             font-size: 1.8rem;
             margin-bottom: 10px;
-            font-family: var(--font-poem);
+            font-family: var(--font-body); /* Changed to Shree */
             font-weight: bold;
         }
 
@@ -234,7 +234,7 @@
             font-weight: bold;
         }
 
-        /* --- EVENTS (KARYAKRAM) --- */
+        /* --- EVENTS (Karyakram) --- */
         .events-container {
             max-width: 900px;
             margin: 0 auto;
@@ -250,9 +250,11 @@
             border-left: 5px solid var(--primary);
         }
         
-        .event-info { padding: 25px; flex: 1; text-align: center; }
+        /* Reduced Padding here */
+        .event-info { padding: 20px; flex: 1; text-align: center; }
         
         .event-title { 
+            /* Using Rozha One here for complex words if needed, otherwise Yatra */
             font-family: var(--font-title);
             font-size: 2rem; 
             color: var(--primary); 
@@ -263,7 +265,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 8px;
+            margin-bottom: 5px; /* Reduced margin */
             font-size: 1.1rem;
             color: #555;
             font-family: var(--font-body);
@@ -274,7 +276,7 @@
         /* --- FAMILY / AAPLE NAMR --- */
         .family-section {
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 20px; /* Reduced padding */
             background-color: var(--white);
             border-top: 1px solid #eee;
         }
@@ -286,7 +288,7 @@
         }
         .family-names {
             font-size: 1.2rem;
-            line-height: 1.8;
+            line-height: 1.6; /* Tighter line height */
             color: #444;
             font-weight: bold;
         }
@@ -418,6 +420,7 @@
     <!-- HERO -->
     <header>
         <div class="hero-content" data-aos="zoom-in" data-aos-duration="1500">
+            <!-- Using Shree for Shree text -->
             <div class="shlok-top">|| श्री गणेशाय नमः ||</div>
             <h1>आदिती</h1>
             <span class="weds-text">Weds</span>
@@ -599,36 +602,41 @@
         const btn = document.getElementById('musicBtn');
         let playing = false;
 
-        // Try to play automatically on load
-        window.addEventListener('load', () => {
+        // Function to attempt playback
+        function attemptPlay() {
             bgMusic.play().then(() => {
                 playing = true;
                 btn.innerText = '⏸';
+                // Remove listeners once successful
+                document.removeEventListener('click', attemptPlay);
+                document.removeEventListener('touchstart', attemptPlay);
+                document.removeEventListener('scroll', attemptPlay);
+                document.removeEventListener('keydown', attemptPlay);
             }).catch(error => {
-                console.log("Autoplay prevented by browser. Waiting for user interaction.");
+                console.log("Autoplay prevented. Waiting for user interaction.");
             });
-        });
+        }
 
-        // Fallback: Play on first click if autoplay failed
-        document.body.addEventListener('click', () => {
-            if (!playing) {
-                bgMusic.play().then(() => {
-                    playing = true;
-                    btn.innerText = '⏸';
-                }).catch(console.error);
-            }
-        }, { once: true });
+        // Try immediately on load
+        window.addEventListener('load', attemptPlay);
+
+        // Add listeners for user interaction
+        document.addEventListener('click', attemptPlay);
+        document.addEventListener('touchstart', attemptPlay);
+        document.addEventListener('scroll', attemptPlay);
+        document.addEventListener('keydown', attemptPlay);
 
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             if (playing) {
                 bgMusic.pause();
                 btn.innerText = '🎵';
+                playing = false;
             } else {
                 bgMusic.play().catch(console.error);
                 btn.innerText = '⏸';
+                playing = true;
             }
-            playing = !playing;
         });
 
         // WhatsApp Logic
