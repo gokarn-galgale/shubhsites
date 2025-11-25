@@ -3,950 +3,426 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#800020" />
-    <meta name="description" content="आदिती आणि रोहन यांच्या शुभ विवाहाचे निमंत्रण.">
-    <title>शुभ विवाह | आदिती आणि रोहन</title>
+    <meta name="theme-color" content="#800000" />
+    <title>शुभ विवाह | Aditi & Rohan</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Baloo 2 & Noto Serif Devanagari for Marathi, Great Vibes for English -->
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Noto+Serif+Devanagari:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700;800&family=Rozha+One&family=Amita:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet"/>
 
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Tailwind Custom Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        maroon: "#800000",
+                        gold: "#d97706",
+                        cream: "#FFFDD0",
+                    },
+                    fontFamily: {
+                        'wedding-body': ['Noto Serif Devanagari', 'serif'],
+                        'wedding-title': ['Rozha One', 'serif'],
+                        'wedding-poem': ['Amita', 'cursive'],
+                        'english-script': ['Great Vibes', 'cursive'],
+                    },
+                    keyframes: {
+                        fadeInDown: {
+                            "0%": { opacity: "0", transform: "translateY(-20px)" },
+                            "100%": { opacity: "1", transform: "translateY(0)" }
+                        },
+                        fadeInUp: {
+                            "0%": { opacity: "0", transform: "translateY(40px)" },
+                            "100%": { opacity: "1", transform: "translateY(0)" }
+                        },
+                        spinSlow: {
+                            "0%": { transform: "rotate(0deg)" },
+                            "100%": { transform: "rotate(360deg)" }
+                        }
+                    },
+                    animation: {
+                        "fade-down": "fadeInDown 1s ease-out forwards",
+                        "fade-up": "fadeInUp 1.2s ease-out forwards",
+                        "spin-slow": "spinSlow 12s linear infinite"
+                    }
+                }
+            }
+        };
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Background texture -->
     <style>
-        /* --- THEME VARIABLES --- */
-        :root {
-            --primary: #800020; /* Royal Maroon */
-            --primary-dark: #5a0016;
-            --gold: #FFD700;
-            --cream: #FFF8E7;
-            --text: #2c1810;
-            --white: #ffffff;
-            --gold-grad: linear-gradient(90deg, #bf953f 0%, #fbf5b7 40%, #aa771c 100%);
-            --font-title: 'Noto Serif Devanagari', serif;
-            --font-body: 'Baloo 2', sans-serif;
-            --font-english: 'Great Vibes', cursive;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { height: 100%; scroll-behavior: smooth; }
-
         body {
-            font-family: var(--font-body);
-            color: var(--text);
-            background-color: var(--cream);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            line-height: 1.6;
-            font-size: 18px;
-        }
-
-        /* --- 3. GANESH INTRO LOADER --- */
-        #loader {
-            position: fixed;
-            inset: 0;
-            background: var(--primary);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.8s ease-out, visibility 0.8s;
-        }
-        .loader-content { text-align: center; color: var(--gold); }
-        .om-loader {
-            font-size: 5rem;
-            font-family: var(--font-title);
-            animation: pulse-om 2s infinite ease-in-out;
-        }
-        .loader-text {
-            margin-top: 15px;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-            opacity: 0.8;
-        }
-        .loader-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-
-        @keyframes pulse-om {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; text-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
-        }
-
-        /* --- 2. GOLD SHINE ANIMATION --- */
-        .gold-text {
-            background: linear-gradient(90deg, #bf953f 0%, #fbf5b7 25%, #aa771c 50%, #fbf5b7 75%, #bf953f 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: inline-block;
-            font-weight: 700;
-            animation: shine-text 5s linear infinite;
-        }
-
-        @keyframes shine-text {
-            to { background-position: 200% center; }
-        }
-
-        /* --- 7. GOLDEN DECORATIVE CORNERS --- */
-        .corner-ornament {
-            position: fixed;
-            width: 150px;
-            height: 150px;
-            pointer-events: none;
-            z-index: 800;
-            background-size: contain;
-            background-repeat: no-repeat;
-            opacity: 0.8;
-            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
-        }
-        /* Using inline SVG encoded for the corner pattern */
-        .corner-ornament::before {
-            content: '';
-            display: block;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23FFD700' stroke-width='2'%3E%3Cpath d='M10,10 Q50,10 50,50 T90,90 M10,30 Q40,30 40,60 M30,10 Q30,40 60,40' /%3E%3Ccircle cx='10' cy='10' r='3' fill='%23FFD700'/%3E%3C/svg%3E");
-        }
-        
-        .corner-top-left { top: 0; left: 0; transform: rotate(0deg); }
-        .corner-top-right { top: 0; right: 0; transform: rotate(90deg); }
-        .corner-bottom-left { bottom: 0; left: 0; transform: rotate(-90deg); }
-        .corner-bottom-right { bottom: 0; right: 0; transform: rotate(180deg); }
-
-        /* --- HEADER / HERO --- */
-        header {
-            height: 100vh;
-            min-height: 600px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            border-bottom: 5px solid var(--gold);
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.5)), 
-                        url('/temp/images/background.jpg') center/cover no-repeat fixed;
-        }
-
-        .hero-content {
-            max-width: 920px;
-            width: 90%;
-            text-align: center;
-            padding: 40px 20px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            color: #fff;
-            position: relative;
-            z-index: 10;
-        }
-
-        .shlok-top {
-            color: var(--gold);
-            font-size: 1.6rem;
-            font-family: var(--font-title);
-            margin-bottom: 10px;
-            font-weight: 700;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-        }
-
-        /* --- 1. NAME REVEAL ANIMATION --- */
-        .reveal-text {
-            font-family: var(--font-title);
-            font-weight: 700;
-            color: #fff;
-            font-size: 4rem;
-            margin: 0;
-            line-height: 1.1;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
-            opacity: 0; /* Hidden initially */
-            transform: translateY(30px);
-            /* Animation handled by class addition in JS */
-            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
-        }
-
-        .reveal-active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .weds-text {
-            font-family: var(--font-english);
-            font-size: 3rem;
-            color: var(--gold);
-            display: block;
-            margin: 5px 0 15px;
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
-            opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 1s ease 0.5s, transform 1s ease 0.5s; /* Delay for weds */
-        }
-
-        .reveal-active-weds {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .date-badge {
-            margin: 20px auto;
-            border-top: 1px solid rgba(255,255,255,0.3);
-            border-bottom: 1px solid rgba(255,255,255,0.3);
-            padding: 10px 30px;
-            width: fit-content;
-            border-radius: 50px;
-            background: rgba(0,0,0,0.3);
-        }
-
-        .date-text {
-            color: #fff;
-            font-family: var(--font-title);
-            font-weight: 700;
-            font-size: 1.3rem;
-            letter-spacing: 1px;
-        }
-
-        header p.lead {
-            color: #f0f0f0;
-            margin-top: 20px;
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.8;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-        }
-
-        /* --- 5. NATURAL PETAL SWAY --- */
-        #petals-container { position: fixed; inset: 0; pointer-events: none; z-index: 900; overflow: hidden; }
-        .petal {
-            position: absolute;
-            user-select: none;
-            pointer-events: none;
-            font-size: 20px;
-            opacity: 0;
-            /* Combined animation: Fall down + Sway left/right */
-            animation: fall linear forwards, sway 3s ease-in-out infinite alternate;
-            will-change: transform, opacity;
-        }
-
-        @keyframes fall {
-            0% { top: -10%; opacity: 0; }
-            10% { opacity: 1; }
-            100% { top: 110%; opacity: 0; }
-        }
-
-        @keyframes sway {
-            0% { margin-left: -15px; transform: rotate(0deg); }
-            100% { margin-left: 15px; transform: rotate(45deg); }
-        }
-
-        /* --- SECTIONS --- */
-        section { padding: 60px 20px; }
-        .bg-cream { background-color: var(--cream); }
-        .bg-white { background-color: var(--white); }
-
-        .ganesha-wrapper { text-align: center; max-width: 800px; margin: 0 auto; padding: 20px; }
-        .om { font-size: 5rem; display: block; margin-bottom: 10px; font-family: var(--font-title); line-height: 1; }
-        
-        .section-title { 
-            font-family: var(--font-title); 
-            font-size: 2.6rem; 
-            color: var(--primary); 
-            margin-bottom: 15px; 
-            display: inline-block; 
-            position: relative; 
-            font-weight: 700;
-        }
-        .section-title::after { 
-            content: '✻'; 
-            display: block; 
-            color: #c5a059; 
-            font-size: 1.5rem; 
-            margin-top: 5px; 
-            line-height: 0.6; 
-        }
-
-        .poem-text { 
-            font-family: var(--font-title); 
-            color: #444; 
-            font-size: 1.3rem; 
-            line-height: 1.8; 
-            margin-top: 10px;
-        }
-
-        /* --- COUPLE PROFILE --- */
-        .couple-wrapper { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 30px; }
-        
-        .profile-card {
-            text-align: center;
-            background: var(--white);
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(128, 0, 32, 0.1);
-            border: 1px solid rgba(128, 0, 32, 0.1);
-            flex: 1 1 300px;
-            max-width: 380px;
-            transition: transform 0.3s ease;
-        }
-        .profile-card:hover { transform: translateY(-5px); }
-
-        .img-ring { 
-            width: 220px; 
-            height: 220px; 
-            border-radius: 50%; 
-            padding: 6px; 
-            background: var(--gold-grad); 
-            margin: 0 auto 15px; 
-            display: grid; 
-            place-items: center; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            /* Shine effect on ring */
-            position: relative;
-            overflow: hidden;
-        }
-        .img-ring::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.6), transparent);
-            transform: skewX(-25deg);
-            animation: shine-ring 3s infinite;
-        }
-        @keyframes shine-ring {
-            0% { left: -100%; }
-            20% { left: 200%; }
-            100% { left: 200%; }
-        }
-
-        .img-ring img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            border-radius: 50%; 
-            border: 4px solid #fff; 
-            display: block;
-            z-index: 2; 
-        }
-
-        .name-text { font-family: var(--font-title); font-size: 2rem; color: var(--primary); margin-bottom: 5px; font-weight: 700; }
-        .relation { color: #888; font-weight: 600; font-size: 1rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .parents-info { font-size: 1.1rem; color: #555; line-height: 1.4; }
-
-        /* --- EVENTS --- */
-        .events-container { max-width: 800px; margin: 0 auto; }
-        
-        .event-box { 
-            background: var(--white); 
-            border-radius: 16px; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05); 
-            margin-bottom: 30px; 
-            display: flex; 
-            flex-direction: column; 
-            border-left: 8px solid var(--primary); 
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
-        .event-box:hover { transform: scale(1.02); }
-
-        .event-info { padding: 30px; text-align: center; }
-        .event-title { font-family: var(--font-title); font-size: 1.8rem; color: var(--primary); margin-bottom: 15px; font-weight: 700; }
-        
-        .info-item { 
-            display: flex; 
-            gap: 10px; 
-            align-items: center; 
-            justify-content: center; 
-            color: #555; 
-            margin-bottom: 8px; 
-            font-size: 1.1rem;
-        }
-        .info-item .icon { font-size: 1.4rem; min-width: 30px; text-align: center; }
-
-        .map-link {
-            display: inline-block;
-            margin-top: 15px;
-            text-decoration: none;
-            color: var(--white);
-            background-color: var(--primary);
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: background 0.3s;
-            box-shadow: 0 4px 10px rgba(128, 0, 32, 0.3);
-        }
-        .map-link:hover { background-color: var(--primary-dark); }
-
-        /* --- FAMILY --- */
-        .family-section { text-align: center; padding: 40px 20px; }
-        .family-title { font-family: var(--font-title); font-size: 1.8rem; color: var(--primary); margin-bottom: 15px; }
-        .family-names { font-size: 1.2rem; color: #444; line-height: 1.8; font-weight: 600; }
-
-        /* --- COUNTDOWN --- */
-        .countdown-overlay { 
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('/temp/images/background.jpg') center/cover no-repeat fixed; 
-            color: #fff; 
-            text-align: center; 
-            padding: 60px 20px; 
-        }
-        .kshan-heading { font-family: var(--font-title); font-size: 2.2rem; color: var(--gold); margin-bottom: 25px; }
-        
-        .timer-display { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
-        .t-block { 
-            background: rgba(255, 255, 255, 0.1); 
-            border-radius: 12px; 
-            padding: 15px 20px; 
-            min-width: 100px; 
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-        }
-        .t-num { font-family: var(--font-title); font-size: 2rem; color: var(--gold); display: block; font-weight: 700; line-height: 1; }
-        .t-text { font-size: 0.9rem; margin-top: 5px; text-transform: uppercase; letter-spacing: 1px; color: #ddd; }
-
-        /* --- FOOTER --- */
-        footer { background: #2b110e; color: #d4af37; text-align: center; padding: 40px 20px 100px; border-top: 4px solid var(--gold); }
-        footer p { margin-bottom: 10px; }
-
-        /* --- FABs (Floating Action Buttons) --- */
-        .fab {
-            position: fixed;
-            bottom: 25px;
-            width: 55px; height: 55px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 6px 25px rgba(0,0,0,0.4);
-            cursor: pointer;
-            z-index: 1001;
-            transition: transform 0.2s ease, box-shadow 0.2s;
-            user-select: none;
-            border: none;
-            outline: none;
-        }
-        .fab:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(0,0,0,0.5); }
-        .fab:active { transform: scale(0.95); }
-        
-        .music-fab { right: 25px; background: var(--primary); border: 2px solid var(--gold); color: #fff; font-size: 1.4rem; }
-        .whatsapp-fab { left: 25px; background: #25D366; border: 2px solid #fff; color: #fff; }
-
-        /* --- 10. MUSIC FAB WAVE PULSE --- */
-        .music-fab.playing {
-            animation: pulse-wave 2s infinite;
-        }
-        @keyframes pulse-wave {
-            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
-        }
-
-        /* --- RESPONSIVE --- */
-        @media(max-width: 768px) {
-            h1 { font-size: 2.8rem; }
-            .weds-text { font-size: 2.2rem; }
-            .hero-content { padding: 30px 15px; }
-            .img-ring { width: 180px; height: 180px; }
-            .name-text { font-size: 1.6rem; }
-            .section-title { font-size: 2rem; }
-            .kshan-heading { font-size: 1.8rem; }
-            .t-num { font-size: 1.5rem; }
-            .t-block { min-width: 80px; padding: 10px; }
-            .om { font-size: 4rem; }
-            /* Hide corners on very small screens if they block text, or adjust size */
-            .corner-ornament { width: 100px; height: 100px; }
-        }
-
-        @media(max-width: 480px) {
-            .t-block { min-width: 45%; margin-bottom: 5px; }
-            .hero-content { width: 95%; }
-            .petal { font-size: 16px; }
-            h1 { font-size: 2.4rem; }
-            .weds-text { font-size: 1.8rem; }
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
         }
     </style>
 </head>
-<body>
-    <!-- LOADER -->
-    <div id="loader">
-        <div class="loader-content">
-            <div class="om-loader">ॐ</div>
-            <p class="loader-text gold-text">शुभ विवाह...</p>
-        </div>
+
+<body class="font-wedding-body text-maroon">
+
+<!-- ============================
+     A. GANESH STHAPANA HEADER
+=============================== -->
+<section class="py-10 text-center">
+    <img 
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Ganesha_Basohli_miniature_circa_1730_Dubost_p73.jpg/440px-Ganesha_Basohli_miniature_circa_1730_Dubost_p73.jpg"
+        class="mx-auto w-40 rounded-xl shadow-lg"
+        alt="गणेश चित्र"
+    />
+
+    <h2 class="mt-4 text-3xl font-extrabold text-gold tracking-widest">
+        || श्री गणेशाय नमः ||
+    </h2>
+</section>
+
+<!-- ============================
+     B. HERO MANDAP SECTION
+=============================== -->
+
+<section class="relative min-h-screen flex items-center justify-center text-center">
+
+    <!-- Background Mandap -->
+    <div class="absolute inset-0">
+        <img 
+            src="https://images.unsplash.com/photo-1519225421980-715cb0202128?q=80&w=2000"
+            class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-yellow-600/10 to-yellow-300/5 mix-blend-overlay"></div>
     </div>
 
-    <!-- Petals Container -->
-    <div id="petals-container" aria-hidden="true"></div>
+    <!-- Toran Top -->
+    <img 
+        src="https://www.pngmart.com/files/16/Wedding-Flower-Decoration-PNG-Free-Download.png"
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl pointer-events-none"
+    />
 
-    <!-- Golden Corners -->
-    <div class="corner-ornament corner-top-left"></div>
-    <div class="corner-ornament corner-top-right"></div>
-    <div class="corner-ornament corner-bottom-left"></div>
-    <div class="corner-ornament corner-bottom-right"></div>
+    <!-- Main Content -->
+    <div class="relative z-10 pt-20 animate-fade-down">
 
-    <!-- Audio Player -->
-    <audio id="bgMusic" loop preload="auto" autoplay playsinline>
-      <source src="/temp/music/tabla.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- Enable-sound button -->
-    <button id="enableSoundBtn" style="position:fixed; right:18px; bottom:86px; z-index:1200; display:none; background:#800020; color:#fff; border:none; padding:10px 12px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.3); font-weight:700; cursor:pointer;">
-      🔊 आवाज चालू करा
-    </button>
-
-    <!-- WhatsApp Share FAB -->
-    <a class="fab whatsapp-fab" id="whatsappBtn" href="#" aria-label="WhatsApp वर शेअर करा" title="WhatsApp वर शेअर करा">
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white" aria-hidden="true">
-            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.017-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487 2.982 1.288 2.982.858 3.526.809.544-.05 1.758-.718 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-        </svg>
-    </a>
-
-    <!-- Music FAB -->
-    <button id="musicBtn" class="fab music-fab" aria-label="संगीत प्ले/पॉज" title="संगीत प्ले करा">▶</button>
-
-    <!-- HERO -->
-    <header role="banner">
-        <div class="hero-content" data-aos="zoom-in" data-aos-duration="1200">
-            <div class="shlok-top">|| श्री गणेशाय नमः ||</div>
-            <!-- Names with initial opacity 0 for reveal animation -->
-            <h1 class="reveal-text" aria-label="आदिती">आदिती</h1>
-            <span class="weds-text" aria-hidden="true">Weds</span>
-            <h1 class="reveal-text" aria-label="रोहन">रोहन</h1>
-
-            <div class="date-badge" aria-hidden="false" role="note">
-                <span class="date-text">१५ डिसेंबर २०२५</span>
-            </div>
-
-            <p class="lead">आम्ही आपल्याला आमच्या शुभ विवाहसोहळ्यास आणि पुढील सर्व मंगल कार्यक्रमांना सहर्ष आमंत्रित करतो. आपल्या उपस्थितीने आमचा आनंद द्विगुणित होईल.</p>
-        </div>
-    </header>
-
-    <!-- GANESHA -->
-    <section class="bg-cream" aria-labelledby="ganesha-title">
-        <div class="ganesha-wrapper" data-aos="fade-up">
-            <span class="om gold-text" aria-hidden="true">ॐ</span>
-            <h2 id="ganesha-title" class="section-title">शुभ विवाह</h2>
-            <p class="poem-text">वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।<br>निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥</p>
-        </div>
-    </section>
-
-    <!-- COUPLE -->
-    <section class="bg-white" id="couple" aria-labelledby="couple-title">
-        <div style="text-align:center;" data-aos="fade-up">
-            <h2 id="couple-title" class="section-title">वर आणि वधू</h2>
+        <!-- शुभ विवाह Badge -->
+        <div class="inline-block px-6 py-2 bg-maroon text-gold rounded-full shadow-xl border border-gold/60 text-xl tracking-wide mb-4">
+            ॥ शुभ विवाह ॥
         </div>
 
-        <div class="couple-wrapper">
-            <!-- Bride -->
-            <article class="profile-card" data-aos="fade-right" aria-labelledby="bride-name">
-                <figure class="img-ring" aria-hidden="false">
-                    <img src="/temp/images/bride.jpg" alt="आदिती यांचे छायाचित्र" />
-                </figure>
-                <div id="bride-name" class="name-text">आदिती</div>
-                <p class="relation">(कन्या)</p>
-                <p class="parents-info">श्री. सुरेश व सौ. अनिता पाटील</p>
-            </article>
-
-            <!-- Groom -->
-            <article class="profile-card" data-aos="fade-left" aria-labelledby="groom-name">
-                <figure class="img-ring">
-                    <img src="/temp/images/groom.jpg" alt="रोहन यांचे छायाचित्र" />
-                </figure>
-                <div id="groom-name" class="name-text">रोहन</div>
-                <p class="relation">(सुपुत्र)</p>
-                <p class="parents-info">श्री. रमेश व सौ. सुनिता देशमुख</p>
-            </article>
+        <!-- Family Names -->
+        <div class="flex items-center justify-center gap-6 text-white font-wedding-title text-5xl md:text-6xl lg:text-7xl drop-shadow-xl">
+            <span>देशमुख</span>
+            <span class="font-english-script text-gold text-6xl">♡</span>
+            <span>पाटील</span>
         </div>
 
-        <div style="text-align:center; margin-top: 30px;" data-aos="fade-up">
-            <h3 style="font-family:var(--font-title); font-size:1.4rem; color:var(--primary);">यांचा शुभ विवाह आयोजित केला आहे</h3>
+        <!-- ===================
+             Couple Circular Frame
+        ===================== -->
+        <div class="mt-10 relative flex justify-center">
+
+            <!-- Rotating Ring -->
+            <div class="absolute w-64 h-64 md:w-72 md:h-72 border-4 border-gold rounded-full animate-spin-slow opacity-80"></div>
+
+            <!-- Couple Photo -->
+            <img 
+                src="https://img.freepik.com/premium-photo/3d-illustration-indian-wedding-couple-generative-ai_1034902-12349.jpg"
+                class="w-60 h-60 md:w-72 md:h-72 rounded-full object-cover border-4 border-white shadow-[0_0_40px_rgba(217,119,6,0.8)]"
+            />
         </div>
-    </section>
+        <!-- Countdown Timer -->
+        <div class="mt-10 flex justify-center">
+            <div class="backdrop-blur-md bg-white/10 border border-white/20 px-6 py-4 rounded-2xl shadow-xl w-full max-w-xl">
+                <h3 class="text-gold text-2xl font-wedding-title mb-3">उर्वरित वेळ</h3>
 
-    <!-- EVENTS -->
-    <section class="bg-cream" aria-labelledby="events-title">
-        <div style="text-align:center;">
-            <h2 id="events-title" class="section-title">मंगल कार्यक्रम</h2>
-        </div>
+                <div id="countdown" class="grid grid-cols-4 gap-3 text-white font-bold">
+                    <div class="flex flex-col bg-black/30 rounded-xl py-3">
+                        <span id="days" class="text-2xl md:text-3xl text-gold">00</span>
+                        <span class="text-xs md:text-sm">दिवस</span>
+                    </div>
 
-        <div class="events-container">
-            <!-- Haldi -->
-            <div class="event-box" data-aos="fade-up">
-                <div class="event-info">
-                    <div class="event-title">हळद आणि संगीत</div>
-                    <div class="info-item"><span class="icon">📅</span><span>१४ डिसेंबर २०२५</span></div>
-                    <div class="info-item"><span class="icon">⏰</span><span>सायं ४:००</span></div>
-                    <div class="info-item"><span class="icon">📍</span><span>हॉटेल ग्रँड पॅलेस, पुणे</span></div>
-                </div>
-            </div>
+                    <div class="flex flex-col bg-black/30 rounded-xl py-3">
+                        <span id="hours" class="text-2xl md:text-3xl text-gold">00</span>
+                        <span class="text-xs md:text-sm">तास</span>
+                    </div>
 
-            <!-- Wedding -->
-            <div class="event-box" data-aos="fade-up" data-aos-delay="100">
-                <div class="event-info">
-                    <div class="event-title">शुभ विवाह सोहळा</div>
-                    <div class="info-item"><span class="icon">📅</span><span>१५ डिसेंबर २०२५</span></div>
-                    <div class="info-item"><span class="icon">⏰</span><span>सकाळी १०:३० (गोरज मुहूर्त)</span></div>
-                    <div class="info-item"><span class="icon">📍</span><span>वृन्दावन लॉन्स, कोल्हापूर</span></div>
+                    <div class="flex flex-col bg-black/30 rounded-xl py-3">
+                        <span id="mins" class="text-2xl md:text-3xl text-gold">00</span>
+                        <span class="text-xs md:text-sm">मिनिटे</span>
+                    </div>
 
-                    <div style="margin-top: 20px;">
-                        <a class="map-link" id="mapLink" href="https://www.google.com/maps/search/?api=1&query=Vrudhavan+Lawns+Kolhapur" target="_blank" rel="noopener noreferrer" aria-label="नकाशा पहा">
-                            🗺️ नकाशा पहा (View Map)
-                        </a>
+                    <div class="flex flex-col bg-black/30 rounded-xl py-3">
+                        <span id="secs" class="text-2xl md:text-3xl text-gold">00</span>
+                        <span class="text-xs md:text-sm">सेकंद</span>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- FAMILY -->
-    <section class="family-section" aria-labelledby="family-title">
-        <div data-aos="fade-up">
-            <h2 id="family-title" class="family-title">आपले नम्र</h2>
-            <div class="family-names">
-                श्री. सुरेश आणि सौ. अनिता पाटील<br>
-                श्री. रमेश आणि सौ. सुनिता देशमुख<br>
-                तसेच<br>
-                समस्त पाटील आणि देशमुख परिवार
-            </div>
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-white animate-bounce">
+            <i data-lucide="arrow-down" class="w-10 h-10"></i>
         </div>
-    </section>
 
-    <!-- COUNTDOWN -->
-    <section class="countdown-overlay" aria-labelledby="countdown-title">
-        <div data-aos="zoom-in">
-            <h2 id="countdown-title" class="kshan-heading">शुभविवाहासाठी उरलेले क्षण</h2>
+    </div><!-- end hero content -->
+</section>
 
-            <div class="timer-display" id="timer" role="timer" aria-live="polite">
-                <div class="t-block">
-                    <span class="t-num" id="days">00</span>
-                    <span class="t-text">दिवस</span>
-                </div>
-                <div class="t-block">
-                    <span class="t-num" id="hours">00</span>
-                    <span class="t-text">तास</span>
-                </div>
-                <div class="t-block">
-                    <span class="t-num" id="mins">00</span>
-                    <span class="t-text">मिनिटे</span>
-                </div>
-                <div class="t-block">
-                    <span class="t-num" id="secs">00</span>
-                    <span class="t-text">सेकंद</span>
-                </div>
-            </div>
+<!-- ==========================================
+     C. MAIN INVITATION CARD (WHITE SECTION)
+============================================= -->
+
+<section class="px-4 md:px-10 py-14 flex justify-center">
+    <div class="bg-white shadow-2xl rounded-3xl border-t-8 border-maroon w-full max-w-3xl p-8 md:p-12 animate-fade-up">
+
+        <!-- Header -->
+        <h2 class="text-center text-xl md:text-2xl text-maroon font-wedding-title">
+            श्री गणेश प्रसन्न || श्री स्वामी समर्थ ||
+        </h2>
+
+        <!-- Bride -->
+        <div class="mt-8 text-center">
+            <h3 class="text-3xl md:text-4xl text-maroon font-wedding-title font-bold">
+                चि. सौ. का. अदिती
+            </h3>
+            <p class="text-lg mt-2 font-semibold">
+                (Granddaughter of Late Ramchandra Hari Deshmukh)
+            </p>
         </div>
-    </section>
 
-    <!-- FOOTER -->
-    <footer role="contentinfo">
-        <p style="font-family:var(--font-title); font-size:1.5rem; color:var(--gold);">।। शुभ भवतु ।।</p>
-        <p style="font-size:0.9rem; color:#ccc;">&copy; 2025 Aditi & Rohan.</p>
-    </footer>
+        <!-- Weds Separator -->
+        <div class="text-center my-6">
+            <span class="font-english-script text-gold text-5xl">weds</span>
+        </div>
 
-    <noscript>
-        <div style="background:#ffd; padding:12px; text-align:center;">कृपया सर्वोत्तम अनुभवासाठी JavaScript सक्षम करा.</div>
-    </noscript>
+        <!-- Groom -->
+        <div class="text-center">
+            <h3 class="text-3xl md:text-4xl text-maroon font-wedding-title font-bold">
+                चि. रोहन
+            </h3>
+            <p class="text-lg mt-2 font-semibold">
+                (Grandson of Late Vishnu Patil)
+            </p>
+        </div>
 
-    <!-- SCRIPTS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // Init AOS
-        AOS.init({ once: true, offset: 80, duration: 700 });
+        <!-- Poem Box -->
+        <div class="mt-10 bg-cream border border-gold rounded-2xl p-6 shadow-md">
+            <p class="font-wedding-poem text-xl leading-relaxed text-center text-maroon">
+                लग्नाची बेडी, प्रेमाची शिडी... <br/>
+                संसाराची गाडी, सुखाची तिजोरी... <br/>
+                जुळली दोन अंतःकरणं, जुळल्या दोन जीवांची दोरी... <br/>
+                संगतीत आयुष्यभर चालत राहोत ही जोडी!
+            </p>
+        </div>
 
-        // LOADER Logic: Hide loader when window loads
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            // Small delay to ensure images are ready
-            setTimeout(() => {
-                loader.classList.add('loader-hidden');
-                
-                // Trigger Name Reveal Animation
-                const revealTexts = document.querySelectorAll('.reveal-text');
-                revealTexts.forEach(el => el.classList.add('reveal-active'));
-                
-                const wedsText = document.querySelector('.weds-text');
-                if(wedsText) wedsText.classList.add('reveal-active-weds');
-            }, 1000);
+    </div>
+</section>
+<!-- ==========================================
+     D. EVENT TIMELINE
+============================================== -->
+
+<section class="px-6 md:px-12 py-12">
+    <h2 class="text-center text-4xl text-maroon font-wedding-title mb-10 animate-fade-up">
+        मंगल कार्यक्रम
+    </h2>
+
+    <div class="space-y-8 max-w-3xl mx-auto">
+
+        <!-- Haldi Ceremony -->
+        <div class="bg-white rounded-2xl shadow-xl border-l-8 border-maroon p-6 transition transform hover:-translate-y-2 hover:shadow-2xl animate-fade-up">
+            <div class="flex items-center gap-4">
+                <i data-lucide="sun" class="w-10 h-10 text-gold"></i>
+                <h3 class="text-2xl font-wedding-title text-maroon">हळद समारंभ</h3>
+            </div>
+            <p class="mt-3 font-semibold">
+                📅 Monday, Dec 01, 2025 — ⏰ 7 PM
+            </p>
+        </div>
+
+        <!-- Wedding Ceremony -->
+        <div class="bg-white rounded-2xl shadow-xl border-l-8 border-maroon p-6 transition transform hover:-translate-y-2 hover:shadow-2xl animate-fade-up">
+            <div class="flex items-center gap-4">
+                <i data-lucide="heart" class="w-10 h-10 text-gold"></i>
+                <h3 class="text-2xl font-wedding-title text-maroon">विवाह सोहळा</h3>
+            </div>
+            <p class="mt-3 font-semibold">
+                📅 Tuesday, Dec 02, 2025 — ⏰ 12:35 PM (अक्षतारोपण)
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ==========================================
+     E. FAMILY DETAILS
+============================================== -->
+
+<section class="px-6 md:px-12 py-14">
+    <h2 class="text-center text-4xl text-maroon font-wedding-title mb-10 animate-fade-up">
+        You are cordially invited by
+    </h2>
+
+    <div class="text-center text-xl font-semibold leading-relaxed animate-fade-up">
+        राजेश देशमुख<br/>
+        विलास पाटील<br/>
+        अंजली देशमुख<br/>
+        शरद पाटील<br/>
+        समस्त देशमुख व पाटील परिवार
+    </div>
+
+    <!-- Kids Section -->
+    <div class="mt-12 bg-yellow-100 border border-yellow-400 border-dashed rounded-2xl p-6 max-w-2xl mx-auto shadow-md animate-fade-up">
+
+        <h3 class="text-3xl font-wedding-title text-maroon text-center mb-3">
+            बाल निमंत्रक
+        </h3>
+
+        <div class="flex justify-center gap-6 text-yellow-700 my-3">
+            <i data-lucide="trumpet" class="w-8 h-8"></i>
+            <i data-lucide="drum" class="w-8 h-8"></i>
+            <i data-lucide="trumpet" class="w-8 h-8"></i>
+        </div>
+
+        <p class="text-center text-xl font-semibold">
+            Aryan • Swara • Arnav
+        </p>
+
+        <p class="text-center mt-2 font-wedding-poem text-lg text-maroon">
+            "आमच्या आत्याच्या लग्नाला नक्की यायचं हं!"
+        </p>
+    </div>
+
+</section>
+<!-- ==========================================
+     F. FOOTER (VENUE)
+============================================== -->
+
+<section class="relative py-14 text-center text-white bg-maroon">
+
+    <!-- Gold Radial Dots Pattern -->
+    <div class="absolute inset-0 bg-[radial-gradient(circle,_rgba(255,215,0,0.25)_1px,_transparent_1px)] bg-[size:20px_20px] opacity-40"></div>
+
+    <div class="relative z-10">
+
+        <h2 class="text-4xl font-wedding-title mb-4 text-gold">
+            स्थळ : संस्कृती लॉन्स आणि बँक्वेट
+        </h2>
+
+        <p class="text-xl mb-6">
+            Karve Nagar, Pune
+        </p>
+
+        <!-- Google Maps Button -->
+        <a href="https://www.google.com/maps?q=Sanskriti+Lawns+Karve+Nagar"
+           target="_blank"
+           class="inline-block px-6 py-3 bg-gold text-maroon font-bold rounded-full shadow-xl hover:bg-yellow-500 transition">
+            नकाशा पहा (View Map)
+        </a>
+
+        <!-- Sender Details -->
+        <p class="mt-8 text-lg font-semibold">
+            प्रेषक : श्री. राजेश रामचंद्र देशमुख व परिवार
+        </p>
+
+        <!-- Phone -->
+        <p class="mt-2">
+            <a href="tel:+919999999999" class="underline text-gold text-xl">
+                📞 +91 99999 99999
+            </a>
+        </p>
+
+    </div>
+</section>
+
+
+<!-- ==========================================
+     Floating Audio Button
+============================================== -->
+
+<button id="audioBtn"
+        class="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-maroon text-gold shadow-2xl flex items-center justify-center border-2 border-gold">
+    <i data-lucide="volume-2" class="w-7 h-7"></i>
+</button>
+
+
+<!-- ==========================================
+     SCRIPTS
+============================================== -->
+
+<script>
+    /* --------------------------
+       Lucide Icons Init
+    ---------------------------*/
+    lucide.createIcons();
+
+
+    /* --------------------------
+       COUNTDOWN TIMER
+    ---------------------------*/
+    function updateCountdown() {
+        const target = new Date("2025-12-02T12:21:00"); 
+        const now = new Date();
+
+        const diff = target - now;
+
+        if (diff <= 0) return;
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+
+        document.getElementById("days").innerText = d;
+        document.getElementById("hours").innerText = h;
+        document.getElementById("mins").innerText = m;
+        document.getElementById("secs").innerText = s;
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+
+    /* --------------------------
+       Scroll Reveal (IntersectionObserver)
+    ---------------------------*/
+    const revealElements = document.querySelectorAll(".animate-fade-up");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("opacity-100", "translate-y-0");
+            }
         });
+    }, { threshold: 0.2 });
 
-        /* ---------- PETALS ANIMATION (Updated with Sway) ---------- */
-        (function petals() {
-            const container = document.getElementById('petals-container');
-            const maxPetals = 15; // Optimized limit
-            let active = 0;
+    revealElements.forEach(el => {
+        el.classList.add("opacity-0", "translate-y-6", "transition-all", "duration-700");
+        observer.observe(el);
+    });
 
-            function createPetal() {
-                if (active >= maxPetals) return;
-                active++;
-                const p = document.createElement('div');
-                p.className = 'petal';
-                const types = ['🌸','🌺','🌼','🌷','🌹'];
-                p.textContent = types[Math.floor(Math.random() * types.length)];
-                
-                // Random position and size
-                const left = 5 + Math.random() * 90;
-                p.style.left = left + 'vw';
-                const size = 15 + Math.random() * 20;
-                p.style.fontSize = size + 'px';
-                
-                // Random animation duration
-                const duration = 6 + Math.random() * 5; 
-                p.style.animationDuration = duration + 's';
-                
-                container.appendChild(p);
 
-                // Cleanup
-                setTimeout(() => {
-                    p.remove();
-                    active--;
-                }, duration * 1000);
-            }
+    /* --------------------------
+       Floating Audio Button
+    ---------------------------*/
+    const audioBtn = document.getElementById("audioBtn");
+    let audio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_5a2fcaad6b.mp3?filename=indian-wedding-music-11267.mp3");
 
-            // Start animation loop
-            setInterval(createPetal, 800);
-        })();
+    let isPlaying = false;
 
-        /* ---------- COUNTDOWN ---------- */
-        (function countdown() {
-            const weddingDate = new Date('2025-12-15T10:30:00'); // Target Date
-            const daysEl = document.getElementById('days');
-            const hoursEl = document.getElementById('hours');
-            const minsEl = document.getElementById('mins');
-            const secsEl = document.getElementById('secs');
-            const timerWrapper = document.getElementById('timer');
+    audioBtn.addEventListener("click", () => {
+        if (!isPlaying) {
+            audio.play();
+            isPlaying = true;
+            audioBtn.innerHTML = '<i data-lucide="pause" class="w-7 h-7"></i>';
+        } else {
+            audio.pause();
+            isPlaying = false;
+            audioBtn.innerHTML = '<i data-lucide="volume-2" class="w-7 h-7"></i>';
+        }
+        lucide.createIcons();
+    });
 
-            function pad(num) { return String(num).padStart(2, '0'); }
+</script>
 
-            function tick() {
-                const now = new Date();
-                const dist = weddingDate - now;
-
-                if (dist <= 0) {
-                    timerWrapper.innerHTML = '<h3 style="color:var(--gold); font-family:var(--font-title); font-size:2rem; margin-top:20px;">लग्न सोहळा संपन्न!</h3>';
-                    clearInterval(interval);
-                    return;
-                }
-                const s = Math.floor(dist / 1000);
-                const days = Math.floor(s / (24 * 3600));
-                const hours = Math.floor((s % (24 * 3600)) / 3600);
-                const mins = Math.floor((s % 3600) / 60);
-                const secs = s % 60;
-
-                daysEl.textContent = pad(days);
-                hoursEl.textContent = pad(hours);
-                minsEl.textContent = pad(mins);
-                secsEl.textContent = pad(secs);
-            }
-
-            tick();
-            const interval = setInterval(tick, 1000);
-        })();
-
-        /* ======= Music autoplay + fallback + enable-button (integrated) ======= */
-        (function musicAutoplayFix() {
-          const audio = document.getElementById('bgMusic');
-          if (!audio) {
-            console.warn('No audio#bgMusic element found.');
-            return;
-          }
-
-          // Ensure enable button exists
-          let enableBtn = document.getElementById('enableSoundBtn');
-          if (!enableBtn) {
-            enableBtn = document.createElement('button');
-            enableBtn.id = 'enableSoundBtn';
-            enableBtn.textContent = '🔊 आवाज चालू करा';
-            Object.assign(enableBtn.style, {
-              position: 'fixed',
-              right: '18px',
-              bottom: '86px',
-              zIndex: 1200,
-              display: 'none',
-              background: '#800020',
-              color: '#fff',
-              border: 'none',
-              padding: '10px 12px',
-              borderRadius: '10px',
-              boxShadow: '0 6px 18px rgba(0,0,0,0.3)',
-              fontWeight: '700',
-              cursor: 'pointer'
-            });
-            document.body.appendChild(enableBtn);
-          }
-
-          // Ensure music FAB exists (so UI is consistent)
-          let musicFab = document.getElementById('musicBtn');
-          if (!musicFab) {
-            musicFab = document.createElement('button');
-            musicFab.id = 'musicBtn';
-            musicFab.className = 'fab music-fab';
-            musicFab.type = 'button';
-            musicFab.title = 'संगीत प्ले करा';
-            musicFab.textContent = '▶';
-            if (!document.querySelector('.fab')) {
-              Object.assign(musicFab.style, {
-                position: 'fixed',
-                right: '25px',
-                bottom: '25px',
-                width: '55px',
-                height: '55px',
-                borderRadius: '50%',
-                background: '#800020',
-                color: '#fff',
-                border: '2px solid #FFD700',
-                zIndex: 1001,
-                cursor: 'pointer',
-              });
-            }
-            document.body.appendChild(musicFab);
-          }
-
-          let playing = false;
-          let audible = false;
-
-          function setUI() {
-            if (playing && audible) {
-              musicFab.textContent = '⏸';
-              musicFab.title = 'संगीत थांबवा';
-              musicFab.setAttribute('aria-pressed', 'true');
-              musicFab.classList.add('playing'); // Add pulse animation
-            } else if (playing && !audible) {
-              musicFab.textContent = '🔈';
-              musicFab.title = 'संगीत प्ले (म्यूट)';
-              musicFab.setAttribute('aria-pressed', 'true');
-              musicFab.classList.add('playing'); // Add pulse animation
-            } else {
-              musicFab.textContent = '▶';
-              musicFab.title = 'संगीत प्ले करा';
-              musicFab.setAttribute('aria-pressed', 'false');
-              musicFab.classList.remove('playing'); // Remove pulse animation
-            }
-          }
-
-          function tryPlayUnmuted() {
-            audio.muted = false;
-            audio.play().then(() => {
-              playing = true;
-              audible = true;
-              setUI();
-              hideEnableBtn();
-            }).catch(err => {
-              // couldn't play unmuted -> fallback to muted autoplay
-              console.warn('Unmuted autoplay failed:', err);
-              tryMutedAutoplay();
-            });
-          }
-
-          function tryMutedAutoplay() {
-            audio.muted = true;
-            audio.play().then(() => {
-              playing = true;
-              audible = false;
-              setUI();
-              // try to unmute after short delay (some browsers allow)
-              setTimeout(() => {
-                audio.muted = false;
-                audio.play().then(() => {
-                  audible = true;
-                  setUI();
-                  hideEnableBtn();
-                }).catch(() => {
-                  audio.muted = true;
-                  audible = false;
-                  setUI();
-                  showEnableBtn();
-                });
-              }, 700);
-            }).catch(err => {
-              console.warn('Muted autoplay also failed:', err);
-              playing = false;
-              audible = false;
-              setUI();
-              showEnableBtn();
-            });
-          }
-
-          function showEnableBtn() { enableBtn.style.display = 'block'; }
-          function hideEnableBtn() { enableBtn.style.display = 'none'; }
-
-          enableBtn.addEventListener('click', function() {
-            audio.muted = false;
-            audio.play().then(() => {
-              playing = true;
-              audible = true;
-              setUI();
-              hideEnableBtn();
-            }).catch(err => {
-              console.warn('Enable button play failed:', err);
-              audio.muted = true;
-              audible = false;
-              setUI();
-              const t = document.createElement('div');
-              t.textContent = 'कृपया परवानगी द्या किंवा पुन्हा प्रयत्न करा';
-              Object.assign(t.style, { position: 'fixed', left: '50%', transform: 'translateX(-50%)', bottom: '22px', background: 'rgba(0,0,0,0.7)', color: '#fff', padding: '8px 12px', borderRadius: '8px', zIndex: 1300 });
-              document.body.appendChild(t);
-              setTimeout(() => t.remove(), 2200);
-            });
-          });
-
-          musicFab.addEventListener('click', function(e) {
-            e.stopPropagation();
-            if (!playing) {
-              tryPlayUnmuted();
-            } else {
-              if (audible) {
-                audio.pause();
-                playing = false;
-                setUI();
-              } else {
-                audio.muted = false;
-                audio.play().then(() => {
-                  audible = true; playing = true; setUI(); hideEnableBtn();
-                }).catch(() => {
-                  audio.muted = true; audible = false; setUI(); showEnableBtn();
-                });
-              }
-            }
-          });
-
-          function onFirstGesture() {
-            if (!playing) tryPlayUnmuted();
-            else if (playing && !audible) {
-              audio.muted = false;
-              audio.play().then(() => { audible = true; setUI(); hideEnableBtn(); }).catch(() => { audio.muted = true; audible = false; setUI(); showEnableBtn(); });
-            }
-          }
-          document.addEventListener('click', onFirstGesture, { passive: true });
-          document.addEventListener('touchstart', onFirstGesture, { passive: true });
-
-          // Init attempt
-          tryPlayUnmuted();
-
-          // Sync UI with audio events
-          audio.addEventListener('pause', () => { playing = false; setUI(); });
-          audio.addEventListener('play', () => { playing = true; setUI(); });
-          audio.addEventListener('volumechange', () => { audible = !audio.muted && audio.volume > 0; setUI(); });
-        })();
-
-        /* ---------- WHATSAPP SHARE ---------- */
-        (function whatsapp() {
-            const btn = document.getElementById('whatsappBtn');
-            const mapLinkEl = document.getElementById('mapLink');
-            const mapLink = mapLinkEl ? mapLinkEl.href : 'https://www.google.com/maps';
-            
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const url = window.location.href;
-                const message = `सस्नेह निमंत्रण! ✨%0A%0Aआदिती आणि रोहन यांच्या शुभ विवाहाचे निमंत्रण.%0A%0Aतारीख: १५ डिसेंबर २०२५%0Aठिकाण: वृन्दावन लॉन्स, कोल्हापूर%0A%0Aनकाशा: ${mapLink}%0A%0Aसंपूर्ण निमंत्रण पाहण्यासाठी:%0A${url}%0A%0Aआपली उपस्थिती प्रार्थनीय आहे. 🙏`;
-                const whatsappUrl = `https://wa.me/?text=${message}`;
-                window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-            });
-        })();
-    </script>
 </body>
 </html>
