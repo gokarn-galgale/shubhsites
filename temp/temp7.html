@@ -1,522 +1,365 @@
 <!DOCTYPE html>
 <html lang="mr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#FFF8E7" />
     <title>शुभ विवाह | आदिती आणि रोहन</title>
-    
-    <!-- Fonts: Using 'Shree Devanagari 714' as the primary font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Shree+Devanagari+714:wght@400;700&display=swap" rel="stylesheet">
-    
-    <!-- Animate On Scroll (AOS) -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Baloo 2 & Noto Serif Devanagari for Marathi, Great Vibes for English -->
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Noto+Serif+Devanagari:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <style>
         /* --- THEME VARIABLES --- */
         :root {
             --primary: #800020; /* Royal Maroon */
-            --gold: #FFD700;    /* Gold */
-            --cream: #FFF8E7;   /* Cream */
-            --text: #2c1810;    /* Dark Brown */
-            
-            /* Font Variables - ALL set to Shree Devanagari 714 */
-            --font-title: 'Shree Devanagari 714', sans-serif;        /* Big Titles */
-            --font-body: 'Shree Devanagari 714', sans-serif;         /* Body text */
-            --font-poem: 'Shree Devanagari 714', sans-serif;         /* Poems */
-            --font-fix: 'Shree Devanagari 714', sans-serif;          /* Fix font */
-            --font-english: 'Great Vibes', cursive;                  /* English (Weds) */
-            
-            /* Gold Gradient */
-            --gold-grad: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            --gold: #FFD700;
+            --cream: #FFF8E7;
+            --text: #2c1810;
+            --white: #ffffff;
+            --gold-grad: linear-gradient(90deg, #bf953f 0%, #fbf5b7 40%, #aa771c 100%);
+            --font-title: 'Noto Serif Devanagari', 'Baloo 2', serif;
+            --font-body: 'Baloo 2', 'Noto Serif Devanagari', sans-serif;
+            --font-english: 'Great Vibes', cursive;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        html, body { height: 100%; }
+
         body {
             font-family: var(--font-body);
             color: var(--text);
             background-color: var(--cream);
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.6;
             font-size: 18px;
-            text-rendering: optimizeLegibility; 
         }
 
-        /* --- UTILITIES --- */
+        /* gold text gradient */
         .gold-text {
             background: var(--gold-grad);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            color: #b38728;
             display: inline-block;
         }
 
-        .rozha-font {
-            font-family: var(--font-title) !important;
-            font-weight: 700; /* Made bold for Shree */
-        }
-
-        /* --- ANIMATIONS --- */
-        .petal {
-            position: fixed;
-            top: -10%;
-            z-index: 9999;
-            user-select: none;
-            pointer-events: none;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            0% { opacity: 0; top: -10%; transform: translateX(0) rotate(0deg); }
-            10% { opacity: 1; }
-            100% { top: 110%; transform: translateX(20px) rotate(360deg); opacity: 0; }
-        }
-
-        /* --- TYPOGRAPHY --- */
-        h1, h2, h3 { 
-            font-family: var(--font-title); 
-            text-align: center; 
-            font-weight: 700; /* Bold for Shree headers */
-        }
-        
-        h1 { 
-            font-size: 4.5rem; 
-            color: #fff;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.6);
-            margin: 0;
-            line-height: 1.3;
-        }
-
-        h2.section-title {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 10px;
-        }
-        
-        h2.section-title::after {
-            content: '✻';
-            display: block;
-            color: #c5a059;
-            font-size: 1.5rem;
-            margin-top: 5px;
-            line-height: 0.5;
-        }
-
-        p { text-align: center; line-height: 1.7; margin-bottom: 15px; }
-
-        .poem-text {
-            font-family: var(--font-poem);
-            font-size: 1.4rem;
-            color: #555;
-            line-height: 1.8;
-        }
-
-        /* --- HEADER (HERO) --- */
+        /* header / hero */
         header {
             height: 100vh;
-            min-height: 600px;
-            /* Using the generated image path */
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('/temp/images/background.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            min-height: 560px;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             position: relative;
             border-bottom: 5px solid var(--gold);
+            background: linear-gradient(rgba(0,0,0,0.28), rgba(0,0,0,0.45)), url('/temp/images/background.jpg') center/cover no-repeat fixed;
         }
 
         .hero-content {
-            border: 2px solid rgba(255,255,255,0.6);
-            padding: 40px;
-            background: rgba(0,0,0,0.2);
-            backdrop-filter: blur(3px);
-            border-radius: 20px;
+            max-width: 920px;
+            width: calc(100% - 40px);
             text-align: center;
-            max-width: 90%;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.2);
+            padding: 36px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+            backdrop-filter: blur(4px);
         }
 
         .shlok-top {
-            color: #FFD700;
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            font-family: var(--font-fix);
+            color: var(--gold);
+            font-size: 1.5rem;
+            font-family: var(--font-title);
+            letter-spacing: 0.6px;
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            font-family: var(--font-title);
             font-weight: 700;
+            color: #fff;
+            font-size: 3.5rem;
+            margin: 6px 0;
+            line-height: 1.1;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
         }
 
         .weds-text {
             font-family: var(--font-english);
-            font-size: 3.5rem;
-            color: #FFD700;
-            margin: -5px 0;
-            display: block;
+            font-size: 2.6rem;
+            color: var(--gold);
+            display: inline-block;
+            margin: 4px 0 12px;
         }
-        
+
         .date-badge {
-            margin-top: 20px; 
-            border-top: 1px solid rgba(255,255,255,0.5); 
-            border-bottom: 1px solid rgba(255,255,255,0.5); 
+            margin-top: 12px;
+            border-top: 1px solid rgba(255,255,255,0.18);
+            border-bottom: 1px solid rgba(255,255,255,0.12);
             padding: 10px 0;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 8px;
+            background: rgba(0,0,0,0.08);
         }
+
         .date-text {
-            color: #fff; 
-            font-family: var(--font-body); 
-            font-size: 1.5rem; 
+            color: #fff;
+            font-family: var(--font-title);
             font-weight: 700;
+            font-size: 1.15rem;
         }
 
-        /* --- GANESHA SECTION --- */
-        .ganesha-wrapper {
-            text-align: center;
-            padding: 40px 20px;
+        header p.lead {
+            color: #eee;
+            margin-top: 18px;
+            font-size: 1.05rem;
+            max-width: 680px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        .om { 
-            font-size: 5rem; 
-            display: block; 
-            margin-bottom: 10px; 
-            font-family: var(--font-title); 
-            line-height: 1;
-        } 
 
-        /* --- SECTIONS --- */
-        section { padding: 60px 20px; }
+        /* petals */
+        #petals-container { position: fixed; inset: 0; pointer-events: none; z-index: 900; overflow: hidden; }
+        .petal {
+            position: absolute;
+            user-select: none;
+            pointer-events: none;
+            font-size: 20px;
+            opacity: 0;
+            animation: fall linear forwards;
+            will-change: transform, opacity;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* sections */
+        section { padding: 56px 20px; }
         .bg-cream { background-color: var(--cream); }
-        .bg-white { background-color: #ffffff; }
+        .bg-white { background-color: var(--white); }
 
-        /* --- COUPLE --- */
-        .couple-wrapper {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
+        .ganesha-wrapper { text-align: center; max-width: 900px; margin: 0 auto; padding: 20px 12px; }
+        .om { font-size: 4.2rem; display: block; margin-bottom: 8px; font-family: var(--font-title); line-height: 1; }
+        .section-title { font-family: var(--font-title); font-size: 2.4rem; color: var(--primary); margin-bottom: 8px; display: inline-block; padding-bottom: 6px; position: relative; }
+        .section-title::after { content: '✻'; display: block; color: #c5a059; font-size: 1.2rem; margin-top: 6px; line-height: 0.6; }
+
+        .poem-text { font-family: var(--font-body); color: #444; font-size: 1.15rem; line-height: 1.7; }
+
+        /* couple */
+        .couple-wrapper { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-top: 26px; }
         .profile-card {
             text-align: center;
-            background: #fff;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border: 1px solid rgba(0,0,0,0.05);
-            flex: 1 1 300px; /* Flex grow/shrink logic */
-            max-width: 350px;
+            background: var(--white);
+            padding: 18px;
+            border-radius: 14px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            flex: 1 1 280px;
+            max-width: 360px;
         }
-        .img-ring {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            padding: 5px;
-            background: var(--gold-grad);
-            margin: 0 auto 15px;
-        }
-        .img-ring img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid white;
-        }
-        .name-text {
-            font-family: var(--font-title);
-            font-size: 2.2rem;
+        .img-ring { width: 200px; height: 200px; border-radius: 50%; padding: 6px; background: var(--gold-grad); margin: 0 auto 12px; display: grid; place-items: center; }
+        .img-ring img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 3px solid #fff; display:block; }
+        .name-text { font-family: var(--font-title); font-size: 1.8rem; color: var(--primary); margin-bottom: 6px; }
+        .relation { color: #666; font-weight: 700; margin-bottom: 6px; }
+
+        /* events */
+        .events-container { max-width: 940px; margin: 0 auto; }
+        .event-box { background: var(--white); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); margin-bottom: 24px; display:flex; flex-direction: column; border-left: 6px solid var(--primary); overflow:hidden; }
+        .event-info { padding: 20px; text-align: center; }
+        .event-title { font-family: var(--font-title); font-size: 1.6rem; color: var(--primary); margin-bottom: 8px; }
+        .info-item { display:flex; gap:8px; align-items:center; justify-content:center; color: #555; margin-bottom:6px; }
+        .info-item .icon { width: 26px; font-size: 1.2rem; display:inline-block; }
+
+        .map-link {
+            display: inline-block;
+            margin-top: 12px;
+            text-decoration: none;
             color: var(--primary);
-            margin-bottom: 5px;
-        }
-        .relation {
-            color: #666; 
-            margin-bottom: 0;
-            font-weight: bold;
+            font-weight: 700;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 2px;
         }
 
-        /* --- EVENTS (Karyakram) --- */
-        .events-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .event-box {
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            margin-bottom: 30px;
-            display: flex;
-            flex-direction: column;
-            border-left: 6px solid var(--primary);
-        }
-        
-        .event-info { padding: 20px; flex: 1; text-align: center; }
-        
-        .event-title { 
-            font-family: var(--font-title);
-            font-size: 2.2rem; 
-            color: var(--primary); 
-            margin-bottom: 10px;
-        }
-        
-        .info-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 5px;
-            font-size: 1.1rem;
-            color: #555;
-        }
-        .icon { width: 30px; color: var(--primary); font-size: 1.2rem; margin-right: 5px; }
+        /* family */
+        .family-section { text-align:center; background: transparent; padding: 28px 12px; }
+        .family-title { font-family: var(--font-title); font-size: 1.6rem; color: var(--primary); margin-bottom: 10px; }
+        .family-names { font-size: 1.05rem; color: #444; line-height: 1.7; font-weight: 700; }
 
-        /* --- FAMILY / AAPLE NAMR --- */
-        .family-section {
-            text-align: center;
-            padding: 30px 20px;
-            background-color: var(--white);
-            border-top: 1px solid #eee;
-        }
-        .family-title {
-            font-family: var(--font-fix);
-            font-size: 2.2rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        .family-names {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            color: #444;
-            font-weight: bold;
-        }
+        /* countdown */
+        .countdown-overlay { background: linear-gradient(rgba(0,0,0,0.66), rgba(0,0,0,0.66)), url('/temp/images/background.jpg') center/cover no-repeat fixed; color: #fff; text-align: center; padding: 44px 18px; }
+        .kshan-heading { font-family: var(--font-title); font-size: 2rem; color: var(--gold); margin-bottom: 18px; }
+        .timer-display { display:flex; gap: 12px; justify-content:center; flex-wrap:wrap; margin-top: 18px; }
+        .t-block { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 12px 14px; min-width: 90px; border: 1px solid rgba(255,255,255,0.12); }
+        .t-num { font-family: var(--font-title); font-size: 1.6rem; color: var(--gold); display:block; }
+        .t-text { font-size: 0.85rem; margin-top:6px; text-transform: uppercase; letter-spacing: 0.6px; }
 
-        /* --- COUNTDOWN (KSHAN) --- */
-        .countdown-overlay {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/temp/images/background.jpg');
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
-            color: #fff;
-            text-align: center;
-            padding: 60px 20px;
-        }
-        
-        .kshan-heading {
-            font-family: var(--font-title);
-            font-size: 2.8rem; 
-            color: #FFD700; 
-            margin-bottom: 20px;
-        }
+        /* footer */
+        footer { background: #2b110e; color: #d4af37; text-align:center; padding: 28px 20px 80px; }
+        footer p { margin-bottom: 8px; }
 
-        .timer-display {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-        .t-block {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 15px;
-            min-width: 80px;
-            border-radius: 10px;
-            flex: 1 1 20%; /* Auto resize on mobile */
-            max-width: 120px;
-        }
-        .t-num { font-family: var(--font-title); font-size: 2rem; color: #FFD700; line-height: 1; display: block; }
-        .t-text { font-family: var(--font-body); font-size: 0.9rem; margin-top: 5px; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* --- FOOTER --- */
-        footer {
-            background: #2b110e;
-            color: #d4af37;
-            text-align: center;
-            padding: 30px 20px;
-            padding-bottom: 90px; /* Space for FABs */
-        }
-
-        /* --- FABs --- */
-        .music-fab, .whatsapp-fab {
+        /* FABs */
+        .fab {
             position: fixed;
-            bottom: 20px;
-            width: 50px; height: 50px;
+            bottom: 18px;
+            width: 52px; height: 52px;
             border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            display:flex; align-items:center; justify-content:center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.35);
             cursor: pointer;
-            z-index: 1000;
-            transition: transform 0.2s;
+            z-index: 1001;
+            transition: transform .16s ease;
+            user-select: none;
         }
-        .music-fab { right: 20px; background: var(--primary); border: 2px solid #FFD700; color: #fff; font-size: 1.4rem; }
-        .whatsapp-fab { left: 20px; background: #25D366; border: 2px solid #fff; }
-        
-        .music-fab:active, .whatsapp-fab:active { transform: scale(0.9); }
+        .fab:active { transform: scale(.94); }
+        .music-fab { right: 18px; background: var(--primary); border: 2px solid var(--gold); color: #fff; font-size: 1.2rem; }
+        .whatsapp-fab { left: 18px; background: #25D366; border: 2px solid #fff; color: #fff; }
 
-        /* --- MOBILE OPTIMIZATIONS --- */
+        /* responsive */
         @media(max-width: 768px) {
-            /* Typography Adjustments */
-            h1 { font-size: 3rem; }
-            .weds-text { font-size: 2.5rem; margin: -5px 0; }
-            h2.section-title { font-size: 2.2rem; margin-bottom: 20px; }
-            .shlok-top { font-size: 1.4rem; }
-            .om { font-size: 4rem; }
-            .date-text { font-size: 1.3rem; }
-            
-            /* Layout Adjustments */
-            .hero-content { padding: 30px 20px; width: 95%; }
-            section { padding: 40px 15px; }
-            
-            /* Couple Section */
-            .couple-wrapper { gap: 30px; }
-            .profile-card { padding: 15px; }
+            h1 { font-size: 2.4rem; }
+            .weds-text { font-size: 1.9rem; }
+            .hero-content { padding: 22px; }
             .img-ring { width: 160px; height: 160px; }
-            .name-text { font-size: 1.8rem; }
-            
-            /* Events */
-            .event-info { padding: 20px 15px; }
-            .event-title { font-size: 1.8rem; }
-            .info-item { font-size: 1rem; }
-            
-            /* Countdown */
-            .kshan-heading { font-size: 2rem; }
-            .t-block { min-width: 70px; padding: 10px; }
-            .t-num { font-size: 1.8rem; }
-            .t-text { font-size: 0.8rem; }
-            
-            /* Family */
-            .family-title { font-size: 2rem; }
-            .family-names { font-size: 1.1rem; }
+            .name-text { font-size: 1.5rem; }
+            .section-title { font-size: 1.6rem; }
+            .kshan-heading { font-size: 1.6rem; }
+            .t-num { font-size: 1.3rem; }
         }
-        
-        @media(max-width: 480px) {
-            h1 { font-size: 2.5rem; }
-            .weds-text { font-size: 2rem; }
-            .hero-content { padding: 25px 15px; }
-            .t-block { flex: 1 1 40%; } /* Stack timer 2x2 on very small screens */
+
+        @media(max-width: 420px) {
+            .t-block { min-width: 48%; }
+            .hero-content { width: calc(100% - 24px); padding: 16px; }
+            .petal { font-size: 16px; }
         }
     </style>
 </head>
 <body>
+    <!-- Petals Container -->
+    <div id="petals-container" aria-hidden="true"></div>
 
-    <!-- Falling Petals -->
-    <div id="petals-container"></div>
-
-    <!-- Music -->
-    <audio id="bgMusic" loop autoplay>
+    <!-- Audio (start paused — user toggles) -->
+    <audio id="bgMusic" loop preload="auto">
         <source src="/temp/music/tabla.mp3" type="audio/mpeg">
+        <!-- fallback text -->
     </audio>
-    <div class="music-fab" id="musicBtn">🎵</div>
+    <button class="fab music-fab" id="musicBtn" aria-pressed="false" aria-label="संगीत प्ले करा" title="संगीत प्ले/पॉज करा">▶</button>
 
-    <!-- WhatsApp Share Button -->
-    <a href="#" class="whatsapp-fab" id="whatsappBtn" title="WhatsApp वर शेअर करा">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.017-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487 2.982 1.288 2.982.858 3.526.809.544-.05 1.758-.718 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+    <!-- WhatsApp Share -->
+    <a class="fab whatsapp-fab" id="whatsappBtn" href="#" aria-label="WhatsApp वर शेअर करा" title="WhatsApp वर शेअर करा">
+        <!-- inline svg icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.017-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487 2.982 1.288 2.982.858 3.526.809.544-.05 1.758-.718 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
     </a>
 
     <!-- HERO -->
-    <header>
-        <div class="hero-content" data-aos="zoom-in" data-aos-duration="1500">
-            <!-- Using Shree for Shree text -->
+    <header role="banner">
+        <div class="hero-content" data-aos="zoom-in" data-aos-duration="1200">
             <div class="shlok-top">|| श्री गणेशाय नमः ||</div>
-            <h1>आदिती</h1>
-            <span class="weds-text">Weds</span>
-            <h1>रोहन</h1>
-            
-            <div class="date-badge">
+            <h1 aria-label="आदिती">आदिती</h1>
+            <span class="weds-text" aria-hidden="true">Weds</span>
+            <h1 aria-label="रोहन">रोहन</h1>
+
+            <div class="date-badge" aria-hidden="false" role="note">
                 <span class="date-text">१५ डिसेंबर २०२५</span>
             </div>
-            
-            <p style="color: #eee; margin-top: 20px; font-size: 1.1rem; max-width: 500px; margin-left: auto; margin-right: auto;">
-                आम्ही आपल्याला आमच्या लग्नासाठी आणि पुढील कार्यक्रमांसाठी सहर्ष आमंत्रित करत आहोत.
-            </p>
+
+            <p class="lead">आम्ही आपल्याला आमच्या शुभ विवाहसोहळ्यास आणि पुढील सर्व मंगल कार्यक्रमांना सहर्ष आमंत्रित करतो. आपल्या उपस्थितीने आमचा आनंद द्विगुणित होईल.</p>
         </div>
     </header>
 
     <!-- GANESHA -->
-    <section class="bg-cream">
+    <section class="bg-cream" aria-labelledby="ganesha-title">
         <div class="ganesha-wrapper" data-aos="fade-up">
-            <span class="om gold-text">ॐ</span>
-            
-            <h2 class="section-title">शुभ विवाह</h2>
-            <p class="poem-text">
-                वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।<br>
-                निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥
-            </p>
+            <span class="om gold-text" aria-hidden="true">ॐ</span>
+            <h2 id="ganesha-title" class="section-title">शुभ विवाह</h2>
+            <p class="poem-text">वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।<br>निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥</p>
         </div>
     </section>
 
     <!-- COUPLE -->
-    <section class="bg-white" id="couple">
-        <div style="text-align: center;" data-aos="fade-up">
-            <h2 class="section-title">वर आणि वधू</h2>
+    <section class="bg-white" id="couple" aria-labelledby="couple-title">
+        <div style="text-align:center;" data-aos="fade-up">
+            <h2 id="couple-title" class="section-title">वर आणि वधू</h2>
         </div>
-        
+
         <div class="couple-wrapper">
             <!-- Bride -->
-            <div class="profile-card" data-aos="fade-right">
-                <div class="img-ring">
-                    <img src="/temp/images/bride.jpg" alt="Bride">
-                </div>
-                <div class="name-text">आदिती</div>
+            <article class="profile-card" data-aos="fade-right" aria-labelledby="bride-name">
+                <figure class="img-ring" aria-hidden="false">
+                    <img src="/temp/images/bride.jpg" alt="आदिती यांच्या छायाचित्र" />
+                </figure>
+                <div id="bride-name" class="name-text">आदिती</div>
                 <p class="relation">(कन्या)</p>
                 <p>श्री. सुरेश व सौ. अनिता पाटील</p>
-            </div>
+            </article>
 
             <!-- Groom -->
-            <div class="profile-card" data-aos="fade-left">
-                <div class="img-ring">
-                    <img src="/temp/images/groom.jpg" alt="Groom">
-                </div>
-                <div class="name-text">रोहन</div>
+            <article class="profile-card" data-aos="fade-left" aria-labelledby="groom-name">
+                <figure class="img-ring">
+                    <img src="/temp/images/groom.jpg" alt="रोहन यांच्या छायाचित्र" />
+                </figure>
+                <div id="groom-name" class="name-text">रोहन</div>
                 <p class="relation">(सुपुत्र)</p>
                 <p>श्री. रमेश व सौ. सुनिता देशमुख</p>
-            </div>
+            </article>
         </div>
 
-        <!-- Added Text -->
-        <div style="text-align: center; margin-top: 30px;" data-aos="fade-up">
-            <h3 class="rozha-font" style="color: var(--primary); font-size: 1.6rem;">यांचा शुभ विवाह आयोजित केला आहे</h3>
+        <div style="text-align:center; margin-top: 22px;" data-aos="fade-up">
+            <h3 class="section-title" style="font-size:1.2rem; color:var(--primary);">यांचा शुभ विवाह आयोजित केला आहे</h3>
         </div>
     </section>
 
-    <!-- EVENTS (KARYAKRAM) -->
-    <section class="bg-cream">
-        <div style="text-align: center;">
-            <h2 class="section-title rozha-font">मंगल कार्यक्रम</h2>
+    <!-- EVENTS -->
+    <section class="bg-cream" aria-labelledby="events-title">
+        <div style="text-align:center;">
+            <h2 id="events-title" class="section-title">मंगल कार्यक्रम</h2>
         </div>
-        
+
         <div class="events-container">
             <!-- Haldi -->
             <div class="event-box" data-aos="fade-up">
                 <div class="event-info">
                     <div class="event-title">हळद आणि संगीत</div>
-                    <div class="info-item"><span class="icon">📅</span> १४ डिसेंबर २०२५</div>
-                    <div class="info-item"><span class="icon">⏰</span> सायं ४:०० वाजता</div>
-                    <div class="info-item"><span class="icon">📍</span> हॉटेल ग्रँड पॅलेस, पुणे</div>
+                    <div class="info-item"><span class="icon">📅</span><span>१४ डिसेंबर २०२५</span></div>
+                    <div class="info-item"><span class="icon">⏰</span><span>सायं ४:००</span></div>
+                    <div class="info-item"><span class="icon">📍</span><span>हॉटेल ग्रँड पॅलेस, पुणे</span></div>
                 </div>
             </div>
 
             <!-- Wedding -->
-            <div class="event-box" data-aos="fade-up" data-aos-delay="100">
+            <div class="event-box" data-aos="fade-up" data-aos-delay="80">
                 <div class="event-info">
                     <div class="event-title">शुभ विवाह सोहळा</div>
-                    <div class="info-item"><span class="icon">📅</span> १५ डिसेंबर २०२५</div>
-                    <div class="info-item"><span class="icon">⏰</span> सकाळी १०:३० (गोरज मुहूर्त)</div>
-                    <div class="info-item"><span class="icon">📍</span> वृन्दावन लॉन्स, कोल्हापूर</div>
-                    
-                    <div style="margin-top: 20px;">
-                        <a href="#" style="color: var(--primary); font-weight: bold; text-decoration: none; border-bottom: 2px solid var(--gold);">🗺️ नकाशा पहा (Map)</a>
+                    <div class="info-item"><span class="icon">📅</span><span>१५ डिसेंबर २०२५</span></div>
+                    <div class="info-item"><span class="icon">⏰</span><span>सकाळी १०:३० (गोरज मुहूर्त)</span></div>
+                    <div class="info-item"><span class="icon">📍</span><span>वृन्दावन लॉन्स, कोल्हापूर</span></div>
+
+                    <div style="margin-top: 12px;">
+                        <!-- Use a maps query so link works even with placeholder -->
+                        <a class="map-link" id="mapLink" href="https://www.google.com/maps/search/?api=1&query=Vrudhavan+Lawns+Kolhapur" target="_blank" rel="noopener noreferrer" aria-label="नकाशा पहा">🗺️ नकाशा पहा (Map)</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- AAPLE NAMR SECTION -->
-    <section class="family-section">
+    <!-- FAMILY -->
+    <section class="family-section" aria-labelledby="family-title">
         <div data-aos="fade-up">
-            <h2 class="family-title rozha-font">आपले नम्र</h2>
+            <h2 id="family-title" class="family-title">आपले नम्र</h2>
             <div class="family-names">
                 श्री. सुरेश आणि सौ. अनिता पाटील<br>
                 श्री. रमेश आणि सौ. सुनिता देशमुख<br>
@@ -526,11 +369,11 @@
         </div>
     </section>
 
-    <!-- COUNTDOWN (KSHAN) -->
-    <section class="countdown-overlay">
-        <h2 class="kshan-heading rozha-font">शुभविवाहासाठी उरलेले क्षण</h2>
-        
-        <div class="timer-display" id="timer">
+    <!-- COUNTDOWN -->
+    <section class="countdown-overlay" aria-labelledby="countdown-title">
+        <h2 id="countdown-title" class="kshan-heading">शुभविवाहासाठी उरलेले क्षण</h2>
+
+        <div class="timer-display" id="timer" role="timer" aria-live="polite">
             <div class="t-block">
                 <span class="t-num" id="days">00</span>
                 <span class="t-text">दिवस</span>
@@ -551,99 +394,164 @@
     </section>
 
     <!-- FOOTER -->
-    <footer>
-        <p style="font-family: var(--font-title); font-size: 1.5rem; color: #FFD700; margin-bottom: 10px;">।। शुभ भवतु ।।</p>
-        <p style="font-size: 0.9rem; color: #aaa;">&copy; 2025 Aditi & Rohan.</p>
+    <footer role="contentinfo">
+        <p style="font-family:var(--font-title); font-size:1.3rem; color:var(--gold);">।। शुभ भवतु ।।</p>
+        <p style="font-size:0.9rem; color:#ccc;">&copy; 2025 Aditi & Rohan.</p>
     </footer>
+
+    <noscript>
+        <div style="background:#ffd; padding:12px; text-align:center;">कृपया सर्वोत्तम अनुभवासाठी JavaScript सक्षम करा.</div>
+    </noscript>
 
     <!-- SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ once: true, offset: 50 });
+        // Init AOS
+        AOS.init({ once: true, offset: 60 });
 
-        // Petals Logic
-        function createPetal() {
+        /* ---------- PETALS ---------- */
+        (function petals() {
             const container = document.getElementById('petals-container');
-            const p = document.createElement('div');
-            p.classList.add('petal');
-            const types = ['🌸', '🌼', '🌺'];
-            p.innerText = types[Math.floor(Math.random() * types.length)];
-            
-            p.style.left = Math.random() * 100 + 'vw';
-            p.style.fontSize = Math.random() * 15 + 15 + 'px';
-            p.style.animationDuration = Math.random() * 3 + 4 + 's';
-            
-            container.appendChild(p);
-            setTimeout(() => p.remove(), 7000);
-        }
-        setInterval(createPetal, 400);
+            const maxPetals = 18; // limit for performance
+            let active = 0;
 
-        // Countdown Logic
-        const weddingDate = new Date("Dec 15, 2025 10:30:00").getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const dist = weddingDate - now;
+            function createPetal() {
+                if (active >= maxPetals) return;
+                active++;
+                const p = document.createElement('div');
+                p.className = 'petal';
+                const types = ['🌸','🌺','🌼','🌷'];
+                p.textContent = types[Math.floor(Math.random() * types.length)];
+                // random horizontal start between 2% and 94% viewport
+                const left = 2 + Math.random() * 92;
+                p.style.left = left + 'vw';
+                // random size
+                const size = 14 + Math.random() * 28;
+                p.style.fontSize = size + 'px';
+                // duration and delay
+                const duration = 5 + Math.random() * 6; // 5s - 11s
+                const delay = Math.random() * 2;
+                p.style.animationDuration = duration + 's';
+                p.style.animationDelay = delay + 's';
 
-            if (dist > 0) {
-                document.getElementById("days").innerText = Math.floor(dist / (1000 * 60 * 60 * 24));
-                document.getElementById("hours").innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById("mins").innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById("secs").innerText = Math.floor((dist % (1000 * 60)) / 1000);
-            } else {
-                document.getElementById("timer").innerHTML = "<h3 style='color:#FFD700; font-size:2rem; font-family: \"Rozha One\"'>लग्न सोहळा संपन्न!</h3>";
+                container.appendChild(p);
+
+                // remove later
+                setTimeout(() => {
+                    p.remove();
+                    active--;
+                }, (duration + delay) * 1000 + 300);
             }
-        }, 1000);
 
-        // Music Logic
-        const bgMusic = document.getElementById('bgMusic');
-        const btn = document.getElementById('musicBtn');
-        let playing = false;
+            // initial burst
+            for (let i = 0; i < 6; i++) setTimeout(createPetal, i * 300);
+            // then interval
+            setInterval(createPetal, 700);
+        })();
 
-        // Function to attempt playback
-        function attemptPlay() {
-            bgMusic.play().then(() => {
-                playing = true;
-                btn.innerText = '⏸';
-                // Remove listeners once successful
-                document.removeEventListener('click', attemptPlay);
-                document.removeEventListener('touchstart', attemptPlay);
-                document.removeEventListener('scroll', attemptPlay);
-                document.removeEventListener('keydown', attemptPlay);
-            }).catch(error => {
-                console.log("Autoplay prevented. Waiting for user interaction.");
+        /* ---------- COUNTDOWN ---------- */
+        (function countdown() {
+            // Use exact wedding date/time in local time (India timezone assumed)
+            const weddingDate = new Date('2025-12-15T10:30:00'); // local time
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minsEl = document.getElementById('mins');
+            const secsEl = document.getElementById('secs');
+            const timerWrapper = document.getElementById('timer');
+
+            function pad(num) { return String(num).padStart(2, '0'); }
+
+            function tick() {
+                const now = new Date();
+                const dist = weddingDate - now;
+
+                if (dist <= 0) {
+                    timerWrapper.innerHTML = '<h3 style="color:var(--gold); font-family:var(--font-title); font-size:1.6rem;">लग्न सोहळा संपन्न!</h3>';
+                    clearInterval(interval);
+                    return;
+                }
+                const s = Math.floor(dist / 1000);
+                const days = Math.floor(s / (24 * 3600));
+                const hours = Math.floor((s % (24 * 3600)) / 3600);
+                const mins = Math.floor((s % 3600) / 60);
+                const secs = s % 60;
+
+                daysEl.textContent = pad(days);
+                hoursEl.textContent = pad(hours);
+                minsEl.textContent = pad(mins);
+                secsEl.textContent = pad(secs);
+            }
+
+            tick();
+            const interval = setInterval(tick, 1000);
+        })();
+
+        /* ---------- MUSIC TOGGLE ---------- */
+        (function music() {
+            const audio = document.getElementById('bgMusic');
+            const btn = document.getElementById('musicBtn');
+            let playing = false;
+
+            function setBtnUI() {
+                btn.textContent = playing ? '⏸' : '▶';
+                btn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+                btn.title = playing ? 'संगीत थांबवा' : 'संगीत प्ले करा';
+            }
+
+            // Try to play on first meaningful user interaction (some browsers require user gesture)
+            function userGesturePlay() {
+                if (playing) return;
+                audio.play().then(() => {
+                    playing = true;
+                    setBtnUI();
+                    // remove listener once played
+                    document.removeEventListener('click', userGesturePlay);
+                    document.removeEventListener('touchstart', userGesturePlay);
+                    document.removeEventListener('keydown', userGesturePlay);
+                }).catch(() => {
+                    // still blocked, keep waiting; user can press the button
+                });
+            }
+
+            // attach listeners to attempt autoplay on gesture
+            document.addEventListener('click', userGesturePlay, { once: false });
+            document.addEventListener('touchstart', userGesturePlay, { once: false });
+            document.addEventListener('keydown', userGesturePlay, { once: false });
+
+            // toggle button
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (!playing) {
+                    audio.play().then(() => { playing = true; setBtnUI(); }).catch((err) => {
+                        // autoplay blocked or other error
+                        playing = false;
+                        setBtnUI();
+                        console.warn('Playback blocked or failed:', err);
+                        alert('संगीत प्ले करण्यासाठी कृपया पेजवर कुठेही टॅप/क्लिक करा किंवा परवानगी द्या.');
+                    });
+                } else {
+                    audio.pause();
+                    playing = false;
+                    setBtnUI();
+                }
             });
-        }
 
-        // Try immediately on load
-        window.addEventListener('load', attemptPlay);
+            // initialize UI
+            setBtnUI();
+        })();
 
-        // Add listeners for user interaction
-        document.addEventListener('click', attemptPlay);
-        document.addEventListener('touchstart', attemptPlay);
-        document.addEventListener('scroll', attemptPlay);
-        document.addEventListener('keydown', attemptPlay);
-
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (playing) {
-                bgMusic.pause();
-                btn.innerText = '🎵';
-                playing = false;
-            } else {
-                bgMusic.play().catch(console.error);
-                btn.innerText = '⏸';
-                playing = true;
-            }
-        });
-
-        // WhatsApp Logic
-        document.getElementById('whatsappBtn').addEventListener('click', function(e) {
-            e.preventDefault();
-            const currentUrl = window.location.href;
-            const message = `सस्नेह निमंत्रण! ✨\n\nआदिती आणि रोहन यांच्या शुभ विवाहाचे निमंत्रण.\n\nअधिक माहितीसाठी खालील लिंकवर क्लिक करा:\n${currentUrl}\n\nआपली उपस्थिती प्रार्थनीय आहे. 🙏`;
-            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-        });
+        /* ---------- WHATSAPP SHARE ---------- */
+        (function whatsapp() {
+            const btn = document.getElementById('whatsappBtn');
+            const mapLink = document.getElementById('mapLink').href;
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const url = window.location.href;
+                const message = `सस्नेह निमंत्रण! ✨%0A%0Aआदिती आणि रोहन यांच्या शुभ विवाहाचे निमंत्रण.%0A%0Aतारीख: १५ डिसेंबर २०२५%0Aठिकाण: वृन्दावन लॉन्स, कोल्हापूर%0A%0Aनकाशा: ${mapLink}%0A%0Aसंपूर्ण निमंत्रण पाहण्यासाठी हा दुवा पहा:%0A${url}%0A%0Aआपली उपस्थिती प्रार्थनीय आहे. 🙏`;
+                const whatsappUrl = `https://wa.me/?text=${message}`;
+                window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+            });
+        })();
     </script>
 </body>
 </html>
