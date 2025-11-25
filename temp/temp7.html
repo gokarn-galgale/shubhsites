@@ -600,14 +600,69 @@
 
         /* ---------- MUSIC TOGGLE ---------- */
        /* ===== Replace your previous music IIFE with this improved logic ===== */
-(function musicAutoplay() {
+/* ======= Replace existing music IIFE with this ======= */
+(function musicAutoplayFix() {
   const audio = document.getElementById('bgMusic');
-  const enableBtn = document.getElementById('enableSoundBtn');
-  const musicFab = document.getElementById('musicBtn'); // keep existing FAB sync
-  let playing = false;
-  let audible = false; // whether currently unmuted
+  if (!audio) {
+    console.warn('No audio#bgMusic element found.');
+    return;
+  }
 
-  // UI sync helper
+  // Ensure enable button exists
+  let enableBtn = document.getElementById('enableSoundBtn');
+  if (!enableBtn) {
+    enableBtn = document.createElement('button');
+    enableBtn.id = 'enableSoundBtn';
+    enableBtn.textContent = '🔊 आवाज चालू करा';
+    Object.assign(enableBtn.style, {
+      position: 'fixed',
+      right: '18px',
+      bottom: '86px',
+      zIndex: 1200,
+      display: 'none',
+      background: '#800020',
+      color: '#fff',
+      border: 'none',
+      padding: '10px 12px',
+      borderRadius: '10px',
+      boxShadow: '0 6px 18px rgba(0,0,0,0.3)',
+      fontWeight: '700',
+      cursor: 'pointer'
+    });
+    document.body.appendChild(enableBtn);
+  }
+
+  // Ensure music FAB exists (so UI is consistent)
+  let musicFab = document.getElementById('musicBtn');
+  if (!musicFab) {
+    musicFab = document.createElement('button');
+    musicFab.id = 'musicBtn';
+    musicFab.className = 'fab music-fab';
+    musicFab.type = 'button';
+    musicFab.title = 'संगीत प्ले करा';
+    musicFab.textContent = '▶';
+    // Minimal inline style fallback if CSS missing
+    if (!document.querySelector('.fab')) {
+      Object.assign(musicFab.style, {
+        position: 'fixed',
+        right: '25px',
+        bottom: '25px',
+        width: '55px',
+        height: '55px',
+        borderRadius: '50%',
+        background: '#800020',
+        color: '#fff',
+        border: '2px solid #FFD700',
+        zIndex: 1001,
+        cursor: 'pointer',
+      });
+    }
+    document.body.appendChild(musicFab);
+  }
+
+  let playing = false;
+  let audible = false;
+
   function setUI() {
     if (playing && audible) {
       musicFab.textContent = '⏸';
@@ -624,7 +679,6 @@
     }
   }
 
-  // Try an immediate play attempt (may succeed on some desktops)
   function tryPlayUnmuted() {
     audio.muted = false;
     audio.play().then(() => {
@@ -632,37 +686,35 @@
       audible = true;
       setUI();
       hideEnableBtn();
-    }).catch(() => {
-      // Couldn't play unmuted — try muted autoplay fallback
+    }).catch(err => {
+      // couldn't play unmuted -> fallback to muted autoplay
+      console.warn('Unmuted autoplay failed:', err);
       tryMutedAutoplay();
     });
   }
 
-  // Fallback: autoplay muted (allowed on most browsers), show enable hint
   function tryMutedAutoplay() {
     audio.muted = true;
     audio.play().then(() => {
       playing = true;
       audible = false;
       setUI();
-      // try to unmute after short delay — some browsers allow unmute after muted playback started
+      // try to unmute after short delay (some browsers allow)
       setTimeout(() => {
-        // Attempt to unmute silently; if blocked this will throw or be rejected
         audio.muted = false;
         audio.play().then(() => {
           audible = true;
           setUI();
           hideEnableBtn();
         }).catch(() => {
-          // still blocked — put it back to muted and show enable button
           audio.muted = true;
           audible = false;
           setUI();
           showEnableBtn();
         });
-      }, 700); // small delay to allow playback to start
-    }).catch(() => {
-      // muted autoplay blocked too (rare) — show enable prompt
+      }, 700);
+    }).catch(err => {
+      console.warn('Muted autoplay also failed:', err);
       playing = false;
       audible = false;
       setUI();
@@ -670,61 +722,81 @@
     });
   }
 
-  // Show the on-screen button prompting user to enable sound
   function showEnableBtn() {
-    if (!enableBtn) return;
     enableBtn.style.display = 'block';
-    enableBtn.onclick = function() {
-      // User tapped — enable audible playback immediately
-      audio.muted = false;
-      audio.play().then(() => {
-        playing = true;
-        audible = true;
-        setUI();
-        hideEnableBtn();
-      }).catch(err => {
-        // if still failing, keep muted but try again
-        console.warn('Failed to enable audible playback:', err);
-        audio.muted = true;
-        audible = false;
-        setUI();
-      });
-    };
   }
   function hideEnableBtn() {
-    if (!enableBtn) return;
     enableBtn.style.display = 'none';
   }
 
-  // Wire up FAB toggle (keeps behavior consistent)
+  // enable button click -> explicit user gesture to turn sound on
+  enableBtn.addEventListener('click', function() {
+    audio.muted = false;
+    audio.play().then(() => {
+      playing = true;
+      audible = true;
+      setUI();
+      hideEnableBtn();
+    }).catch(err => {
+      console.warn('Enable button play failed:', err);
+      // keep muted and show small toast
+      audio.muted = true;
+      audible = false;
+      setUI();
+      // optional toast
+      const t = document.createElement('div');
+      t.textContent = 'कृपया परवानगी द्या किंवा पुन्हा प्रयत्न करा';
+      Object.assign(t.style, { position: 'fixed', left: '50%', transform: 'translateX(-50%)', bottom: '22px', background: 'rgba(0,0,0,0.7)', color: '#fff', padding: '8px 12px', borderRadius: '8px', zIndex: 1300 });
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 2200);
+    });
+  });
+
+  // music FAB toggle behavior
   musicFab.addEventListener('click', function(e) {
     e.stopPropagation();
     if (!playing) {
-      // start playback (try unmuted first)
       tryPlayUnmuted();
     } else {
       if (audible) {
-        // pause music
         audio.pause();
         playing = false;
         setUI();
       } else {
-        // currently muted but playing -> unmute attempt
+        // currently muted but playing -> attempt to unmute
         audio.muted = false;
         audio.play().then(() => {
-          audible = true;
-          setUI();
-          hideEnableBtn();
+          audible = true; playing = true; setUI(); hideEnableBtn();
         }).catch(() => {
-          // cannot unmute without gesture; show button
-          audio.muted = true;
-          audible = false;
-          setUI();
-          showEnableBtn();
+          audio.muted = true; audible = false; setUI(); showEnableBtn();
         });
       }
     }
   });
+
+  // On first user gesture try to enable audible playback
+  function onFirstGesture() {
+    // if nothing playing try unmuted
+    if (!playing) tryPlayUnmuted();
+    // if already playing but muted, try unmute
+    else if (playing && !audible) {
+      audio.muted = false;
+      audio.play().then(() => { audible = true; setUI(); hideEnableBtn(); }).catch(() => { audio.muted = true; audible = false; setUI(); showEnableBtn(); });
+    }
+    // remove listeners only if we succeeded in enabling audible
+    // keep them otherwise to allow later gesture
+  }
+  document.addEventListener('click', onFirstGesture, { passive: true });
+  document.addEventListener('touchstart', onFirstGesture, { passive: true });
+
+  // Init attempt
+  tryPlayUnmuted();
+
+  // Sync UI with audio events
+  audio.addEventListener('pause', () => { playing = false; setUI(); });
+  audio.addEventListener('play', () => { playing = true; setUI(); });
+  audio.addEventListener('volumechange', () => { audible = !audio.muted && audio.volume > 0; setUI(); });
+})();
 
   // On first user gesture anywhere, try to enable audible playback (helps many mobile browsers)
   function onFirstGesture() {
