@@ -29,6 +29,7 @@
             --font-title: 'Noto Serif Devanagari', serif;
             --font-body: 'Baloo 2', sans-serif;
             --font-english: 'Great Vibes', cursive;
+            --safe-edge: 18px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -64,7 +65,6 @@
             justify-content: center;
             position: relative;
             border-bottom: 5px solid var(--gold);
-            /* Updated Background Image */
             background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.5)), 
                         url('/temp/images/background.jpg') center/cover no-repeat fixed;
         }
@@ -194,6 +194,7 @@
         /* --- COUPLE PROFILE --- */
         .couple-wrapper { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 30px; }
         
+        /* Keep smooth transitions but only apply hover transform on hover-capable devices (fix mobile hover issue) */
         .profile-card {
             text-align: center;
             background: var(--white);
@@ -203,9 +204,13 @@
             border: 1px solid rgba(128, 0, 32, 0.1);
             flex: 1 1 300px;
             max-width: 380px;
-            transition: transform 0.3s ease;
+            transition: transform 0.25s ease;
+            will-change: transform;
         }
-        .profile-card:hover { transform: translateY(-5px); }
+
+        @media (hover: hover) and (pointer: fine) {
+          .profile-card:hover { transform: translateY(-5px); }
+        }
 
         .img-ring { 
             width: 220px; 
@@ -217,6 +222,7 @@
             display: grid; 
             place-items: center; 
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            will-change: transform;
         }
         .img-ring img { 
             width: 100%; 
@@ -245,7 +251,9 @@
             overflow: hidden;
             transition: transform 0.3s;
         }
-        .event-box:hover { transform: scale(1.02); }
+        @media (hover: hover) and (pointer: fine) {
+          .event-box:hover { transform: scale(1.02); }
+        }
 
         .event-info { padding: 30px; text-align: center; }
         .event-title { font-family: var(--font-title); font-size: 1.8rem; color: var(--primary); margin-bottom: 15px; font-weight: 700; }
@@ -310,7 +318,7 @@
         /* --- FABs (Floating Action Buttons) --- */
         .fab {
             position: fixed;
-            bottom: 25px;
+            bottom: var(--safe-edge);
             width: 55px; height: 55px;
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
@@ -321,9 +329,17 @@
             user-select: none;
             border: none;
             outline: none;
+            -webkit-tap-highlight-color: transparent;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
-        .fab:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(0,0,0,0.5); }
         .fab:active { transform: scale(0.95); }
+
+        /* Only hover effect on hover-capable devices */
+        @media (hover: hover) and (pointer: fine) {
+          .fab:hover { transform: scale(1.08); box-shadow: 0 8px 30px rgba(0,0,0,0.5); }
+        }
         
         .music-fab { right: 25px; background: var(--primary); border: 2px solid var(--gold); color: #fff; font-size: 1.4rem; }
         .whatsapp-fab { left: 25px; background: #25D366; border: 2px solid #fff; color: #fff; }
@@ -340,6 +356,8 @@
             .t-num { font-size: 1.5rem; }
             .t-block { min-width: 80px; padding: 10px; }
             .om { font-size: 4rem; }
+            /* adjust FAB safe edge so it doesn't overlap content as much on small screens */
+            :root { --safe-edge: 16px; }
         }
 
         @media(max-width: 480px) {
@@ -348,6 +366,8 @@
             .petal { font-size: 16px; }
             h1 { font-size: 2.4rem; }
             .weds-text { font-size: 1.8rem; }
+            .music-fab { right: 12px; }
+            .whatsapp-fab { left: 12px; }
         }
     </style>
 </head>
@@ -410,7 +430,6 @@
             <!-- Bride -->
             <article class="profile-card" data-aos="fade-right" aria-labelledby="bride-name">
                 <figure class="img-ring" aria-hidden="false">
-                    <!-- Placeholder image used for preview -->
                     <img src="/temp/images/bride.jpg" alt="आदिती यांचे छायाचित्र" />
                 </figure>
                 <div id="bride-name" class="name-text">आदिती</div>
@@ -421,7 +440,6 @@
             <!-- Groom -->
             <article class="profile-card" data-aos="fade-left" aria-labelledby="groom-name">
                 <figure class="img-ring">
-                    <!-- Placeholder image used for preview -->
                     <img src="/temp/images/groom.jpg" alt="रोहन यांचे छायाचित्र" />
                 </figure>
                 <div id="groom-name" class="name-text">रोहन</div>
@@ -630,7 +648,7 @@
             document.body.appendChild(enableBtn);
           }
 
-          // Ensure music FAB exists (so UI is consistent)
+          // Ensure music FAB exists (so JS is consistent)
           let musicFab = document.getElementById('musicBtn');
           if (!musicFab) {
             musicFab = document.createElement('button');
@@ -639,21 +657,6 @@
             musicFab.type = 'button';
             musicFab.title = 'संगीत प्ले करा';
             musicFab.textContent = '▶';
-            if (!document.querySelector('.fab')) {
-              Object.assign(musicFab.style, {
-                position: 'fixed',
-                right: '25px',
-                bottom: '25px',
-                width: '55px',
-                height: '55px',
-                borderRadius: '50%',
-                background: '#800020',
-                color: '#fff',
-                border: '2px solid #FFD700',
-                zIndex: 1001,
-                cursor: 'pointer',
-              });
-            }
             document.body.appendChild(musicFab);
           }
 
@@ -771,6 +774,15 @@
           }
           document.addEventListener('click', onFirstGesture, { passive: true });
           document.addEventListener('touchstart', onFirstGesture, { passive: true });
+
+          // avoid FAB focus and blur on mobile to prevent auto-zoom and hover-like effects
+          (function avoidFabFocusOnMobile() {
+            if (!musicFab) return;
+            musicFab.addEventListener('focus', () => musicFab.blur());
+            setTimeout(() => { try { musicFab.blur(); } catch(e) {} }, 100);
+            document.addEventListener('scroll', () => { try { musicFab.blur(); } catch(e) {} }, { passive: true });
+            document.addEventListener('touchstart', () => { try { musicFab.blur(); } catch(e) {} }, { passive: true });
+          })();
 
           // Init attempt
           tryPlayUnmuted();
